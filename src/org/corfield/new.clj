@@ -110,14 +110,12 @@
                    :src-dirs   [(str dir "/" src)]
                    :replace    data}))))
 
-(defn create
-  "Exec function to create a new project from a template.
-  :template -- a symbol identifying the template.
-  :target-dir -- a string identifying the directory to
-      create the new project in.
-  :overwrite -- a boolean indicating whether to delete
-      and recreate an existing directory or not."
-  [{:keys [template target-dir overwrite]}]
+(defn- preprocess-options
+  "Given the raw options hash map, preprocess, parse, and
+  validate certain values, and derive defaults for others."
+  [{:keys [template target-dir name] :as opts}]
+  (when-not (and template name)
+    (throw (ex-info "Both :template and :name are required." opts)))
   (let [;; clean up input parameters:
         template   (symbol template) ; allow for string or symbol
         template   (if (namespace template)
@@ -125,6 +123,21 @@
                      ;; default ns for short template names:
                      (symbol "org.corfield.new" (name template)))
         target-dir (str target-dir)
+        defaults   {:template   template
+                    :target-dir target-dir
+                    :name       name}]
+    (merge defaults (dissoc opts :template :target-dir :name))))
+
+(defn create
+  "Exec function to create a new project from a template.
+  :template -- a symbol identifying the template.
+  :target-dir -- a string identifying the directory to
+      create the new project in.
+  :overwrite -- a boolean indicating whether to delete
+      and recreate an existing directory or not."
+  [opts]
+  (let [{:keys [template target-dir overwrite]}
+        (preprocess-options opts)
         [dir ednf] (find-root template)
         _
         (when-not dir
