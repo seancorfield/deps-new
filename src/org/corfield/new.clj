@@ -10,7 +10,9 @@
             [clojure.string :as str]
             [clojure.tools.build.api :as b])
   (:import (java.nio.file Files)
-           (java.nio.file.attribute FileAttribute)))
+           (java.nio.file.attribute FileAttribute)
+           (java.text SimpleDateFormat)
+           (java.util Calendar Date)))
 
 (set! *warn-on-reflection* true)
 
@@ -110,33 +112,78 @@
                    :src-dirs   [(str dir "/" src)]
                    :replace    data}))))
 
+(def ^:private known-scms
+  "A string to be used as part of a regex, identifying
+  known SCM providers that we special case."
+  "^(io|com|org)\\.(github|gitlab|bitbucket)\\.")
+
+(defn- deconstruct-project-name
+  "Given a symbol, make it canonical, and break down the
+  various things we derive from it."
+  [project-name]
+  (let [project-name (if (namespace project-name)
+                       project-name
+                       (symbol (name project-name)
+                               (name project-name)))
+        qualifier    (namespace project-name)
+        base-name    (name project-name)
+        top          (str/replace qualifier (re-pattern known-scms) "")]
+    {:artifact/id base-name
+     :group/id    (if (str/includes? qualifier ".")
+                    qualifier
+                    (str "net.clojars." qualifier))
+     :main        base-name
+     :name        project-name
+     :scm/domain  (let [[_ scm-tld scm-host]
+                        (re-matches (re-pattern (str known-scms ".*$")) qualifier)]
+                    (if scm-host
+                      (str scm-host "."
+                           (if (= "io" scm-tld)
+                             "com"
+                             scm-tld))
+                      "github.com"))
+     :scm/user    top
+     :scm/repo    base-name
+     :top         top}))
+
 (defn- preprocess-options
   "Given the raw options hash map, preprocess, parse, and
   validate certain values, and derive defaults for others."
-  [{:keys [template target-dir name] :as opts}]
-  (when-not (and template name)
+  [{:keys [template target-dir], project-name :name, :as opts}]
+  (when-not (and template project-name)
     (throw (ex-info "Both :template and :name are required." opts)))
-  (let [;; clean up input parameters:
-        template   (symbol template) ; allow for string or symbol
+  (let [template   (symbol template) ; allow for string or symbol
         template   (if (namespace template)
                      template
                      ;; default ns for short template names:
                      (symbol "org.corfield.new" (name template)))
-        target-dir (str target-dir)
-        defaults   {:template   template
-                    :target-dir target-dir
-                    :name       name}]
-    (merge defaults (dissoc opts :template :target-dir :name))))
+        {:keys [main] :as name-data}
+        (deconstruct-project-name (symbol project-name)) ; allow for string or symbol
+        target-dir (str (or target-dir main))
+        username   (or (System/getenv "USER")
+                       (System/getProperty "user.name"))]
+    (merge name-data
+           {:developer  (str/capitalize username)
+            :now/date   (.format (SimpleDateFormat. "yyyy-MM-dd") (Date.))
+            :now/year   (.get (Calendar/getInstance) Calendar/YEAR)
+            :raw-name   project-name
+            :template   template
+            :target-dir target-dir
+            :user       username
+            :version    "0.1.0-SNAPSHOT"}
+           ;; remove options we cleaned up:
+           (dissoc opts :template :target-dir :name))))
 
 (defn create
   "Exec function to create a new project from a template.
-  :template -- a symbol identifying the template.
-  :target-dir -- a string identifying the directory to
-      create the new project in.
+  :template -- a symbol (or string) identifying the template,
+  :name -- a symbol (or string) identifying the project name,
+  :target-dir -- optional string identifying the directory to
+      create the new project in,
   :overwrite -- a boolean indicating whether to delete
       and recreate an existing directory or not."
   [opts]
-  (let [{:keys [template target-dir overwrite]}
+  (let [{:keys [template target-dir overwrite] :as opts}
         (preprocess-options opts)
         [dir ednf] (find-root template)
         _
@@ -144,7 +191,7 @@
           (throw (ex-info (str "Unable to find template.edn for " template) {})))
         ;; this may throw for invalid EDN:
         edn        (-> ednf (slurp) (edn/read-string))
-        data       (->subst-map {:top 'myname :main 'myapp})]
+        data       (->subst-map opts)]
 
     (when-not (s/valid? ::template edn)
       (throw (ex-info (str ednf " is not a valid template file\n\n"
@@ -165,6 +212,7 @@
   (let [[_dir edn] (find-root 'org.corfield.new/app)]
     (s/conform ::template (edn/read-string (slurp edn))))
   (create {:template   'org.corfield.new/app
+           :name       'org.bitbucket.wsnetworks/example
            :target-dir "new-out"
            :overwrite  true})
   (find-root 'org.corfield.new/lib)
