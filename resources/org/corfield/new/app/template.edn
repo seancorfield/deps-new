@@ -1,0 +1,5 @@
+{:transform
+ [["src" "src/{{top/ns}}"
+   {"main.clj" "{{main/file}}.clj"}]
+  ["test" "test/{{top/ns}}"
+   {"main_test.clj" "{{main/file}}_test.clj"}]]}

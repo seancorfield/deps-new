@@ -1,0 +1,11 @@
+{:paths ["src" "resources"]
+ :deps
+ {io.github.clojure/tools.build {:git/tag "v0.1.7" :git/sha "fc2e1f8"}}
+
+ :tools/usage
+ {:ns-default org.corfield.new}
+
+ :aliases
+ {:test
+  {:extra-paths ["test"]
+   :extra-deps {com.github.seancorfield/expectations {:mvn/version "2.0.0-alpha2"}}}}}
