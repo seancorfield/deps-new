@@ -164,6 +164,21 @@
            ;; remove options we cleaned up:
            (dissoc opts :template :target-dir :name))))
 
+(defn apply-template-fns
+  "Given the options hash map and template hash map (EDN),
+  apply any data manipulation and template manipulation
+  functions specified in the template."
+  [basic-opts basic-edn]
+  (let [opts (if-let [data-fn (:data-fn basic-edn)]
+               ;; :data-fn result is additive:
+               (merge basic-opts ((requiring-resolve data-fn) basic-opts))
+               basic-opts)
+        edn  (if-let [template-fn (:template-fn basic-edn)]
+               ;; :template-fn result is replacement:
+               ((requiring-resolve template-fn) basic-edn opts)
+               basic-edn)]
+    [opts edn]))
+
 (comment
   (find-root 'org.corfield.new/app)
   (find-root 'org.corfield.new/lib)

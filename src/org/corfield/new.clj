@@ -13,10 +13,12 @@
 (set! *warn-on-reflection* true)
 
 (s/def ::root string?)
+(s/def ::data-fn symbol?)
+(s/def ::template-fn symbol?)
 (s/def ::files (s/map-of string? string?))
 (s/def ::dir-spec (s/tuple string? string? ::files))
 (s/def ::transform (s/coll-of ::dir-spec :min-count 1))
-(s/def ::template (s/keys :opt-un [::root ::transform]))
+(s/def ::template (s/keys :opt-un [::data-fn ::root ::template-fn ::transform]))
 
 (defn create
   "Exec function to create a new project from a template.
@@ -28,18 +30,21 @@
       for `:delete`, to delete it first; if `:overwrite` is `nil`
       or `false`, an existing directory will not be overwritten."
   [opts]
-  (let [{:keys [template target-dir overwrite] :as opts}
+  (let [{:keys [template] :as basic-opts}
         (impl/preprocess-options opts)
-        [dir ednf] (impl/find-root template)
+        [dir edn-file] (impl/find-root template)
         _
         (when-not dir
           (throw (ex-info (str "Unable to find template.edn for " template) {})))
-        ;; this may throw for invalid EDN:
-        edn        (-> ednf (slurp) (edn/read-string))
-        data       (impl/->subst-map opts)]
+
+        [{:keys [target-dir overwrite] :as final-opts} edn]
+        (impl/apply-template-fns basic-opts
+                                 ;; this may throw for invalid EDN:
+                                 (-> edn-file (slurp) (edn/read-string)))
+        data       (impl/->subst-map final-opts)]
 
     (when-not (s/valid? ::template edn)
-      (throw (ex-info (str ednf " is not a valid template file\n\n"
+      (throw (ex-info (str edn-file " is not a valid template file\n\n"
                            (s/explain-str ::template edn))
                       (s/explain-data ::template edn))))
 
