@@ -7,15 +7,44 @@ Intended to be installed as a "tool" (Clojure CLI 1.10.3.933 or later).
 ```bash
 clojure -Ttools install com.github.seancorfield/deps-new '{:sha "..."}' :as deps-new
 
-clojure -Tdeps-new create :template app :name myusername/mynewapp
+clojure -Tdeps-new app :name myusername/mynewapp
 ```
 
-Currently there's only that one template. Watch this space!
+Creates a directory `mynewapp` containing a new application project, with `myusername` as the "top" namespace
+and `mynewapp` as the main project namespace:
+
+```clojure
+;; mynewapp/src/myusername/mynewapp.clj
+(ns myusername.mynewapp
+  (:gen-class))
+
+(defn greet
+  "Callable entry point to the application."
+  [data]
+  (println (str "Hello, " (or (:name data) "World") "!")))
+
+(defn -main
+  "I don't do a whole lot ... yet."
+  [& args]
+  (greet {:name (first args)}))
+```
+
+Currently there's only that one built-in template (`app`).
+
+More general usage:
+
+```bash
+clojure -A:template -Tdeps-new create :template com.acme.project/cool-lib :name myusername/mynewproject
+```
+
+Looks for `com/acme/project/cool_lib/template.edn` on the classpath (based on the `:template` alias) and,
+if present, uses that template to create a project, in `mynewproject`.
 
 Available options:
 * `:template` (required) -- symbol (or string) identifying the template to use,
 * `:name` (required) -- symbol (or string) identifying the project name to create,
 * `:target-dir` -- string (or symbol) identifying the directory in which to create the project; defaults to the trailing portion of the qualified project name.
+* `:overwrite` -- indicate whether an existing directory should be overwritten (added to), deleted, or prevent creation of the project; defaults to `nil` (prevents creation of the project); `:delete` means delete the existing directory and then create the project; any other truthy value means overlay the project on the existing directory.
 
 The following optional keys can be provided to override defaults in the template:
 * `:artifact/id` -- the `artifact-id` to use in the `pom.xml` file; defaults to the trailing portion of the qualified project name,

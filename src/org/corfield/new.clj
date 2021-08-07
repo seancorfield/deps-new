@@ -210,6 +210,17 @@
     (copy-template-dir dir target-dir [(:root edn "root")] data)
     (run! #(copy-template-dir dir target-dir % data) (:transform edn))))
 
+(defn app
+  "Exec function to create an application project.
+  `:name` -- a symbol (or string) identifying the project name,
+  `:target-dir` -- optional string identifying the directory to
+      create the new project in,
+  `:overwrite` -- whether to overwrite an existing directory or,
+      for `:delete`, to delete it first; if `:overwrite` is `nil`
+      or `false`, an existing directory will not be overwritten."
+  [opts]
+  (create (assoc opts :template 'app)))
+
 (comment
   (let [[_dir edn] (find-root 'org.corfield.new/app)]
     (s/conform ::template (edn/read-string (slurp edn))))
