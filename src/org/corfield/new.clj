@@ -176,12 +176,13 @@
 
 (defn create
   "Exec function to create a new project from a template.
-  :template -- a symbol (or string) identifying the template,
-  :name -- a symbol (or string) identifying the project name,
-  :target-dir -- optional string identifying the directory to
+  `:template` -- a symbol (or string) identifying the template,
+  `:name` -- a symbol (or string) identifying the project name,
+  `:target-dir` -- optional string identifying the directory to
       create the new project in,
-  :overwrite -- a boolean indicating whether to delete
-      and recreate an existing directory or not."
+  `:overwrite` -- whether to overwrite an existing directory or,
+      for `:delete`, to delete it first; if `:overwrite` is `nil`
+      or `false`, an existing directory will not be overwritten."
   [opts]
   (let [{:keys [template target-dir overwrite] :as opts}
         (preprocess-options opts)
@@ -200,7 +201,8 @@
 
     (when (.exists (io/file target-dir))
       (if overwrite
-        (b/delete {:path target-dir})
+        (when (= :delete overwrite)
+          (b/delete {:path target-dir}))
         (throw (ex-info (str target-dir " already exists (and :overwrite was not true).") {}))))
 
     (println "Creating project from" template "in" target-dir)
@@ -214,7 +216,7 @@
   (create {:template   'org.corfield.new/app
            :name       'org.bitbucket.wsnetworks/example
            :target-dir "new-out"
-           :overwrite  true})
+           :overwrite  :delete})
   (find-root 'org.corfield.new/lib)
   (substitute "{{foo/file}}.clj"
               (->subst-map {:top/ns "org.corfield"

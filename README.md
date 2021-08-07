@@ -13,23 +13,23 @@ clojure -Tdeps-new create :template app :name myusername/mynewapp
 Currently there's only that one template. Watch this space!
 
 Available options:
-* `:template` (required) -- symbol (or string) identifying template to use,
+* `:template` (required) -- symbol (or string) identifying the template to use,
 * `:name` (required) -- symbol (or string) identifying the project name to create,
-* `:target-dir` -- string (or symbol) identifying the directory in which to create the project; defaults to the trailing portion of the project name.
+* `:target-dir` -- string (or symbol) identifying the directory in which to create the project; defaults to the trailing portion of the qualified project name.
 
 The following optional keys can be provided to override defaults in the template:
-* `:artifact/id` -- the `artifact-id` to use in the `pom.xml` file; defaults to the trailing portion of the project name,
+* `:artifact/id` -- the `artifact-id` to use in the `pom.xml` file; defaults to the trailing portion of the qualified project name,
 * `:developer` -- the capitalized version of your current username,
-* `:group/id` -- the `group-id` to use in the `pom.xml` file; defaults the leading portion of the project name, prefixed by `net.clojars.` if it does not contain a `.`,
-* `:main` -- the trailing portion of the project name,
-* `:name` -- the qualified project name,
+* `:group/id` -- the `group-id` to use in the `pom.xml` file; defaults the leading portion of the qualified project name, prefixed by `net.clojars.` if it does not already contain a `.`,
+* `:main` -- the trailing portion of the qualified project name,
+* `:name` -- the qualified project name (if the original `:name` was not a qualified symbol, e.g., `foo`, then this will be `foo/foo`),
 * `:now/date` -- the current date, formatted as `yyyy-MM-dd`,
 * `:now/year` -- the current year (four digits),
-* `:raw-name` -- the project name as supplied on the command-line (which may be unqualified),
-* `:scm/domain` -- `"github.com"` unless the leading portion of the project name indicates this should be hosted on `gitlab` or `bitbucket`,
-* `:scm/user` -- the leading portion of the project name, with known SCM hosts removed,
-* `:scm/repo` -- the trailing portion of the project name
-* `:top` -- the leading portion of the project name, with known SCM hosts removed.
+* `:raw-name` -- the original project name as supplied on the command-line (which may be unqualified),
+* `:scm/domain` -- `"github.com"` unless the leading portion of the qualified project name suggests this should be hosted on `gitlab` or `bitbucket`,
+* `:scm/user` -- the leading portion of the qualified project name, with known SCM hosts removed,
+* `:scm/repo` -- the trailing portion of the qualified project name
+* `:top` -- the leading portion of the qualified project name, with known SCM hosts removed.
 * `:user` -- your current username,
 * `:version` -- the version string; defaults to `"0.1.0-SNAPSHOT"`.
 
