@@ -177,7 +177,9 @@
                ;; :template-fn result is replacement:
                ((requiring-resolve template-fn) basic-edn opts)
                basic-edn)]
-    [opts edn]))
+    ;; this allows any defaults from the template to
+    ;; be part of the data used for substitution:
+    [(merge edn opts) edn]))
 
 (comment
   (find-root 'org.corfield.new/app)

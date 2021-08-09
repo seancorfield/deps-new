@@ -1,5 +1,5 @@
-{:description "FIXME: my new application."
- :transform
+{:description "FIXME: my new library."
+:transform
  [["src" "src/{{top/file}}"
    {"main.clj" "{{main/file}}.clj"}]
   ["test" "test/{{top/file}}"

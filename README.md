@@ -34,13 +34,15 @@ Currently there's only that one built-in template (`app`).
 More general usage:
 
 ```bash
-clojure -A:template -Tdeps-new create :template com.acme.project/cool-lib :name myusername/mynewproject
+clojure -A:somealias -Tdeps-new create :template com.acme.project/cool-lib :name myusername/mynewproject
 ```
 
-Looks for `com/acme/project/cool_lib/template.edn` on the classpath (based on the `:template` alias) and,
-if present, uses that template to create a project, in `mynewproject`.
+Looks for `com/acme/project/cool_lib/template.edn` on the classpath (based on the `:somealias` alias) and,
+if present, uses that template to create a project, in `mynewproject`. Instead of `-A:somealias`, you
+could use `-Sdeps` to specify the dependencies needed to make the template available.
 
-Available options:
+# Available Options
+
 * `:template` (required) -- symbol (or string) identifying the template to use,
 * `:name` (required) -- symbol (or string) identifying the project name to create,
 * `:target-dir` -- string (or symbol) identifying the directory in which to create the project; defaults to the trailing portion of the qualified project name.

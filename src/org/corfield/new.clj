@@ -13,12 +13,13 @@
 (set! *warn-on-reflection* true)
 
 (s/def ::root string?)
+(s/def ::description string?)
 (s/def ::data-fn symbol?)
 (s/def ::template-fn symbol?)
 (s/def ::files (s/map-of string? string?))
 (s/def ::dir-spec (s/tuple string? string? ::files))
 (s/def ::transform (s/coll-of ::dir-spec :min-count 1))
-(s/def ::template (s/keys :opt-un [::data-fn ::root ::template-fn ::transform]))
+(s/def ::template (s/keys :opt-un [::data-fn ::description ::root ::template-fn ::transform]))
 
 (defn create
   "Exec function to create a new project from a template.
