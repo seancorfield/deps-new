@@ -1,4 +1,5 @@
 .classpath
+.clj-kondo/.cache
 .hg/
 .hgignore
 .project

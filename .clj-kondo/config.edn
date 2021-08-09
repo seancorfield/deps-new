@@ -1,0 +1,1 @@
+{:lint-as {expectations.clojure.test/defexpect clojure.test/deftest}}
