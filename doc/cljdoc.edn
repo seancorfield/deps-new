@@ -1,2 +1,4 @@
 {:cljdoc.doc/tree [["Readme" {:file "README.md"}]
-                   ["Changes" {:file "CHANGELOG.md"}]]}
+                   ["Changes" {:file "CHANGELOG.md"}]
+                   ["Writing Templates" {:file "doc/template.md"}]
+                   ["All the Options" {:file "doc/options.md"}]]}
