@@ -29,7 +29,14 @@ and `mynewapp` as the main project namespace:
   (greet {:name (first args)}))
 ```
 
-Currently there's only that one built-in template (`app`).
+```bash
+clojure -Tdeps-new lib :name myusername/mycoollib
+```
+
+Creates a directory `mycoollib` containing a new library project, with `myusername` as the "top" namespace
+and `mycoollib` as the main project namespace.
+
+Currently those are only the only two built-in templates (`app` and `lib`).
 
 More general usage:
 
