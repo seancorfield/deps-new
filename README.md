@@ -57,6 +57,7 @@ could use `-Sdeps` to specify the dependencies needed to make the template avail
 
 The following optional keys can be provided to override defaults in the template:
 * `:artifact/id` -- the `artifact-id` to use in the `pom.xml` file; defaults to the trailing portion of the qualified project name,
+* `:description` -- a string used in the generated README and `pom.xml` files to describe the project; the default value is typically provided by `template.edn`,
 * `:developer` -- the capitalized version of your current username,
 * `:group/id` -- the `group-id` to use in the `pom.xml` file; defaults the leading portion of the qualified project name, prefixed by `net.clojars.` if it does not already contain a `.`,
 * `:main` -- the trailing portion of the qualified project name,
