@@ -123,7 +123,7 @@
                     qualifier
                     (str "net.clojars." qualifier))
      :main        base-name
-     :name        project-name
+     :name        (str project-name)
      :scm/domain  (let [[_ scm-tld scm-host]
                         (re-matches (re-pattern (str known-scms ".*$")) qualifier)]
                     (if scm-host
@@ -156,8 +156,8 @@
            {:developer  (str/capitalize username)
             :now/date   (.format (SimpleDateFormat. "yyyy-MM-dd") (Date.))
             :now/year   (.get (Calendar/getInstance) Calendar/YEAR)
-            :raw-name   project-name
-            :template   template
+            :raw-name   (str project-name)
+            :template   (str template)
             :target-dir target-dir
             :user       username
             :version    "0.1.0-SNAPSHOT"}
@@ -165,10 +165,10 @@
            (dissoc opts :template :target-dir :name))))
 
 (defn apply-template-fns
-  "Given the options hash map and template hash map (EDN),
-  apply any data manipulation and template manipulation
-  functions specified in the template."
-  [basic-opts basic-edn]
+  "Given the template name, the options hash map and template
+  hash map (EDN), apply any data manipulation and template
+  manipulation functions specified in the template."
+  [template-name basic-opts basic-edn]
   (let [opts (if-let [data-fn (:data-fn basic-edn)]
                ;; :data-fn result is additive:
                (merge basic-opts ((requiring-resolve data-fn) basic-opts))
@@ -179,7 +179,7 @@
                basic-edn)]
     ;; this allows any defaults from the template to
     ;; be part of the data used for substitution:
-    [(merge edn opts) edn]))
+    [(merge {:description (str "FIXME: my new " template-name " project.")} edn opts) edn]))
 
 (comment
   (find-root 'org.corfield.new/app)

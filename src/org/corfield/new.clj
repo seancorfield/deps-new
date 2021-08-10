@@ -39,7 +39,8 @@
           (throw (ex-info (str "Unable to find template.edn for " template) {})))
 
         [{:keys [target-dir overwrite] :as final-opts} edn]
-        (impl/apply-template-fns basic-opts
+        (impl/apply-template-fns (name template)
+                                 basic-opts
                                  ;; this may throw for invalid EDN:
                                  (-> edn-file (slurp) (edn/read-string)))
         data       (impl/->subst-map final-opts)]
