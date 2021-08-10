@@ -48,6 +48,8 @@ Looks for `com/acme/project/cool_lib/template.edn` on the classpath (based on th
 if present, uses that template to create a project, in `mynewproject`. Instead of `-A:somealias`, you
 could use `-Sdeps` to specify the dependencies needed to make the template available.
 
+See [**Project Names and Variables**](doc/names-variables.md) to see how the project name (`:name`)
+is used to derive the default values of all the built-in substitution variables.
 See [**All the Options**](doc/options.md) for the full list of command-line options available
 when invoking `deps-new`. See [**Writing Templates**](doc/templates.md) for documentation on
 how to write your own templates.

@@ -1,4 +1,5 @@
 {:cljdoc.doc/tree [["Readme" {:file "README.md"}]
                    ["Changes" {:file "CHANGELOG.md"}]
+                   ["Project Names and Variables" {:file "doc/names-variables.md"}]
                    ["Writing Templates" {:file "doc/template.md"}]
                    ["All the Options" {:file "doc/options.md"}]]}

@@ -23,9 +23,3 @@ The following optional keys can be provided to override defaults in the template
 * `:top` -- the leading portion of the qualified project name, with known SCM hosts removed.
 * `:user` -- your current username,
 * `:version` -- the version string; defaults to `"0.1.0-SNAPSHOT"`.
-
-For all unqualified keys that have a string as a value, two additional substitutions
-are available in templates:
-* `:<key>/file` -- the key's value as a filename (`/`-separated, with `_`),
-* `:<key>/ns` -- the key's value as a namespace (dot-separated, with `-`).
-_For some keys this may make no sense, but it is intended as a convenience where you know you want a filename or namespace._
