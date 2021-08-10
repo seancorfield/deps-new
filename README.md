@@ -10,8 +10,8 @@ clojure -Ttools install com.github.seancorfield/deps-new '{:sha "..."}' :as deps
 clojure -Tdeps-new app :name myusername/mynewapp
 ```
 
-Creates a directory `mynewapp` containing a new application project, with `myusername` as the "top" namespace
-and `mynewapp` as the main project namespace:
+Creates a directory `mynewapp` containing a new application project, with `myusername` as the
+"top" namespace and `mynewapp` as the main project namespace:
 
 ```clojure
 ;; mynewapp/src/myusername/mynewapp.clj
@@ -34,7 +34,17 @@ clojure -Tdeps-new lib :name myusername/mycoollib
 ```
 
 Creates a directory `mycoollib` containing a new library project, with `myusername` as the "top" namespace
-and `mycoollib` as the main project namespace.
+and `mycoollib` as the main project namespace under that.
+
+If you want to generate the project into a different directory than the project name, use
+the `:target-dir` option to specify a path to the directory that should be created:
+
+```bash
+clojure -Tdeps-new lib :name myusername/mycoollib :target-dir projects/newlib
+```
+
+Creates a directory `projects/newlib` containing a new library project, with `myusername` as
+the "top" namespace and `mycoollib` as the main project namespace under that.
 
 Currently those are only the only two built-in templates (`app` and `lib`).
 

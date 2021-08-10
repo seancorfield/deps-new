@@ -21,7 +21,7 @@ We will use a project name of `com.acme/my.cool-lib` as the illustration for the
 following derivation examples.
 
 If `:target-dir` is not provided on the command-line, it will default to the
-trailing portion of the project name, e.g., `my.cool-lib` (as a string).
+trailing portion of the project name, e.g., `"my.cool-lib"` (as a string).
 
 All of the variables listed below can be overridden on the command-line by passing named
 arguments that match the variable name, e.g., `:version '"1.2.3"'` to override `{{version}}`.
