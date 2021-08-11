@@ -165,11 +165,15 @@
            (dissoc opts :template :target-dir :name))))
 
 (defn apply-template-fns
-  "Given the template name, the options hash map and template
-  hash map (EDN), apply any data manipulation and template
-  manipulation functions specified in the template."
-  [template-name basic-opts basic-edn]
-  (let [opts (if-let [data-fn (:data-fn basic-edn)]
+  "Given the template directory, the options hash map, and
+  the template hash map (EDN), apply any data manipulation
+  and template manipulation functions specified in the template.
+
+  `:template-dir` is added to the options hash map first, and
+  `:template` is already available."
+  [template-dir basic-opts basic-edn]
+  (let [basic-opts (assoc basic-opts :template-dir template-dir)
+        opts (if-let [data-fn (:data-fn basic-edn)]
                ;; :data-fn result is additive:
                (merge basic-opts ((requiring-resolve data-fn) basic-opts))
                basic-opts)
@@ -179,7 +183,10 @@
                basic-edn)]
     ;; this allows any defaults from the template to
     ;; be part of the data used for substitution:
-    [(merge {:description (str "FIXME: my new " template-name " project.")} edn opts) edn]))
+    [(merge {:description (str "FIXME: my new"
+                               (when-let [template-name (:template opts)]
+                                 (str " " template-name))
+                               " project.")} edn opts) edn]))
 
 (comment
   (find-root 'org.corfield.new/app)

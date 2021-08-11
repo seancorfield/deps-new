@@ -39,7 +39,7 @@
           (throw (ex-info (str "Unable to find template.edn for " template) {})))
 
         [{:keys [target-dir overwrite] :as final-opts} edn]
-        (impl/apply-template-fns (name template)
+        (impl/apply-template-fns dir
                                  basic-opts
                                  ;; this may throw for invalid EDN:
                                  (-> edn-file (slurp) (edn/read-string)))
@@ -53,6 +53,7 @@
     (when (.exists (io/file target-dir))
       (if overwrite
         (when (= :delete overwrite)
+          (println "Deleting old" target-dir)
           (b/delete {:path target-dir}))
         (throw (ex-info (str target-dir " already exists (and :overwrite was not true).") {}))))
 
