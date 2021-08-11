@@ -46,7 +46,18 @@ clojure -Tdeps-new lib :name myusername/mycoollib :target-dir projects/newlib
 Creates a directory `projects/newlib` containing a new library project, with `myusername` as
 the "top" namespace and `mycoollib` as the main project namespace under that.
 
-Currently those are only the only two built-in templates (`app` and `lib`).
+If you just want a very minimal `deps.edn` project to experiment with:
+
+```bash
+clojure -Tdeps-new scratch :name play
+```
+
+Creates a directory `play` containing an empty `deps.edn` file and `src/scratch.clj`
+with a simple `exec` function (you can invoke via `clojure -X scratch/exec`) and a
+simple `-main` function (you can invoke via `clojure -M -m scratch`). This is intended
+to be a minimal "playground" to get started with `deps.edn` and the CLI.
+
+Currently those are only the only three built-in templates (`app`, `lib`, and `scratch`).
 
 More general usage:
 
