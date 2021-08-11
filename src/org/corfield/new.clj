@@ -84,6 +84,17 @@
   [opts]
   (create (assoc opts :template 'lib)))
 
+(defn scratch
+  "Exec function to create a minimal 'scratch' project.
+  `:name` -- a symbol (or string) identifying the project name,
+  `:target-dir` -- optional string identifying the directory to
+      create the new project in,
+  `:overwrite` -- whether to overwrite an existing directory or,
+      for `:delete`, to delete it first; if `:overwrite` is `nil`
+      or `false`, an existing directory will not be overwritten."
+  [opts]
+  (create (assoc opts :template 'scratch)))
+
 (comment
   (let [[_dir edn] (impl/find-root 'org.corfield.new/app)]
     (s/conform ::template (edn/read-string (slurp edn))))
