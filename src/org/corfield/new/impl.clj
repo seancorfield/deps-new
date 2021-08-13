@@ -132,7 +132,7 @@
                              "com"
                              scm-tld))
                       "github.com"))
-     :scm/user    top
+     :scm/user    (str/replace top #"(com|org)\." "")
      :scm/repo    base-name
      :top         top}))
 

@@ -37,7 +37,7 @@ assuming `com.acme/my.cool-lib` as the example `:name` parameter.
 * `{{name}}` -- `"com.acme/my.cool-lib"`,
 * `{{raw-name}}` -- `"com.acme/my.cool-lib"`; note: this is the original value of the `:name` command-line argument,
 * `{{scm/domain}}` -- `"github.com"` because `com.acme` does not indicate a known SCM domain; see **SCM Domains** below for more details,
-* `{{scm/user}}` -- `"com.acme"`; note: this is the leading portion of the project name, with known SCM hosts removed -- see below,
+* `{{scm/user}}` -- `"acme"`; note: this is the leading portion of the project name, with known SCM hosts removed -- see below -- and any leading `com.` or `org.` removed,
 * `{{scm/repo}}` -- `"my.coo.lib"`,
 * `{{top}}` -- `"com.acme"`; note: this is the leading portion of the project name, with known SCM hosts removed -- see below.
 
@@ -90,7 +90,13 @@ If the project name begins with the following pattern, that prefix is removed fr
 
 In other words, a project name of `io.gitlab.myname/myproject`
 will cause `"gitlab.com"` to be selected for `{{scm/domain}}` and both `{{scm/user}}` and `{{top}}`
-will be `"myname"`. A project name of `org.bitbucket.myname/myproject` will cause `"bitbucket.org"`
+will be `"myname"`.
+
+A project name of `org.bitbucket.myname/myproject` will cause `"bitbucket.org"`
 to be selected for `{{scm/domain}}` and both `{{scm/user}}` and `{{top}}` will be `"myname"`.
-In both cases, `{{scm/repo}}` and `{{main}}` will be `"myproject"`. These variables can all
+
+A project name of `com.acme/myproject` will cause `"github.com"` to be selected for
+`{{scm/domain}}`, `{{scm/user}}` will be `"acme"`, and `{{top}}` will be `"com.acme"`.
+
+In all three cases, `{{scm/repo}}` and `{{main}}` will be `"myproject"`. These variables can all
 be overridden individually on the command-line.

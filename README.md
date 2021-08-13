@@ -6,7 +6,11 @@ Intended to be installed as a "tool" (Clojure CLI 1.10.3.933 or later).
 
 ```bash
 clojure -Ttools install com.github.seancorfield/deps-new '{:sha "..."}' :as deps-new
+```
 
+## Create an Application
+
+```bash
 clojure -Tdeps-new app :name myusername/mynewapp
 ```
 
@@ -29,6 +33,8 @@ Creates a directory `mynewapp` containing a new application project, with `myuse
   (greet {:name (first args)}))
 ```
 
+## Create a Library
+
 ```bash
 clojure -Tdeps-new lib :name myusername/mycoollib
 ```
@@ -46,6 +52,8 @@ clojure -Tdeps-new lib :name myusername/mycoollib :target-dir projects/newlib
 Creates a directory `projects/newlib` containing a new library project, with `myusername` as
 the "top" namespace and `mycoollib` as the main project namespace under that.
 
+## Create a Minimal "scratch" Project
+
 If you just want a very minimal `deps.edn` project to experiment with:
 
 ```bash
@@ -57,7 +65,37 @@ with a simple `exec` function (you can invoke via `clojure -X scratch/exec`) and
 simple `-main` function (you can invoke via `clojure -M -m scratch`). This is intended
 to be a minimal "playground" to get started with `deps.edn` and the CLI.
 
-Currently those are only the only three built-in templates (`app`, `lib`, and `scratch`).
+## Create a Fully-Fleshed `pom.xml`
+
+```bash
+clojure -Tdeps-new pom :name com.acme/cool-lib :target-dir .
+```
+
+Creates a `pom.xml` file in the current directory (_overwriting any existing file!_)
+that has all the fields needed to publish a project to Clojars and have cljdoc.org
+generate the documentation, e.g.,
+
+```xml
+  <groupId>com.acme</groupId>
+  <artifactId>cool-lib</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <name>com.acme/cool-lib</name>
+  <description>FIXME: my new org.corfield.new/pom project.</description>
+  <url>https://github.com/com.acme/cool-lib</url>
+...
+  <scm>
+    <url>https://github.com/acme/cool-lib</url>
+    <connection>scm:git:git://github.com/acme/cool-lib.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/acme/cool-lib.git</developerConnection>
+    <tag>v0.1.0-SNAPSHOT</tag>
+  </scm>
+```
+
+You should run `clojure -Spom` to synchronize the `<dependencies>` from your `deps.edn` file.
+
+## More General Usage
+
+Currently those are the only four built-in templates (`app`, `lib`, `pom`, and `scratch`).
 
 More general usage:
 
