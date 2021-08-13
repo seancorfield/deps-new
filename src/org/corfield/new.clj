@@ -84,6 +84,17 @@
   [opts]
   (create (assoc opts :template 'lib)))
 
+(defn pom
+  "Exec function to create just a `pom.xml` file.
+  `:name` -- a symbol (or string) identifying the project name,
+  `:target-dir` -- a string identifying the directory in which
+      to create the `pom.xml` file,
+  `:overwrite` -- defaults to `true` since you _do_ want to
+      write into an existing directory!"
+  [opts]
+  (create (-> (merge {:overwrite true} opts)
+              (assoc :template 'pom))))
+
 (defn scratch
   "Exec function to create a minimal 'scratch' project.
   `:name` -- a symbol (or string) identifying the project name,
