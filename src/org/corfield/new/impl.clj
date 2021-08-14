@@ -76,7 +76,7 @@
 
   If files is provided, any files found in the source directory
   that are not explicitly mentioned are copied directly."
-  [dir target-dir [src target files] data]
+  [template-dir target-dir [src target files] data]
   (let [target (when target (str "/" (substitute target data)))]
     (if (seq files)
       (let [intermediate (-> (Files/createTempDirectory
@@ -86,11 +86,11 @@
                              (.getCanonicalPath))]
         ;; first we just copy the raw files with no substitutions:
         (b/copy-dir {:target-dir intermediate
-                     :src-dirs   [(str dir "/" src)]})
+                     :src-dirs   [(str template-dir "/" src)]})
         ;; now we process the named files, substituting paths:
         (run! (fn [[from to]]
                 (b/delete {:path (str intermediate "/" from)})
-                (b/copy-file {:src    (str dir "/" src "/" from)
+                (b/copy-file {:src    (str template-dir "/" src "/" from)
                               :target (str intermediate target "/"
                                            (substitute to data))}))
               files)
@@ -99,7 +99,7 @@
                      :src-dirs   [intermediate]
                      :replace    data}))
       (b/copy-dir {:target-dir (str target-dir target)
-                   :src-dirs   [(str dir "/" src)]
+                   :src-dirs   [(str template-dir "/" src)]
                    :replace    data}))))
 
 (def ^:private known-scms

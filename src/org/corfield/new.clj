@@ -38,7 +38,7 @@
         (when-not dir
           (throw (ex-info (str "Unable to find template.edn for " template) {})))
 
-        [{:keys [target-dir overwrite] :as final-opts} edn]
+        [{:keys [target-dir template-dir overwrite] :as final-opts} edn]
         (impl/apply-template-fns dir
                                  basic-opts
                                  ;; this may throw for invalid EDN:
@@ -59,8 +59,8 @@
 
     (println "Creating project from" template "in" target-dir)
 
-    (impl/copy-template-dir dir target-dir [(:root edn "root")] data)
-    (run! #(impl/copy-template-dir dir target-dir % data) (:transform edn))))
+    (impl/copy-template-dir template-dir target-dir [(:root edn "root")] data)
+    (run! #(impl/copy-template-dir template-dir target-dir % data) (:transform edn))))
 
 (defn app
   "Exec function to create an application project.
