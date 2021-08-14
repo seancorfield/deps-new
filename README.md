@@ -5,13 +5,13 @@ The next generation of `clj-new`. Work-in-progress!
 Intended to be installed as a "tool" (Clojure CLI 1.10.3.933 or later).
 
 ```bash
-clojure -Ttools install com.github.seancorfield/deps-new '{:sha "..."}' :as deps-new
+clojure -Ttools install com.github.seancorfield/deps-new '{:sha "..."}' :as new
 ```
 
 ## Create an Application
 
 ```bash
-clojure -Tdeps-new app :name myusername/mynewapp
+clojure -Tnew app :name myusername/mynewapp
 ```
 
 Creates a directory `mynewapp` containing a new application project, with `myusername` as the
@@ -36,7 +36,7 @@ Creates a directory `mynewapp` containing a new application project, with `myuse
 ## Create a Library
 
 ```bash
-clojure -Tdeps-new lib :name myusername/mycoollib
+clojure -Tnew lib :name myusername/mycoollib
 ```
 
 Creates a directory `mycoollib` containing a new library project, with `myusername` as the "top" namespace
@@ -46,7 +46,7 @@ If you want to generate the project into a different directory than the project 
 the `:target-dir` option to specify a path to the directory that should be created:
 
 ```bash
-clojure -Tdeps-new lib :name myusername/mycoollib :target-dir projects/newlib
+clojure -Tnew lib :name myusername/mycoollib :target-dir projects/newlib
 ```
 
 Creates a directory `projects/newlib` containing a new library project, with `myusername` as
@@ -57,7 +57,7 @@ the "top" namespace and `mycoollib` as the main project namespace under that.
 If you just want a very minimal `deps.edn` project to experiment with:
 
 ```bash
-clojure -Tdeps-new scratch :name play
+clojure -Tnew scratch :name play
 ```
 
 Creates a directory `play` containing an empty `deps.edn` file and `src/scratch.clj`
@@ -68,7 +68,7 @@ to be a minimal "playground" to get started with `deps.edn` and the CLI.
 ## Create a Fully-Fleshed `pom.xml`
 
 ```bash
-clojure -Tdeps-new pom :name com.acme/cool-lib :target-dir .
+clojure -Tnew pom :name com.acme/cool-lib :target-dir .
 ```
 
 Creates a `pom.xml` file in the current directory (_overwriting any existing file!_)
@@ -100,7 +100,7 @@ Currently those are the only four built-in templates (`app`, `lib`, `pom`, and `
 More general usage:
 
 ```bash
-clojure -A:somealias -Tdeps-new create :template com.acme.project/cool-lib :name myusername/mynewproject
+clojure -A:somealias -Tnew create :template com.acme.project/cool-lib :name myusername/mynewproject
 ```
 
 Looks for `com/acme/project/cool_lib/template.edn` on the classpath (based on the `:somealias` alias) and,
