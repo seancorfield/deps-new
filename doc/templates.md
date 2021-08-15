@@ -64,3 +64,19 @@ Any files in `src` (or `test`) that are not specifically listed in the hash map 
 be copied as-is.
 
 ## Programmatic Transformation
+
+Sometimes you might need more than just a declarative approach and simple string
+substitution. For those situations, you can declare transformation functions in
+`template.edn` that will be invoked on the data and/or the EDN of the template
+itself.
+
+The keys are `:data-fn` and `:template-fn` and the values should be fully-qualified
+symbols that will resolve to functions that can be invoked as follows:
+
+* `:data-fn` -- a function that is invoked with a hash map containing all the substitution data, both derived and from the command-line, and can return additional key/value pairs that should be added to it,
+* `:template-fn` -- a function that is invoked with the EDN (hash map) as the first argument and the substitution data (augmented by the result of `:data-fn` if present), and which should return the updated template EDN.
+
+The data function could, for example, dynamically generate the content of one or more files as
+new keys in the substitution map, and the template function could augment the EDN with additional
+folders to copy and transform. This would allow for a template to accept command-line arguments
+that controlled the inclusion of optional features in the generated project.
