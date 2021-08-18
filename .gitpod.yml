@@ -7,7 +7,9 @@ vscode:
 
 tasks:
   - name: Prepare deps
-    init: clojure -J-Dclojure.server.repl="{:address \"0.0.0.0\" :port 50505 :accept clojure.core.server/repl}" -A:test
+    init: -A:test -P
+  - name: Start REPL
+    command: clojure -J-Dclojure.server.repl="{:address \"0.0.0.0\" :port 50505 :accept clojure.core.server/repl}" -A:test
   - name: Start up
     command: code CHANGELOG.md
 
