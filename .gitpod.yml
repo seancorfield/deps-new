@@ -4,6 +4,7 @@ image:
 vscode:
   extensions:
     - betterthantomorrow.calva
+    - mauricioszabo.clover
 
 tasks:
   - name: Prepare deps
