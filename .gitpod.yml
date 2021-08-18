@@ -1,0 +1,16 @@
+image:
+  file: .gitpod.dockerfile
+
+vscode:
+  extensions:
+    - betterthantomorrow.calva
+
+tasks:
+  - name: Prepare deps
+    init: clojure -X clojure.server.repl :address '"0.0.0.0"'' :port 50505 :accept clojure.core.server/repl &
+  - name: Start up
+    command: code CHANGELOG.md
+
+github:
+  prebuilds:
+    main: true
