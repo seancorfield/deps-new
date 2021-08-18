@@ -1,6 +1,6 @@
-# deps-new
+# deps-new [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/seancorfield/deps-new)
 
-The next generation of `clj-new`. Work-in-progress!
+A new, simpler alternative to `clj-new`. Work-in-progress!
 
 Intended to be installed as a "tool" (Clojure CLI 1.10.3.933 or later).
 
