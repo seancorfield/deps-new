@@ -11,6 +11,7 @@ tasks:
     init: -A:test -P
   - name: Clover Config
     command: |
+      echo 50505 > .socket-repl-port
       mkdir ~/.config/clover
       cp .clover/config.cljs ~/.config/clover/
   - name: Start REPL
