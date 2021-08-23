@@ -14,6 +14,12 @@ The `app` and `lib` templates in `deps-new` are currently almost identical to th
 they provide in generated projects, although they need no code: `deps-new` templates are primarily declarative,
 using a `template.edn` file to describe how parts of the template are copied into the target project folder.
 
+You can get help on the available functions like this:
+
+```bash
+clojure -A:deps -Tnew help/doc
+```
+
 ## Create an Application
 
 ```bash
