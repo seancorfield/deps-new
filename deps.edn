@@ -1,6 +1,6 @@
 {:paths ["src" "resources"]
  :deps
- {io.github.clojure/tools.build {:git/tag "v0.1.8" :git/sha "38d2780"}}
+ {io.github.clojure/tools.build {:git/tag "v0.1.9" :git/sha "6736c83"}}
 
  :tools/usage
  {:ns-default org.corfield.new}
@@ -9,6 +9,5 @@
  {:test
   {:extra-paths ["test"]
    :extra-deps {com.github.seancorfield/expectations {:mvn/version "2.0.0-alpha2"}
-                io.github.cognitect-labs/test-runner
-                {:git/tag "v0.4.0" :git/sha "334f2e2"}}
+                io.github.cognitect-labs/test-runner {:git/tag "v0.4.0" :git/sha "334f2e2"}}
    :exec-fn cognitect.test-runner.api/test}}}
