@@ -1,8 +1,12 @@
-/target
-/classes
-/checkouts
-*.jar
+.classpath
+.clj-kondo/.cache
+.hg/
+.hgignore
+.project
+.settings
+.vscode
 *.class
+*.jar
 /.calva/output-window/
 /.cpcache
 /.lein-*
@@ -11,5 +15,6 @@
 /.nrepl-port
 /.rebel_readline_history
 /.socket-repl-port
-.hgignore
-.hg/
+/checkouts
+/classes
+/target
