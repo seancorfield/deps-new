@@ -1,6 +1,6 @@
 # Changes
 
-* v0.2.0 in progress
+* v0.2.0 -- 2021-09-16
   * Address #12 by switching all templates to `tools.build` (from `depstar`).
   * Update `.gitignore` template files (includes change of LSP database location).
 
