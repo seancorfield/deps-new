@@ -32,24 +32,25 @@ Run the project, overriding the name to be greeted:
 
 Run the project's tests (they'll fail until you edit them):
 
-    $ clojure -X:test
+    $ clojure -T:build test
 
-Build an uberjar:
+Run the project's CI pipeline and build an uberjar (this will fail until you edit the tests to pass):
 
-    $ clojure -X:uberjar
+    $ clojure -T:build ci
 
-This will update the generated `pom.xml` file to keep the dependencies synchronized with
-your `deps.edn` file. You can update the version (and SCM tag) information in the `pom.xml` using the
-`:version` argument:
+This will produce an updated `pom.xml` file with synchronized dependencies inside the `META-INF`
+directory inside `target/classes` and the uberjar in `target`. You can update the version (and SCM tag)
+information in generated `pom.xml` by updating `build.clj`.
 
-    $ clojure -X:uberjar :version '"1.2.3"'
-
-If you don't want the `pom.xml` file in your project, you can remove it, but you will
-also need to remove `:sync-pom true` from the `deps.edn` file (in the `:exec-args` for `depstar`).
+If you don't want the `pom.xml` file in your project, you can remove it. The `ci` task will
+still generate a minimal `pom.xml` as part of the `uber` task, unless you remove `version`
+from `build.clj`.
 
 Run that uberjar:
 
-    $ java -jar {{main/file}}.jar
+    $ java -jar target/{{main/ns}}-{{version}}.jar
+
+If you remove `version` from `build.clj`, the uberjar will become `target/{{main/ns}}-standalone.jar`.
 
 ## Options
 

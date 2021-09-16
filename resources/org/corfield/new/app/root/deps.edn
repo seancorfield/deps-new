@@ -2,18 +2,13 @@
  :deps {org.clojure/clojure {:mvn/version "1.10.3"}}
  :aliases
  {:run-m {:main-opts ["-m" "{{top/ns}}.{{main/ns}}"]}
-  :run-x {:ns-default {{top/ns}}.{{main/ns}}
+  :run-x {:ns-default {{top/ns}} . {{main/ns}}
           :exec-fn greet
           :exec-args {:name "Clojure"}}
+  :build {:deps {io.github.seancorfield/build-clj
+                 {:git/tag "v0.2.1" :git/sha "6ccae5b"}}
+          :ns-default build}
   :test {:extra-paths ["test"]
          :extra-deps {org.clojure/test.check {:mvn/version "1.1.0"}
                       io.github.cognitect-labs/test-runner
-                      {:git/url "https://github.com/cognitect-labs/test-runner"
-                       :sha "62ef1de18e076903374306060ac0e8a752e57c86"}}
-         :exec-fn cognitect.test-runner.api/test}
-  :uberjar {:replace-deps {com.github.seancorfield/depstar {:mvn/version "2.1.278"}}
-            :exec-fn hf.depstar/uberjar
-            :exec-args {:aot true
-                        :jar "{{main/file}}.jar"
-                        :main-class "{{top/ns}}.{{main/ns}}"
-                        :sync-pom true}}}}
+                      {:git/tag "v0.5.0" :git/sha "48c3c67"}}}}}
