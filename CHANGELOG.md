@@ -1,6 +1,6 @@
 # Changes
 
-* v0.2.1 -- 2021-09-17
+* v0.2.1 411e687 -- 2021-09-17
   * Update `build-clj` in `app` and `lib` to v0.3.1 (which uses updated `tools.build` and `deps-deploy` versions).
 
 * v0.2.0 d3e1caa -- 2021-09-16
