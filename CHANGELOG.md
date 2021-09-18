@@ -1,5 +1,8 @@
 # Changes
 
+* v0.2.1 -- 2021-09-17
+  * Update `build-clj` in `app` and `lib` to v0.3.1 (which uses updated `tools.build` and `deps-deploy` versions).
+
 * v0.2.0 d3e1caa -- 2021-09-16
   * Address #12 by switching all templates to `tools.build` (from `depstar`).
   * Update `.gitignore` template files (includes change of LSP database location).
