@@ -2,7 +2,7 @@
  :deps {org.clojure/clojure {:mvn/version "1.10.3"}}
  :aliases
  {:run-m {:main-opts ["-m" "{{top/ns}}.{{main/ns}}"]}
-  :run-x {:ns-default {{top/ns}} . {{main/ns}}
+  :run-x {:ns-default {{top/ns}}.{{main/ns}}
           :exec-fn greet
           :exec-args {:name "Clojure"}}
   :build {:deps {io.github.seancorfield/build-clj
