@@ -1,0 +1,7 @@
+{:description "FIXME: my new template."
+ :transform
+ [["resources" "resources/{{top/file}}/{{main/file}}" {} ["<<" ">>"]]
+  ["src" "src/{{top/file}}"
+   {"main.clj" "{{main/file}}.clj"}]
+  ["test" "test/{{top/file}}"
+   {"main_test.clj" "{{main/file}}_test.clj"}]]}
