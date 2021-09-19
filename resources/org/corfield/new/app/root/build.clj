@@ -2,7 +2,7 @@
   (:refer-clojure :exclude [test])
   (:require [org.corfield.build :as bb]))
 
-(def lib '{{top/ns}}/{{main/ns}})
+(def lib '{{group/id}}/{{artifact/id}})
 (def version "{{version}}")
 (def main '{{top/ns}}.{{main/ns}})
 
