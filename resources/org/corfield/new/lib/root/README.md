@@ -30,7 +30,7 @@ Install it locally (requires the `ci` task be run first):
 Deploy it to Clojars -- needs `CLOJARS_USERNAME` and `CLOJARS_PASSWORD` environment
 variables (requires the `ci` task be run first):
 
-    $ clojure -X:build deploy
+    $ clojure -T:build deploy
 
 Your library will be deployed to {{group/id}}/{{artifact/id}} on clojars.org by default.
 
