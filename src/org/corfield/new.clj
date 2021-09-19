@@ -17,7 +17,9 @@
 (s/def ::data-fn symbol?)
 (s/def ::template-fn symbol?)
 (s/def ::files (s/map-of string? string?))
-(s/def ::dir-spec (s/tuple string? string? ::files))
+(s/def ::open-close (s/tuple string? string?))
+(s/def ::dir-spec (s/or :default (s/tuple string? string? ::files)
+                        :open-close (s/tuple string? string? ::files ::open-close)))
 (s/def ::transform (s/coll-of ::dir-spec :min-count 1))
 (s/def ::template (s/keys :opt-un [::data-fn ::description ::root ::template-fn ::transform]))
 
@@ -83,6 +85,17 @@
       or `false`, an existing directory will not be overwritten."
   [opts]
   (create (assoc opts :template 'lib)))
+
+(defn template
+  "Exec function to create a template project.
+  `:name` -- a symbol (or string) identifying the project name,
+  `:target-dir` -- optional string identifying the directory to
+      create the new project in,
+  `:overwrite` -- whether to overwrite an existing directory or,
+      for `:delete`, to delete it first; if `:overwrite` is `nil`
+      or `false`, an existing directory will not be overwritten."
+  [opts]
+  (create (assoc opts :template 'template)))
 
 (defn pom
   "Exec function to create just a `pom.xml` file.
