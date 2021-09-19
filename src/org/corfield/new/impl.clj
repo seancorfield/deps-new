@@ -67,6 +67,23 @@
   [s data]
   (reduce (fn [s [from to]] (str/replace s from to)) s data))
 
+(defn- adjust-subst-map
+  "Given a substitution hash map and new open/close tags,
+  return an updated substitution hash map with the keys
+  adjusted to use the new open/close tags instead."
+  [data open close]
+  (reduce-kv (fn [m k v]
+               (let [k' (-> k
+                            (str/replace #"^\{\{" open)
+                            (str/replace #"\}\}$" close))]
+                 (assoc m k' v)))
+             {}
+             data))
+
+(comment
+  (adjust-subst-map (->subst-map {:a 1 :b "two"}) "<<" ">>")
+  )
+
 (defn copy-template-dir
   "Given a template directory, a target directory, a tuple
   of source directory, target subdirectory (with possible
@@ -76,31 +93,35 @@
 
   If files is provided, any files found in the source directory
   that are not explicitly mentioned are copied directly."
-  [template-dir target-dir [src target files] data]
-  (let [target (when target (str "/" (substitute target data)))]
+  [template-dir target-dir [src target files [open close]] data]
+  (let [target    (when target (str "/" (substitute target data)))
+        file-data (if (and open close)
+                    (adjust-subst-map data open close)
+                    data)]
     (if (seq files)
       (let [intermediate (-> (Files/createTempDirectory
                               "deps-new" (into-array FileAttribute []))
                              (.toFile)
                              (doto .deleteOnExit)
-                             (.getCanonicalPath))]
+                             (.getCanonicalPath))
+            inter-target (str intermediate target)]
         ;; first we just copy the raw files with no substitutions:
-        (b/copy-dir {:target-dir intermediate
+        (b/copy-dir {:target-dir inter-target
                      :src-dirs   [(str template-dir "/" src)]})
         ;; now we process the named files, substituting paths:
         (run! (fn [[from to]]
-                (b/delete {:path (str intermediate "/" from)})
+                (b/delete {:path (str inter-target "/" from)})
                 (b/copy-file {:src    (str template-dir "/" src "/" from)
-                              :target (str intermediate target "/"
+                              :target (str inter-target "/"
                                            (substitute to data))}))
               files)
         ;; finally we copy the prepared folder (with substitutions):
         (b/copy-dir {:target-dir target-dir
                      :src-dirs   [intermediate]
-                     :replace    data}))
+                     :replace    file-data}))
       (b/copy-dir {:target-dir (str target-dir target)
                    :src-dirs   [(str template-dir "/" src)]
-                   :replace    data}))))
+                   :replace    file-data}))))
 
 (def ^:private known-scms
   "A string to be used as part of a regex, identifying
