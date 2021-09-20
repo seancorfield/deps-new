@@ -1,6 +1,6 @@
 # Changes
 
-* v0.3.0 -- 2021-09-19
+* v0.3.0 419420c -- 2021-09-19
   * Address #8 by adding generation of a `template` project.
   * Fixes a bug in `:transform` handling while copying files that were not explicitly listed.
   * Fixes a bug in the group/artifact ID used in generated `build.clj` files.
