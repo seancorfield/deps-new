@@ -5,7 +5,7 @@ A new, simpler alternative to `clj-new`.
 Intended to be installed as a "tool" (Clojure CLI 1.10.3.933 or later).
 
 ```bash
-clojure -Ttools install io.github.seancorfield/deps-new '{:git/tag "v0.2.1"}' :as new
+clojure -Ttools install io.github.seancorfield/deps-new '{:git/tag "v0.3.0"}' :as new
 ```
 
 > `clj-new` inherently carries along all of the baggage of `lein new` and `boot new`, including a modified chunk of Leiningen itself, as well as depending on Pomegranate for loading dependencies (so as to be compatible with Leiningen and Boot), and Stencil for the variable substitution in templates. The recently-released `tools.build` library, from the core Clojure team, provides all of the functionality needed to create new projects from templates, so `deps-new` aims to provide a wrapper around `tools.build`, some standard templates "out of the box", and machinery to allow you to easily write your own templates, mostly with no code needed at all.
@@ -63,6 +63,26 @@ clojure -Tnew lib :name myusername/mycoollib :target-dir projects/newlib
 
 Creates a directory `projects/newlib` containing a new library project, with `myusername` as
 the "top" namespace and `mycoollib` as the main project namespace under that.
+
+## Create a template
+
+```bash
+clojure -Tnew template :name myusername/mytemplate
+```
+
+Creates a directory `mytemplate` containing a new template project, with `myusername` as the "top" namespace
+and `mytemplate` as the main project namespace under that. By default, the generated template
+project will work as a template that produces a library project.
+
+If you want to generate the project into a different directory than the project name, use
+the `:target-dir` option to specify a path to the directory that should be created:
+
+```bash
+clojure -Tnew template :name myusername/mytemplate :target-dir projects/newtemplate
+```
+
+Creates a directory `projects/newtemplate` containing a new library project, with `myusername` as
+the "top" namespace and `mytemplate` as the main project namespace under that.
 
 ## Create a Minimal "scratch" Project
 

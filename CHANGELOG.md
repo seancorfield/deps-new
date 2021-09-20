@@ -1,5 +1,10 @@
 # Changes
 
+* v0.3.0 -- 2021-09-19
+  * Address #8 by adding generation of a `template` project.
+  * Fixes a bug in `:transform` handling while copying files that were not explicitly listed.
+  * Fixes a bug in the group/artifact ID used in generated `build.clj` files.
+
 * v0.2.1 411e687 -- 2021-09-17
   * Update `build-clj` in `app` and `lib` to v0.3.1 (which uses updated `tools.build` and `deps-deploy` versions).
 
