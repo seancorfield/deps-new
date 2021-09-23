@@ -14,7 +14,7 @@ As originally generated, it will produce a new library project when run:
 Assuming you have installed `deps-new` as your `new` "tool" via:
 
 ```bash
-clojure -Ttools install io.github.seancorfield/deps-new '{:git/tag "v0.3.0"}' :as new
+clojure -Ttools install io.github.seancorfield/deps-new '{:git/tag "v0.3.1"}' :as new
 ```
 
 Run this template project's tests (they'll fail until you edit them):
@@ -31,7 +31,7 @@ information in generated `pom.xml` by updating `build.clj`.
 
 Install it locally (requires the `ci` task be run first):
 
-    $ clojure -T:build deploy :installer :local
+    $ clojure -T:build install
 
 Deploy it to Clojars -- needs `CLOJARS_USERNAME` and `CLOJARS_PASSWORD` environment
 variables (requires the `ci` task be run first):

@@ -25,7 +25,7 @@ information in generated `pom.xml` by updating `build.clj`.
 
 Install it locally (requires the `ci` task be run first):
 
-    $ clojure -T:build deploy :installer :local
+    $ clojure -T:build install
 
 Deploy it to Clojars -- needs `CLOJARS_USERNAME` and `CLOJARS_PASSWORD` environment
 variables (requires the `ci` task be run first):

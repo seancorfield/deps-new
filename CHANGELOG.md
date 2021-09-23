@@ -1,5 +1,8 @@
 # Changes
 
+* v0.3.1 -- 2021-09-22
+  * Update `build-clj` to v0.4.0 (which adds `install` task).
+
 * v0.3.0 419420c -- 2021-09-19
   * Address #8 by adding generation of a `template` project.
   * Fixes a bug in `:transform` handling while copying files that were not explicitly listed.
