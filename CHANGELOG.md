@@ -1,6 +1,6 @@
 # Changes
 
-* v0.3.1 -- 2021-09-22
+* v0.3.1 e4e5bc0 -- 2021-09-22
   * Update `build-clj` to v0.4.0 (which adds `install` task).
 
 * v0.3.0 419420c -- 2021-09-19
