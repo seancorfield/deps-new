@@ -5,7 +5,7 @@ A new, simpler alternative to `clj-new`.
 Intended to be installed as a "tool" (Clojure CLI 1.10.3.933 or later).
 
 ```bash
-clojure -Ttools install io.github.seancorfield/deps-new '{:git/tag "v0.3.1"}' :as new
+clojure -Ttools install io.github.seancorfield/deps-new '{:git/tag "v0.3.2"}' :as new
 ```
 
 > `clj-new` inherently carries along all of the baggage of `lein new` and `boot new`, including a modified chunk of Leiningen itself, as well as depending on Pomegranate for loading dependencies (so as to be compatible with Leiningen and Boot), and Stencil for the variable substitution in templates. The recently-released `tools.build` library, from the core Clojure team, provides all of the functionality needed to create new projects from templates, so `deps-new` aims to provide a wrapper around `tools.build`, some standard templates "out of the box", and machinery to allow you to easily write your own templates, mostly with no code needed at all.
@@ -64,7 +64,7 @@ clojure -Tnew lib :name myusername/mycoollib :target-dir projects/newlib
 Creates a directory `projects/newlib` containing a new library project, with `myusername` as
 the "top" namespace and `mycoollib` as the main project namespace under that.
 
-## Create a template
+## Create a Template
 
 ```bash
 clojure -Tnew template :name myusername/mytemplate
@@ -144,6 +144,36 @@ is used to derive the default values of all the built-in substitution variables.
 See [**All the Options**](doc/options.md) for the full list of command-line options available
 when invoking `deps-new`. See [**Writing Templates**](doc/templates.md) for documentation on
 how to write your own templates.
+
+## The Generated `LICENSE` File
+
+The generated projects (from the built-in `app`, `lib`, and `template` templates) all
+contain a `LICENSE` file which is the Eclipse Public License (version 1.0) and that
+is also mentioned in the generated `README.md` files. This is a tradition that started
+with Leiningen's `lein new` and carried over into `boot new` and now `clj-new`. The
+idea is that it's better to ensure any open source projects created have a valid
+license of some sort, as a starting point, and historically most Clojure projects use
+the EPLv1.0 because Clojure itself and the Contrib libraries have all used this license
+for a long time.
+
+**You are not required to open source your generated project!** Just because the projects
+are generated with an open source `LICENSE` file and have a **License** section in their
+`README.md` files does not mean you need to keep that license in place, if you do not
+want your project to be open source.
+
+**You are not required to use EPLv1.0 for your project!** If you prefer a different license,
+use it! Replace the `LICENSE` file and update the `README.md` file to reflect your personal
+preference in licensing (I have tended to use the
+[Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0.html) in most of my open
+source projects, prior to working with Clojure, but see
+[Prefer the MIT License](https://juxt.pro/blog/prefer-mit) for an alternative
+viewpoint from the folks who wrote XTDB).
+
+> Note: if you incorporate any source code from other people's open source projects, be
+aware of the legal implications and that you must respect whatever license _they_ have
+used for that code (which _may_ require you to release your enhancements under the same
+license and will, most likely, require you to include their copyright notices, etc).
+_Do not copy other people's code without attribution!_
 
 # License
 

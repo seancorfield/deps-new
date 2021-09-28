@@ -14,7 +14,7 @@ As originally generated, it will produce a new library project when run:
 Assuming you have installed `deps-new` as your `new` "tool" via:
 
 ```bash
-clojure -Ttools install io.github.seancorfield/deps-new '{:git/tag "v0.3.1"}' :as new
+clojure -Ttools install io.github.seancorfield/deps-new '{:git/tag "v0.3.2"}' :as new
 ```
 
 Run this template project's tests (they'll fail until you edit them):

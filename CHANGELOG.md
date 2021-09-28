@@ -1,5 +1,9 @@
 # Changes
 
+* v0.3.2 -- 2021-09-28
+  * Add clarification on licensing (copied from `clj-new`'s `README`).
+  * Update `build-clj` to v0.5.0 (which exposes the various `default-*` functions).
+
 * v0.3.1 e4e5bc0 -- 2021-09-22
   * Update `build-clj` to v0.4.0 (which adds `install` task).
 
