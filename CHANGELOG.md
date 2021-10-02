@@ -1,6 +1,6 @@
 # Changes
 
-* v0.3.3 -- 2021-10-01
+* v0.3.3 00192bc -- 2021-10-01
   * Update `template`'s generated `README` to correct how to use the generated project.
 
 * v0.3.2 3e68761 -- 2021-09-28
