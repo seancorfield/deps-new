@@ -137,7 +137,11 @@ clojure -A:somealias -Tnew create :template com.acme.project/cool-lib :name myus
 
 Looks for `com/acme/project/cool_lib/template.edn` on the classpath (based on the `:somealias` alias) and,
 if present, uses that template to create a project, in `mynewproject`. Instead of `-A:somealias`, you
-could use `-Sdeps` to specify the dependencies needed to make the template available.
+could use `-Sdeps` to specify the dependencies needed to make the template available:
+
+```bash
+clojure -Sdeps '{:deps {com.acme.project/cool-lib}}' -Tnew create :template com.acme.project/cool-lib :name myusername/mynewproject
+```
 
 See [**Project Names and Variables**](doc/names-variables.md) to see how the project name (`:name`)
 is used to derive the default values of all the built-in substitution variables.
