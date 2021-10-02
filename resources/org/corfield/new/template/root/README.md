@@ -9,13 +9,15 @@ FIXME: write usage documentation!
 This is a template project for use with [deps-new](https://github.com/seancorfield/deps-new).
 As originally generated, it will produce a new library project when run:
 
-    $ clojure -Tnew create :template {{top/ns}}.{{main/ns}} :name myusername/mycoollib
+    $ clojure -Sdeps '{:deps {{{group/id}}/{{artifact/id}} {:local/root "."}}}' -Tnew create :template {{top/ns}}/{{main/ns}} :name myusername/mycoollib
 
 Assuming you have installed `deps-new` as your `new` "tool" via:
 
 ```bash
 clojure -Ttools install io.github.seancorfield/deps-new '{:git/tag "v0.3.2"}' :as new
 ```
+
+> Note: once the template has been published (to a public git repo or to Clojars, etc), the invocation will be the same, except the `:local/root` dependency will be replaced by a git or Maven-like coordinate.
 
 Run this template project's tests (they'll fail until you edit them):
 
