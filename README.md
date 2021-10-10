@@ -5,7 +5,7 @@ A new, simpler alternative to `clj-new`.
 Intended to be installed as a "tool" (Clojure CLI 1.10.3.933 or later).
 
 ```bash
-clojure -Ttools install io.github.seancorfield/deps-new '{:git/tag "v0.3.2"}' :as new
+clojure -Ttools install io.github.seancorfield/deps-new '{:git/tag "v0.3.3"}' :as new
 ```
 
 > `clj-new` inherently carries along all of the baggage of `lein new` and `boot new`, including a modified chunk of Leiningen itself, as well as depending on Pomegranate for loading dependencies (so as to be compatible with Leiningen and Boot), and Stencil for the variable substitution in templates. The recently-released `tools.build` library, from the core Clojure team, provides all of the functionality needed to create new projects from templates, so `deps-new` aims to provide a wrapper around `tools.build`, some standard templates "out of the box", and machinery to allow you to easily write your own templates, mostly with no code needed at all.
@@ -138,7 +138,11 @@ clojure -A:somealias -Tnew create :template com.acme.project/cool-lib :name myus
 
 Looks for `com/acme/project/cool_lib/template.edn` on the classpath (based on the `:somealias` alias) and,
 if present, uses that template to create a project, in `mynewproject`. Instead of `-A:somealias`, you
-could use `-Sdeps` to specify the dependencies needed to make the template available.
+could use `-Sdeps` to specify the dependencies needed to make the template available:
+
+```bash
+clojure -Sdeps '{:deps {com.acme.project/cool-lib}}' -Tnew create :template com.acme.project/cool-lib :name myusername/mynewproject
+```
 
 See [**Project Names and Variables**](doc/names-variables.md) to see how the project name (`:name`)
 is used to derive the default values of all the built-in substitution variables.
