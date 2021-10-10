@@ -63,6 +63,52 @@ and `test/main_test.clj` will be copied to `<target>/test/com/acme/cool_lib_test
 Any files in `src` (or `test`) that are not specifically listed in the hash map will
 be copied as-is.
 
+## Alternative Delimiters
+
+As indicated above, patterns like `{{opt}}` are replaced by the value of the `:opt` option
+when files are copied. If you are working with template files (e.g., for Selmer), those
+will contain `{{..}}` patterns that you will not want substituted if they accidentally
+match your options.
+
+For such cases, you can specify alternative delimiters as a pair (vector) of two strings
+representing the open and close sections for substitution, followng the (optional) hash map of
+file renamings:
+
+```clojure
+;; template.edn
+{:transform
+ [["src" "src/{{top/file}}"
+   {"main.clj" "{{main/file}}.clj"}]
+  ["test" "test/{{top/file}}"
+   {"main_test.clj" "{{main/file}}_test.clj"}
+   ["<<" ">>"]]]}
+```
+
+In this example, while files in `src` will use `{{opt}}` as the substitution pattern,
+files in `test` will use `<<opt>>` as the substitution pattern. This is how `deps-new`
+itself handles generation of the `template` project, since some files that are copied
+are templates themselves that will later have substitutions applied to them.
+
+## Suppressing Substition & Binary Files
+
+By default, `deps-new` passes a `:replace` option to the `copy-dir` of `tools.build`
+in order to perform the substitutions of `{{opt}}`. Unfortunately, that means that
+files are treated as text -- so binary files will not be copied correctly.
+
+You can suppress substitution for a specified directory of files in a template,
+such as `"images"`, by adding `:raw` as the last element of the `:transform` tuple
+for that directory:
+
+```clojure
+;; template.edn
+{:transform [["resources" "resources/{{top/file}}"]
+             ["images" "resources/{{top/file}}/images" :raw]]}
+```
+
+In this example, files in `resources` will be treated as text and substitution
+will be performed on them but files in `images` will be copied to the specified
+target as raw files -- no substitution and therefore treated as binary files.
+
 ## Programmatic Transformation
 
 Sometimes you might need more than just a declarative approach and simple string
