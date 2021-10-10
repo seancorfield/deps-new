@@ -89,7 +89,7 @@ files in `test` will use `<<opt>>` as the substitution pattern. This is how `dep
 itself handles generation of the `template` project, since some files that are copied
 are templates themselves that will later have substitutions applied to them.
 
-## Suppressing Substition & Binary Files
+## Suppressing Substitution & Binary Files
 
 By default, `deps-new` passes a `:replace` option to the `copy-dir` of `tools.build`
 in order to perform the substitutions of `{{opt}}`. Unfortunately, that means that
