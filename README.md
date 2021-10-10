@@ -71,8 +71,9 @@ clojure -Tnew template :name myusername/mytemplate
 ```
 
 Creates a directory `mytemplate` containing a new template project, with `myusername` as the "top" namespace
-and `mytemplate` as the main project namespace under that. By default, the generated template
-project will work as a template that produces a library project.
+and `mytemplate` as the main project namespace under that. The generated template
+project will work as a template that produces a library project, but you can
+change it to produce whatever you want.
 
 If you want to generate the project into a different directory than the project name, use
 the `:target-dir` option to specify a path to the directory that should be created:
