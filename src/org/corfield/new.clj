@@ -18,10 +18,21 @@
 (s/def ::template-fn symbol?)
 (s/def ::files (s/map-of string? string?))
 (s/def ::open-close (s/tuple string? string?))
-(s/def ::dir-spec (s/or :default (s/tuple string? string? ::files)
-                        :open-close (s/tuple string? string? ::files ::open-close)))
+(s/def ::raw #{:raw})
+(s/def ::dir-spec (s/cat :src string?
+                         :target (s/? string?)
+                         :files (s/? ::files)
+                         :delims (s/? ::open-close)
+                         :raw (s/? ::raw)))
 (s/def ::transform (s/coll-of ::dir-spec :min-count 1))
 (s/def ::template (s/keys :opt-un [::data-fn ::description ::root ::template-fn ::transform]))
+
+(comment
+  (s/conform ::transform [["root"]])
+  (s/conform ::transform [["raw" "images" {} :raw]])
+  (s/conform ::template {:transform [["resources" "resources"]
+                                     ["images" "img" {"logo.png" "{{logo}}/main.png"} :raw]]})
+  )
 
 (defn create
   "Exec function to create a new project from a template.
@@ -45,9 +56,10 @@
                                  basic-opts
                                  ;; this may throw for invalid EDN:
                                  (-> edn-file (slurp) (edn/read-string)))
-        data       (impl/->subst-map final-opts)]
+        data       (impl/->subst-map final-opts)
+        edn'       (s/conform ::template edn)]
 
-    (when-not (s/valid? ::template edn)
+    (when-not (s/invalid? edn')
       (throw (ex-info (str edn-file " is not a valid template file\n\n"
                            (s/explain-str ::template edn))
                       (s/explain-data ::template edn))))
@@ -61,8 +73,8 @@
 
     (println "Creating project from" template "in" target-dir)
 
-    (impl/copy-template-dir template-dir target-dir [(:root edn "root")] data)
-    (run! #(impl/copy-template-dir template-dir target-dir % data) (:transform edn))))
+    (impl/copy-template-dir template-dir target-dir [(:root edn' "root")] data)
+    (run! #(impl/copy-template-dir template-dir target-dir % data) (:transform edn'))))
 
 (defn app
   "Exec function to create an application project.

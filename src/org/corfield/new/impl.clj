@@ -93,11 +93,12 @@
 
   If files is provided, any files found in the source directory
   that are not explicitly mentioned are copied directly."
-  [template-dir target-dir [src target files [open close]] data]
+  [template-dir target-dir {:keys [src target files delims raw]} data]
   (let [target    (when target (str "/" (substitute target data)))
-        file-data (if (and open close)
-                    (adjust-subst-map data open close)
-                    data)]
+        file-data (let [[open close] delims]
+                    (if (and open close)
+                      (adjust-subst-map data open close)
+                      data))]
     (if (seq files)
       (let [intermediate (-> (Files/createTempDirectory
                               "deps-new" (into-array FileAttribute []))
@@ -116,12 +117,14 @@
                                            (substitute to data))}))
               files)
         ;; finally we copy the prepared folder (with substitutions):
-        (b/copy-dir {:target-dir target-dir
-                     :src-dirs   [intermediate]
-                     :replace    file-data}))
-      (b/copy-dir {:target-dir (str target-dir target)
-                   :src-dirs   [(str template-dir "/" src)]
-                   :replace    file-data}))))
+        (b/copy-dir (cond-> {:target-dir target-dir
+                             :src-dirs   [intermediate]}
+                      (not raw)
+                      (assoc :replace file-data))))
+      (b/copy-dir (cond-> {:target-dir (str target-dir target)
+                           :src-dirs   [(str template-dir "/" src)]}
+                    (not raw)
+                    (assoc :replace file-data))))))
 
 (def ^:private known-scms
   "A string to be used as part of a regex, identifying
