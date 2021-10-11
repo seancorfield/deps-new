@@ -1,9 +1,10 @@
 # Changes
 
-* v0.4.0 in progress
-  * Add `:raw` mode for copying non-text assets.
+* v0.4.0 -- 2021-10-11
+  * Add `:raw` mode for copying non-text assets and/or suppressing textual substitution.
   * Document alternative substitution delimiters (added in v0.3.0).
-  * Update `build-clj` to v0.5.1 (`:transitive` support).
+  * Update `tools.build` to v0.6.1 515b334 (for non-replacement on some non-text files).
+  * Update `build-clj` to v0.5.2 (`:transitive` support).
 
 * v0.3.3 00192bc -- 2021-10-01
   * Update `template`'s generated `README` to correct how to use the generated project.

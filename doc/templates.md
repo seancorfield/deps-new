@@ -92,22 +92,27 @@ are templates themselves that will later have substitutions applied to them.
 ## Suppressing Substitution & Binary Files
 
 By default, `deps-new` passes a `:replace` option to the `copy-dir` of `tools.build`
-in order to perform the substitutions of `{{opt}}`. Unfortunately, that means that
-files are treated as text -- so binary files will not be copied correctly.
+in order to perform the substitutions of `{{opt}}`. That function skips some common
+image types (`jpg`, `jpeg`, `png`, `gif`, and `bmp` as of v0.6.1) but treats all other
+as text and attempts to perform textual replacements -- so some binary files will not
+be copied correctly. In addition, you may want to copy some files as if they were
+templates and not have substitution performed.
 
 You can suppress substitution for a specified directory of files in a template,
-such as `"images"`, by adding `:raw` as the last element of the `:transform` tuple
+such as `"templates"`, by adding `:raw` as the last element of the `:transform` tuple
 for that directory:
 
 ```clojure
 ;; template.edn
 {:transform [["resources" "resources/{{top/file}}"]
-             ["images" "resources/{{top/file}}/images" :raw]]}
+             ["templates" "resources/{{top/file}}/templates" :raw]]}
 ```
 
-In this example, files in `resources` will be treated as text and substitution
-will be performed on them but files in `images` will be copied to the specified
-target as raw files -- no substitution and therefore treated as binary files.
+In this example, files in `resources` will be treated as text (except for the common
+image files noted above) and substitution
+will be performed on them but files in `templates` will be copied to the specified
+target as raw files -- with no substitutions (and therefore safely treated as binary files,
+if appropriate).
 
 ## Programmatic Transformation
 
