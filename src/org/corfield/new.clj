@@ -59,7 +59,7 @@
         data       (impl/->subst-map final-opts)
         edn'       (s/conform ::template edn)]
 
-    (when-not (s/invalid? edn')
+    (when (s/invalid? edn')
       (throw (ex-info (str edn-file " is not a valid template file\n\n"
                            (s/explain-str ::template edn))
                       (s/explain-data ::template edn))))
