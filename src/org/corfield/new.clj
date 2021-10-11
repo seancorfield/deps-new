@@ -73,7 +73,7 @@
 
     (println "Creating project from" template "in" target-dir)
 
-    (impl/copy-template-dir template-dir target-dir [(:root edn' "root")] data)
+    (impl/copy-template-dir template-dir target-dir {:src (:root edn' "root")} data)
     (run! #(impl/copy-template-dir template-dir target-dir % data) (:transform edn'))))
 
 (defn app
