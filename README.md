@@ -144,10 +144,11 @@ could use `-Sdeps` to specify the dependencies needed to make the template avail
 clojure -Sdeps '{:deps {com.acme.project/cool-lib COORDINATES}}' -Tnew create :template com.acme.project/cool-lib :name myusername/mynewproject
 ```
 
-The `COORDINATES` could be something like `{:mvn/version "1.2.3"}` for a version of the template
-that has been deployed to Maven Central or Clojars, or it could be `{:local/root "/path/to/cool-lib"}`
+The `COORDINATES` could be something like `{:local/root "/path/to/cool-lib"}`
 for a template that exists on the local filesystem, or it could be based on `:git/url`/`:git/sha` etc
 for a template that exists in a `git` repository.
+
+> Note: because `deps-new` is based on `tools.build` and uses its file copying functions, the template must ultimately live on the filesystem, so `:local/root` and `git`-based coordinates are supported, but Maven/Clojars coordinates are not.
 
 See [**Project Names and Variables**](doc/names-variables.md) to see how the project name (`:name`)
 is used to derive the default values of all the built-in substitution variables.
