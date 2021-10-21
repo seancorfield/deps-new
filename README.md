@@ -144,6 +144,13 @@ could use `-Sdeps` to specify the dependencies needed to make the template avail
 clojure -Sdeps '{:deps {com.acme.project/cool-lib}}' -Tnew create :template com.acme.project/cool-lib :name myusername/mynewproject
 ```
 
+In case the template is defined in a local directory, you need to specify the path to it like this:
+
+```bash
+clojure -Sdeps '{:paths ["resources"]}' -Tnew create :template '"/cool-lib"' :name myusername/mycoollib 
+```
+This would search for the template.edn in local folder `resources/cool-lib`
+
 See [**Project Names and Variables**](doc/names-variables.md) to see how the project name (`:name`)
 is used to derive the default values of all the built-in substitution variables.
 See [**All the Options**](doc/options.md) for the full list of command-line options available
