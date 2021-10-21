@@ -141,8 +141,13 @@ if present, uses that template to create a project, in `mynewproject`. Instead o
 could use `-Sdeps` to specify the dependencies needed to make the template available:
 
 ```bash
-clojure -Sdeps '{:deps {com.acme.project/cool-lib}}' -Tnew create :template com.acme.project/cool-lib :name myusername/mynewproject
+clojure -Sdeps '{:deps {com.acme.project/cool-lib COORDINATES}}' -Tnew create :template com.acme.project/cool-lib :name myusername/mynewproject
 ```
+
+The `COORDINATES` could be something like `{:mvn/version "1.2.3"}` for a version of the template
+that has been deployed to Maven Central or Clojars, or it could be `{:local/root "/path/to/cool-lib"}`
+for a template that exists on the local filesystem, or it could be based on `:git/url`/`:git/sha` etc
+for a template that exists in a `git` repository.
 
 See [**Project Names and Variables**](doc/names-variables.md) to see how the project name (`:name`)
 is used to derive the default values of all the built-in substitution variables.

@@ -1,5 +1,8 @@
 # Changes
 
+* v0.4.next in progress
+  * Clarify coordinates for templates in **More General Usage** in the `README`.
+
 * v0.4.0 0fb18a6 -- 2021-10-11
   * Add `:raw` mode for copying non-text assets and/or suppressing textual substitution.
   * Document alternative substitution delimiters (added in v0.3.0).
