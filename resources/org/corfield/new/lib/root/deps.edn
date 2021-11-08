@@ -7,5 +7,5 @@
                 io.github.cognitect-labs/test-runner
                 {:git/tag "v0.5.0" :git/sha "48c3c67"}}}
   :build {:deps {io.github.seancorfield/build-clj
-                 {:git/tag "v0.5.2" :git/sha "8f75b81"}}
+                 {:git/tag "v0.5.3" :git/sha "dbf7321"}}
           :ns-default build}}}

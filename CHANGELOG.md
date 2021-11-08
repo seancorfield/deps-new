@@ -1,7 +1,8 @@
 # Changes
 
-* v0.4.next in progress
+* v0.4.1 -- 2021-11-08
   * Clarify coordinates for templates in **More General Usage** in the `README`.
+  * Update `build-clj` to v0.5.3 and `tools.build` to v0.6.3.
 
 * v0.4.0 0fb18a6 -- 2021-10-11
   * Add `:raw` mode for copying non-text assets and/or suppressing textual substitution.
