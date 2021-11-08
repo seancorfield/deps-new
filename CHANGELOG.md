@@ -1,6 +1,6 @@
 # Changes
 
-* v0.4.1 -- 2021-11-08
+* v0.4.1 728d512 -- 2021-11-08
   * Clarify coordinates for templates in **More General Usage** in the `README`.
   * Update `build-clj` to v0.5.3 and `tools.build` to v0.6.3.
 
