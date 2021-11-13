@@ -1,8 +1,8 @@
 # Changes
 
-* v0.4.2 -- 2021-11-13
+* v0.4.2 1ec7e62 -- 2021-11-13
   * Clean up `template` template: remove JAR/deploy mentions; add test that validates `template.edn`. #20.
-  * Update `build-clj` to v0.5.4 and
+  * Update `build-clj` to v0.5.4 and `tools.build` to v0.6.5.
 
 * v0.4.1 728d512 -- 2021-11-08
   * Clarify coordinates for templates in **More General Usage** in the `README`.
