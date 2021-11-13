@@ -17,30 +17,12 @@ Assuming you have installed `deps-new` as your `new` "tool" via:
 clojure -Ttools install io.github.seancorfield/deps-new '{:git/tag "v0.4.1"}' :as new
 ```
 
-> Note: once the template has been published (to a public git repo or to Clojars, etc), the invocation will be the same, except the `:local/root` dependency will be replaced by a git or Maven-like coordinate.
+> Note: once the template has been published (to a public git repo), the invocation will be the same, except the `:local/root` dependency will be replaced by a git or Maven-like coordinate.
 
-Run this template project's tests (they'll fail until you edit them):
+Run this template project's tests (by default, this just validates your template's `template.edn`
+file -- that it is valid EDN and it satisfies the `deps-new` Spec for template files):
 
     $ clojure -T:build test
-
-Run this template project's CI pipeline and build a JAR (this will fail until you edit the tests to pass):
-
-    $ clojure -T:build ci
-
-This will produce an updated `pom.xml` file with synchronized dependencies inside the `META-INF`
-directory inside `target/classes` and the JAR in `target`. You can update the version (and SCM tag)
-information in generated `pom.xml` by updating `build.clj`.
-
-Install it locally (requires the `ci` task be run first):
-
-    $ clojure -T:build install
-
-Deploy it to Clojars -- needs `CLOJARS_USERNAME` and `CLOJARS_PASSWORD` environment
-variables (requires the `ci` task be run first):
-
-    $ clojure -T:build deploy
-
-Your library will be deployed to {{group/id}}/{{artifact/id}} on clojars.org by default.
 
 ## License
 
