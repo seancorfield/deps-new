@@ -18,18 +18,19 @@
 (s/def ::template-fn symbol?)
 (s/def ::files (s/map-of string? string?))
 (s/def ::open-close (s/tuple string? string?))
-(s/def ::raw #{:raw})
+(s/def ::opts #{:file :raw})
 (s/def ::dir-spec (s/cat :src string?
                          :target (s/? string?)
                          :files (s/? ::files)
                          :delims (s/? ::open-close)
-                         :raw (s/? ::raw)))
+                         :opts (s/* ::opts)))
 (s/def ::transform (s/coll-of ::dir-spec :min-count 1))
 (s/def ::template (s/keys :opt-un [::data-fn ::description ::root ::template-fn ::transform]))
 
 (comment
   (s/conform ::transform [["root"]])
   (s/conform ::transform [["raw" "images" {} :raw]])
+  (s/conform ::transform [["raw" "images" {} :file :raw]])
   (s/conform ::template {:transform [["resources" "resources"]
                                      ["images" "img" {"logo.png" "{{logo}}/main.png"} :raw]]})
   )

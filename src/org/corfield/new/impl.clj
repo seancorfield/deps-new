@@ -93,13 +93,17 @@
 
   If files is provided, any files found in the source directory
   that are not explicitly mentioned are copied directly."
-  [template-dir target-dir {:keys [src target files delims raw]} data]
+  [template-dir target-dir {:keys [src target files delims opts]} data]
   (let [target    (when target (str "/" (substitute target data)))
+        opts      (set opts)
+        raw       (:raw opts)
+        file      (:file opts)
         file-data (let [[open close] delims]
                     (if (and open close)
                       (adjust-subst-map data open close)
                       data))]
     (if (seq files)
+      ;; TODO: can't have files and single file
       (let [intermediate (-> (Files/createTempDirectory
                               "deps-new" (into-array FileAttribute []))
                              (.toFile)
@@ -121,10 +125,13 @@
                              :src-dirs   [intermediate]}
                       (not raw)
                       (assoc :replace file-data))))
-      (b/copy-dir (cond-> {:target-dir (str target-dir target)
-                           :src-dirs   [(str template-dir "/" src)]}
-                    (not raw)
-                    (assoc :replace file-data))))))
+      (if file
+        (b/copy-file {:src (str template-dir "/" src)
+                      :target (str target-dir "/" target)})
+        (b/copy-dir (cond-> {:target-dir (str target-dir target)
+                             :src-dirs   [(str template-dir "/" src)]}
+                      (not raw)
+                      (assoc :replace file-data)))))))
 
 (def ^:private known-scms
   "A string to be used as part of a regex, identifying
