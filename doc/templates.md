@@ -63,6 +63,29 @@ and `test/main_test.clj` will be copied to `<target>/test/com/acme/cool_lib_test
 Any files in `src` (or `test`) that are not specifically listed in the hash map will
 be copied as-is.
 
+## Copying Files (Only)
+
+As seen above, by default the entire folder is copied, with specified files renamed.
+Sometimes it is convenient to copy only specified files from a folder and ignore the
+other files in that folder. You can specify `:only` as the last element of the
+transformation tuple:
+
+```clojure
+;; template.edn
+{:transform
+ [["src" "src/{{top/file}}"
+   {"main.clj" "{{main/file}}.clj"}]
+  ["test" "test/{{top/file}}"
+   {"main_test.clj" "{{main/file}}_test.clj"}
+   :only]]}
+```
+
+In this example, `src/main.clj` will be copied to `<target>/src/com/acme/cool_lib.clj`
+and `test/main_test.clj` will be copied to `<target>/test/com/acme/cool_lib_test.clj`.
+Any files in `src` that are not specifically listed in the hash map will
+be copied as-is. Because of the `:only` option, no other files in `test` will be
+copied -- just the specified ones (`main_test.clj` in this case).
+
 ## Alternative Delimiters
 
 As indicated above, patterns like `{{opt}}` are replaced by the value of the `:opt` option
@@ -93,13 +116,14 @@ are templates themselves that will later have substitutions applied to them.
 
 By default, `deps-new` passes a `:replace` option to the `copy-dir` of `tools.build`
 in order to perform the substitutions of `{{opt}}`. That function skips some common
-image types (`jpg`, `jpeg`, `png`, `gif`, and `bmp` as of v0.6.1) but treats all other
+image types (`jpg`, `jpeg`, `png`, `gif`, and `bmp` as of `tools.build` v0.6.1)
+but treats all other
 as text and attempts to perform textual replacements -- so some binary files will not
 be copied correctly. In addition, you may want to copy some files as if they were
 templates and not have substitution performed.
 
 You can suppress substitution for a specified directory of files in a template,
-such as `"templates"`, by adding `:raw` as the last element of the `:transform` tuple
+such as `"templates"`, by adding `:raw` as the last element of the transformation tuple
 for that directory:
 
 ```clojure
@@ -113,6 +137,8 @@ image files noted above) and substitution
 will be performed on them but files in `templates` will be copied to the specified
 target as raw files -- with no substitutions (and therefore safely treated as binary files,
 if appropriate).
+
+> Note: you can specify both `:raw` and `:only` as the last elements of the transformation tuple, if needed, and they can be in either order, but they must be after the delimiter string pair if that is also specified.
 
 ## Programmatic Transformation
 

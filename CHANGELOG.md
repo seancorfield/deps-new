@@ -1,6 +1,7 @@
 # Changes
 
-* 0.4.next in progress
+* v0.4.3 -- 2021-11-28
+  * Address #17 by adding `:only` option to copy just named files.
   * Update `build-clj` to v0.5.5 and `tools.build` to v0.6.8.
 
 * v0.4.2 1ec7e62 -- 2021-11-13

@@ -1,9 +1,11 @@
 ;; copyright (c) 2021 sean corfield, all rights reserved
 
 (ns org.corfield.new.impl-test
-  (:require [expectations.clojure.test
+  (:require [clojure.string :as str]
+            [clojure.tools.build.api :as b]
+            [expectations.clojure.test
              :refer [defexpect expect expecting from-each
-                     more more-> more-of]]
+                     more more-> more-of side-effects]]
             [org.corfield.new.impl :as sut]))
 
 (defexpect test->ns
@@ -46,6 +48,41 @@
 
 ;; #'sut/substitute
 ;; sut/copy-template-dir
+
+(defexpect test-copy-template-dir
+  (expect (more-of [[folder-copy] [{:keys [src target]}] [{:keys [replace src-dirs target-dir]}]]
+                   ;; step 1: copy dir with no replace, to temporary folder:
+                   nil?       (:replace    folder-copy)
+                   ["/tmp/x"] (:src-dirs   folder-copy)
+                   #"/y$"     (:target-dir folder-copy)
+                   ;; step 2: copy only file a to temporary structure:
+                   "/tmp/x/a" src
+                   #"/y/b$"   target
+                   true?      (str/starts-with? target (:target-dir folder-copy))
+                   ;; step 3: copy dir with no replace, from temporary folder to target:
+                   nil?       replace
+                   vector?    src-dirs
+                   true?      (str/starts-with? (:target-dir folder-copy) (first src-dirs))
+                   "/tmp/y"   target-dir)
+          (side-effects [b/copy-dir b/copy-file]
+                        (sut/copy-template-dir "/tmp" "/tmp/y"
+                                               {:src "x" :target "y" :files {"a" "b"} :opts [:raw]}
+                                               {"q" "r"})))
+  (expect (more-of [[{:keys [src target]}]
+                    [{:keys [replace src-dirs target-dir]}]]
+                   ;; step 1: copy only file a to temporary structure:
+                   "/tmp/x/a" src
+                   #"/y/b$"   target
+                   ;; step 2: copy dir with replace, from temporary folder to target:
+                   {"q" "r"}  replace
+                   vector?    src-dirs
+                   true?      (str/starts-with? target (first src-dirs))
+                   "/tmp/y"   target-dir)
+          (side-effects [b/copy-dir b/copy-file]
+                        (sut/copy-template-dir "/tmp" "/tmp/y"
+                                               {:src "x" :target "y" :files {"a" "b"} :opts [:only]}
+                                               {"q" "r"}))))
+
 ;; #'sut/deconstruct-project-name
 
 (defexpect test-preprocess-options
