@@ -1,4 +1,1 @@
-{:lint-as
- {expectations.clojure.test/defexpect clojure.test/deftest
-  expectations.clojure.test/from-each clojure.core/for
-  expectations.clojure.test/more-of   clj-kondo.lint-as/def-catch-all}}
+{:config-paths ["com.github.seancorfield/expectations"]}
