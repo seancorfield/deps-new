@@ -18,7 +18,7 @@
 (s/def ::template-fn symbol?)
 (s/def ::files (s/map-of string? string?))
 (s/def ::open-close (s/tuple string? string?))
-(s/def ::opts #{:file :raw})
+(s/def ::opts #{:only :raw})
 (s/def ::dir-spec (s/cat :src string?
                          :target (s/? string?)
                          :files (s/? ::files)
@@ -30,7 +30,7 @@
 (comment
   (s/conform ::transform [["root"]])
   (s/conform ::transform [["raw" "images" {} :raw]])
-  (s/conform ::transform [["raw" "images" {} :file :raw]])
+  (s/conform ::transform [["raw" "images" {} :only :raw]])
   (s/conform ::template {:transform [["resources" "resources"]
                                      ["images" "img" {"logo.png" "{{logo}}/main.png"} :raw]]})
   )

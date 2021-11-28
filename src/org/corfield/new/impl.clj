@@ -97,13 +97,12 @@
   (let [target    (when target (str "/" (substitute target data)))
         opts      (set opts)
         raw       (:raw opts)
-        file      (:file opts)
+        only      (:only opts)
         file-data (let [[open close] delims]
                     (if (and open close)
                       (adjust-subst-map data open close)
                       data))]
     (if (seq files)
-      ;; TODO: can't have files and single file
       (let [intermediate (-> (Files/createTempDirectory
                               "deps-new" (into-array FileAttribute []))
                              (.toFile)
@@ -111,8 +110,9 @@
                              (.getCanonicalPath))
             inter-target (str intermediate target)]
         ;; first we just copy the raw files with no substitutions:
-        (b/copy-dir {:target-dir inter-target
-                     :src-dirs   [(str template-dir "/" src)]})
+        (when (not only)
+          (b/copy-dir {:target-dir inter-target
+                       :src-dirs   [(str template-dir "/" src)]}))
         ;; now we process the named files, substituting paths:
         (run! (fn [[from to]]
                 (b/delete {:path (str inter-target "/" from)})
@@ -125,9 +125,8 @@
                              :src-dirs   [intermediate]}
                       (not raw)
                       (assoc :replace file-data))))
-      (if file
-        (b/copy-file {:src (str template-dir "/" src)
-                      :target (str target-dir "/" target)})
+      (if only
+        nil ; what should happen for :only with no files?
         (b/copy-dir (cond-> {:target-dir (str target-dir target)
                              :src-dirs   [(str template-dir "/" src)]}
                       (not raw)
