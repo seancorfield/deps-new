@@ -1,1 +1,5 @@
-{}
+{
+  ;; :deps {
+  ;;   org.example/lib {:mvn/version "x.x.x"}
+  ;; }
+}
