@@ -1,7 +1,7 @@
 # Changes
 
-* v0.4.next in progress
-  * Update `build-clj` to v0.6.0 and use "slim" dependency for `app` template.
+* v0.4.4 -- 2021-12-10
+  * Update `build-clj` to v0.6.1 (for updated log4j2 dependency) and use "slim" dependency for `app` template.
 
 * v0.4.3 3b96da4 -- 2021-11-28
   * Address #17 by adding `:only` option to copy just named files.
