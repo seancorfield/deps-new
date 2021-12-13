@@ -1,5 +1,8 @@
 # Changes
 
+* v0.4.5 -- 2021-12-13
+  * Update `tools.build` to v0.7.2 and `build-clj` to v0.6.2 (for bug fixes/enhancements in `tools.build`).
+
 * v0.4.4 287c8c9 -- 2021-12-10
   * Update `build-clj` to v0.6.1 (for updated log4j2 dependency) and use "slim" dependency for `app` template.
 

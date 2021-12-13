@@ -9,5 +9,5 @@
                 io.github.seancorfield/deps-new
                 {:git/tag "v0.4.4" :git/sha "287c8c9"}}}
   :build {:deps {io.github.seancorfield/build-clj
-                 {:git/tag "v0.6.1" :git/sha "6e962ef"}}
+                 {:git/tag "v0.6.2" :git/sha "97c275a"}}
           :ns-default build}}}
