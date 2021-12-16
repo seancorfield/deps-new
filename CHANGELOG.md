@@ -1,6 +1,6 @@
 # Changes
 
-* v0.4.6 -- 2021-12-15
+* v0.4.6 acc1e86 -- 2021-12-15
   * Update `build-clj` to v0.6.3 for another log4j2 update.
 
 * v0.4.5 d2b4cda -- 2021-12-13
