@@ -1,6 +1,6 @@
 # Changes
 
-* v0.4.7 -- 2021-12-22
+* v0.4.7 8fd6af0 -- 2021-12-22
   * Update `tools.build` to v0.7.3 and `build-clj` to v0.6.4 for bug fixes, enhancements, and another log4j2 update.
 
 * v0.4.6 acc1e86 -- 2021-12-15
