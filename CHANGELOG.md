@@ -1,6 +1,6 @@
 # Changes
 
-* v0.4.8 -- 2021-12-23
+* v0.4.8 a059d98 -- 2021-12-23
   * Update `tools.build` to v0.7.4 and `build-clj` to v0.6.5 for bug fixes and enhancements.
 
 * v0.4.7 8fd6af0 -- 2021-12-22
