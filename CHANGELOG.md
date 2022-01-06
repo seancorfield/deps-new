@@ -1,5 +1,8 @@
 # Changes
 
+* v0.4.10 in progress
+  * Update `build-clj` to v0.6.7 for underlying updates (bug fixes).
+
 * v0.4.9 ba30a76 -- 2022-01-04
   * Update `build-clj` to v0.6.6 for another log4j2 update.
 
