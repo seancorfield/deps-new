@@ -1,6 +1,7 @@
 # Changes
 
 * v0.4.10 in progress
+  * Update README to link to Deps and Cli Reference > Quoting keys and values (for Powershell users).
   * Update `build-clj` to v0.6.7 for underlying updates (bug fixes).
 
 * v0.4.9 ba30a76 -- 2022-01-04
