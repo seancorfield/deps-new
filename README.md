@@ -8,7 +8,7 @@ Intended to be installed as a "tool" (Clojure CLI 1.10.3.933 or later).
 clojure -Ttools install io.github.seancorfield/deps-new '{:git/tag "v0.4.9"}' :as new
 ```
 
-> Note: if you are on Windows, read [https://clojure.org/reference/deps_and_cli#quoting](**Quoting keys and values**) in the official **Deps and CLI Reference** documentation to understand how the above command needs to look on Powershell.
+> Note: if you are on Windows, read [**Quoting keys and values**](https://clojure.org/reference/deps_and_cli#quoting) in the official **Deps and CLI Reference** documentation to understand how the above command needs to look on Powershell.
 
 ## Motivation
 
