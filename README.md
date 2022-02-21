@@ -160,6 +160,10 @@ See [**All the Options**](doc/options.md) for the full list of command-line opti
 when invoking `deps-new`. See [**Writing Templates**](doc/templates.md) for documentation on
 how to write your own templates.
 
+## Emacs Integration
+
+An [emacs package](https://github.com/jpe90/emacs-clj-deps-new) is available which provides a Magit-style interface to `clj-new` and `deps-new`. It includes some community templates and welcomes for recommendations for more.
+
 ## The Generated `LICENSE` File
 
 The generated projects (from the built-in `app`, `lib`, and `template` templates) all
