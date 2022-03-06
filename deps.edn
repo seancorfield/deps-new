@@ -1,6 +1,6 @@
 {:paths ["src" "resources"]
  :deps
- {io.github.clojure/tools.build {:git/tag "v0.7.5" :git/sha "34727f7"}}
+ {io.github.clojure/tools.build {:git/tag "v0.8.0" :git/sha "e3e3532"}}
 
  :tools/usage
  {:ns-default org.corfield.new}
