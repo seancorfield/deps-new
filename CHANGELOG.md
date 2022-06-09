@@ -1,6 +1,6 @@
 # Changes
 
-* v0.4.10 -- 2022-01-04
+* v0.4.10 1ac9260 -- 2022-06-09
   * Add `babashka.cli` example to README (and `ns` metadata to support that).
   * Update README to link to Deps and Cli Reference > Quoting keys and values (for Powershell users).
   * Update `build-clj` to v0.8.2 for underlying updates.
