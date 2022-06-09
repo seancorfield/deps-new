@@ -1,9 +1,10 @@
 # Changes
 
-* v0.4.10 in progress
+* v0.4.10 -- 2022-01-04
+  * Add `babashka.cli` example to README (and `ns` metadata to support that).
   * Update README to link to Deps and Cli Reference > Quoting keys and values (for Powershell users).
-  * Update `build-clj` to v0.8.0 for underlying updates (bug fixes).
-  * Update `tools.build` to v0.8.0 for various enhancements and bug fixes.
+  * Update `build-clj` to v0.8.2 for underlying updates.
+  * Update `tools.build` to v0.8.2 for various enhancements and bug fixes.
 
 * v0.4.9 ba30a76 -- 2022-01-04
   * Update `build-clj` to v0.6.6 for another log4j2 update.
