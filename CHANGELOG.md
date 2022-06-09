@@ -1,5 +1,9 @@
 # Changes
 
+* v0.4.11 in progress
+  * Update default Clojure version to 1.11.1.
+  * Update various deps.
+
 * v0.4.10 1ac9260 -- 2022-06-09
   * Add `babashka.cli` example to README (and `ns` metadata to support that).
   * Update README to link to Deps and Cli Reference > Quoting keys and values (for Powershell users).
