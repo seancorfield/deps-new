@@ -8,7 +8,7 @@ Intended to be installed as a "tool" (Clojure CLI 1.10.3.933 or later).
 clojure -Ttools install io.github.seancorfield/deps-new '{:git/tag "v0.4.9"}' :as new
 ```
 
-> Note: if you are on Windows, read [**Quoting keys and values**](https://clojure.org/reference/deps_and_cli#quoting) in the official **Deps and CLI Reference** documentation to understand how the above command needs to look on Powershell.
+> Note: if you are on Windows, read [**Quoting keys and values**](https://clojure.org/reference/deps_and_cli#quoting) in the official **Deps and CLI Reference** documentation to understand how the above command needs to look on Powershell. Or take a look at the [Babashka CLI](#babashka-cli) library support.
 
 ## Motivation
 
@@ -193,6 +193,28 @@ aware of the legal implications and that you must respect whatever license _they
 used for that code (which _may_ require you to release your enhancements under the same
 license and will, most likely, require you to include their copyright notices, etc).
 _Do not copy other people's code without attribution!_
+
+## Babashka CLI
+
+The [babashka CLI](https://github.com/babashka/cli) library allows you to call
+an `-X` (exec) function in a more Unixy way, without writing EDN on the command
+line. If you are dealing with quoting issues in your shell, this could be a
+viable alternative:
+
+```clojure
+:new {:deps {org.babashka/cli {:mvn/version "0.2.15"}
+             io.github.seancorfield/deps-new {:git/sha "0.4.9"
+                                              :git/tag "ba30a76"}}
+      :ns-default org.corfield.new
+      :exec-args {} ;; insert default arguments here
+      :main-opts ["-m" "babashka.cli.exec"]}
+```
+
+This allows you to call `deps-new` on the command line as:
+
+``` bash
+$ clj -M:new app --name foo/bar --overwrite delete
+```
 
 # License
 

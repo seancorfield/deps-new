@@ -4,6 +4,7 @@
   "The next generation of clj-new. Uses tools.build and
   tools.deps.alpha heavily to provide a simpler 'shim'
   around template processing."
+  {:org.babashka/cli {:coerce {:overwrite :keyword}}}
   (:require [clojure.edn :as edn]
             [clojure.java.io :as io]
             [clojure.spec.alpha :as s]
