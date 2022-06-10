@@ -1,6 +1,6 @@
 # Changes
 
-* v0.4.11 -- 2022-06-10
+* v0.4.11 aa172ea -- 2022-06-10
   * Fix git coordinates for `tools.build` #31 (thank you @dpassen).
   * Update default Clojure version to 1.11.1.
   * Update various deps.
