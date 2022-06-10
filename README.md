@@ -5,7 +5,7 @@ A new, simpler alternative to `clj-new`.
 Intended to be installed as a "tool" (Clojure CLI 1.10.3.933 or later).
 
 ```bash
-clojure -Ttools install io.github.seancorfield/deps-new '{:git/tag "v0.4.10"}' :as new
+clojure -Ttools install io.github.seancorfield/deps-new '{:git/tag "v0.4.11"}' :as new
 ```
 
 > Note: if you are on Windows, read [**Quoting keys and values**](https://clojure.org/reference/deps_and_cli#quoting) in the official **Deps and CLI Reference** documentation to understand how the above command needs to look on Powershell. Or take a look at the [Babashka CLI](#babashka-cli) library support.
@@ -203,8 +203,8 @@ viable alternative:
 
 ```clojure
 :new {:deps {org.babashka/cli {:mvn/version "0.2.15"}
-             io.github.seancorfield/deps-new {:git/tag "v0.4.10"
-                                              :git/sha "1ac9260"}}
+             io.github.seancorfield/deps-new {:git/tag "v0.4.11"
+                                              :git/sha "..."}}
       :ns-default org.corfield.new
       :exec-args {} ;; insert default arguments here
       :main-opts ["-m" "babashka.cli.exec"]}

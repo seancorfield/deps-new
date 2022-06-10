@@ -1,14 +1,15 @@
 # Changes
 
-* v0.4.11 in progress
+* v0.4.11 -- 2022-06-10
+  * Fix git coordinates for `tools.build` #31 (thank you @dpassen).
   * Update default Clojure version to 1.11.1.
   * Update various deps.
-
-* v0.4.10 1ac9260 -- 2022-06-09
   * Add `babashka.cli` example to README (and `ns` metadata to support that).
   * Update README to link to Deps and Cli Reference > Quoting keys and values (for Powershell users).
   * Update `build-clj` to v0.8.2 for underlying updates.
   * Update `tools.build` to v0.8.2 for various enhancements and bug fixes.
+
+* v0.4.10 was broken, sorry!
 
 * v0.4.9 ba30a76 -- 2022-01-04
   * Update `build-clj` to v0.6.6 for another log4j2 update.
