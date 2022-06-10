@@ -1,6 +1,6 @@
 # Changes
 
-* v0.4.12 -- 2022-06-10
+* v0.4.12 37aa288 -- 2022-06-10
   * Bump `deps-new` in `template` to non-broken version.
 
 * v0.4.11 aa172ea -- 2022-06-10
