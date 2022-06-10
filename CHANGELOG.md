@@ -1,5 +1,8 @@
 # Changes
 
+* v0.4.12 -- 2022-06-10
+  * Bump `deps-new` in `template` to non-broken version.
+
 * v0.4.11 aa172ea -- 2022-06-10
   * Fix git coordinates for `tools.build` #31 (thank you @dpassen).
   * Update default Clojure version to 1.11.1.
