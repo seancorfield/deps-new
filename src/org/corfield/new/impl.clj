@@ -8,7 +8,7 @@
   (:import (java.nio.file Files)
            (java.nio.file.attribute FileAttribute)
            (java.text SimpleDateFormat)
-           (java.util Calendar Date)))
+           (java.util Date)))
 
 (set! *warn-on-reflection* true)
 
@@ -185,7 +185,7 @@
     (merge name-data
            {:developer  (str/capitalize username)
             :now/date   (.format (SimpleDateFormat. "yyyy-MM-dd") (Date.))
-            :now/year   (.get (Calendar/getInstance) Calendar/YEAR)
+            :now/year   (str (+ 1900 (.getYear (Date.))))
             :raw-name   (str project-name)
             :template   (str template)
             :target-dir target-dir
