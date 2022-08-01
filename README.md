@@ -103,10 +103,10 @@ simple `-main` function (you can invoke via `clojure -M -m scratch`). This is in
 to be a minimal "playground" to get started with `deps.edn` and the CLI.
 
 If you want the `scratch.clj` file to have a different name, you can override the
-default with `:scratch/file`:
+default with `:scratch`:
 
 ```bash
-clojure -Tnew scratch :name play :scratch/file ground
+clojure -Tnew scratch :name play :scratch ground
 ```
 
 The created file will be `src/ground.clj` in the `play` folder.

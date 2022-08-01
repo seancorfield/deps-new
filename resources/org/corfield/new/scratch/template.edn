@@ -1,4 +1,4 @@
-{:scratch/file "scratch"
+{:scratch "scratch"
  :transform
  [["src" "src"
    {"scratch.clj" "{{scratch/file}}.clj"}]]}
