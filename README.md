@@ -109,7 +109,14 @@ default with `:scratch`:
 clojure -Tnew scratch :name play :scratch ground
 ```
 
-The created file will be `src/ground.clj` in the `play` folder.
+The created file will be `src/ground.clj` in the `play` folder. `:scratch` can be
+a path:
+
+```bash
+clojure -Tnew scratch :name play :scratch play/ground
+```
+
+The created file will be `src/play/ground.clj` in the `play` folder.
 
 ## Create a Fully-Fleshed `pom.xml`
 
