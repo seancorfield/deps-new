@@ -1,6 +1,7 @@
 # Changes
 
 * v0.4.next in progress
+  * Merge PR [#33](https://github.com/seancorfield/deps-new/pull/33) making `deps-new` compatible with Babashka -- [@borkdude](https://github.com/borkdude).
   * Address [#32](https://github.com/seancorfield/deps-new/issues/32) by adding `:scratch` variable, defaulting to `"scratch"`.
 
 * v0.4.12 37aa288 -- 2022-06-10
