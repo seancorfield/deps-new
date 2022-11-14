@@ -135,7 +135,7 @@
 (def ^:private known-scms
   "A string to be used as part of a regex, identifying
   known SCM providers that we special case."
-  "^(io|com|org)\\.(github|gitlab|bitbucket)\\.")
+  "^(io|com|org|ht)\\.(github|gitlab|bitbucket|codeberg|git\\.sr)\\.")
 
 (defn- deconstruct-project-name
   "Given a symbol, make it canonical, and break down the
