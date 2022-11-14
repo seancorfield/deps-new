@@ -78,14 +78,14 @@ _For some unqualified variables this additional processing may make no sense, bu
 
 ## SCM Domains
 
-`deps-new` "knows about" GitHub, GitLab, and BitBucket and treats project names that contain a
+`deps-new` "knows about" GitHub, GitLab, BitBucket, Codeberg, and sr.ht and treats project names that contain a
 reverse domain name based on those sites in a special manner.
 
 If the project name begins with the following pattern, that prefix is removed from the values of
 `{{scm/user}}` and `{{top}}`:
 
 ```
-^(io|com|org)\.(github|gitlab|bitbucket)\.
+^(io|com|org|ht)\.(github|gitlab|bitbucket|codeberg|git\.sr)\.
 ```
 
 In other words, a project name of `io.gitlab.myname/myproject`
@@ -94,6 +94,12 @@ will be `"myname"`.
 
 A project name of `org.bitbucket.myname/myproject` will cause `"bitbucket.org"`
 to be selected for `{{scm/domain}}` and both `{{scm/user}}` and `{{top}}` will be `"myname"`.
+
+A project name of `org.codeberg.myname/myproject` will cause "codeberg.org" to be selected 
+for `{{scm/domain}}` and both `{{scm/user}}` and `{{top}}` will be "myname". 
+
+A project name of `ht.sr.git.myname/myproject` will cause "git.sr.ht" to be selected 
+for `{{scm/domain}}` and both `{{scm/user}}` and `{{top}}` will be "myname". 
 
 A project name of `com.acme/myproject` will cause `"github.com"` to be selected for
 `{{scm/domain}}`, `{{scm/user}}` will be `"acme"`, and `{{top}}` will be `"com.acme"`.
