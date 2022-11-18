@@ -4,6 +4,7 @@
   "The implementation helpers for `org.corfield.new/create`."
   (:require [clojure.java.io :as io]
             [clojure.string :as str]
+            [clojure.tools.deps.alpha.extensions.git :as git]
             [clojure.tools.build.api :as b])
   (:import (java.nio.file Files)
            (java.nio.file.attribute FileAttribute)
@@ -147,20 +148,22 @@
                                (name project-name)))
         qualifier    (namespace project-name)
         base-name    (name project-name)
-        top          (str/replace qualifier (re-pattern known-scms) "")]
+        top          (or (some (fn [{:keys [service]}]
+                                 (when-let [matches (re-matches service qualifier)]
+                                   (second matches)))
+                               (vals @#'git/git-services))
+                         qualifier)]
     {:artifact/id base-name
      :group/id    (if (str/includes? qualifier ".")
                     qualifier
                     (str "net.clojars." qualifier))
      :main        base-name
      :name        (str project-name)
-     :scm/domain  (let [[_ scm-tld scm-host]
-                        (re-matches (re-pattern (str known-scms ".*$")) qualifier)]
-                    (if scm-host
-                      (str scm-host "."
-                           (if (= "io" scm-tld)
-                             "com"
-                             scm-tld))
+     :scm/domain  (let [url (git/auto-git-url project-name)]
+                    (if url
+                      (-> url
+                          (str/replace #"^https://" "")
+                          (str/replace #"/.*$" ""))
                       "github.com"))
      :scm/user    (str/replace top #"(com|org)\." "")
      :scm/repo    base-name
