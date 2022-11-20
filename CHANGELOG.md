@@ -1,5 +1,8 @@
 # Changes
 
+* 0.4.next in progress
+  * Fix [#37](https://github.com/seancorfield/deps-new/issues/37) by using `tools.deps.alpha`'s git provider for [inferring coordinates from lib names](https://clojure.org/reference/deps_and_cli#_git).
+
 * v0.4.13 879c4eb -- 2022-08-02
   * Merge PR [#33](https://github.com/seancorfield/deps-new/pull/33) making `deps-new` compatible with Babashka -- [@borkdude](https://github.com/borkdude).
   * Address [#32](https://github.com/seancorfield/deps-new/issues/32) by adding `:scratch` variable, defaulting to `"scratch"`.

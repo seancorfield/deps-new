@@ -17,7 +17,7 @@ The following optional keys can be provided to override defaults in the template
 * `:now/date` -- the current date, formatted as `yyyy-MM-dd`,
 * `:now/year` -- the current year (four digits),
 * `:raw-name` -- the original project name as supplied on the command-line (which may be unqualified),
-* `:scm/domain` -- `"github.com"` unless the leading portion of the qualified project name suggests this should be hosted on `gitlab` or `bitbucket`,
+* `:scm/domain` -- `"github.com"` unless the leading portion of the qualified project name suggests this should be hosted on `gitlab` or another SCM provider,
 * `:scm/user` -- the leading portion of the qualified project name, with known SCM hosts removed and with leading `com.` or `org.` removed,
 * `:scm/repo` -- the trailing portion of the qualified project name,
 * `:top` -- the leading portion of the qualified project name, with known SCM hosts removed.
