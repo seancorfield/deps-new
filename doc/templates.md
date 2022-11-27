@@ -25,6 +25,29 @@ that has a string as its value, an `{{opt/ns}}` version is also available that s
 be suitable for use as a namespace in the generated code, and an `{{opt/file}}` version
 that should be suitable for use as a filename or directory path.
 
+## Making your template work remotely
+
+If you wish to deploy and use your template from a remote git repository, a `template.edn` and
+`root` directory alone aren't sufficient. You will also need to package it in a deps.edn project,
+so `deps-new` can consume it.
+
+It will look for `root` and `template.edn` under something like `resources/myusername/mytemplate/`
+The best way to set it up correctly is to follow the README instructions under "Create a Template"
+and run `clojure -Tnew template :name myusername/mytemplate`.
+
+Next, place your template files under `resources/myusername/mytemplate/root/` and update the
+`template.edn` if necessary.
+
+Finally, be sure to update the top-level README so users know what's in your template, and how to
+use it. If you follow the instructions in "Create a Template", there will be a `clojure -Sdeps`
+command to use the template locally. Change the coordinates to use a git URL and SHA, and you
+should be good to go.
+
+E.g.:
+```bash
+clojure -Sdeps '{:deps {net.clojars.myusername/my-template {:git/url "https://github.com/myusername/my-template" :git/sha "e55b1472680a62fe38ea28be8a9d81adf711a9eb"}}}' -Tnew create :template myusername/my-template :name myusername/mycoollib
+```
+
 ## Renaming Folders
 
 All of the files inside the "root" folder are copied to matching files in the

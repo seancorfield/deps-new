@@ -176,6 +176,14 @@ See [**All the Options**](doc/options.md) for the full list of command-line opti
 when invoking `deps-new`. See [**Writing Templates**](doc/templates.md) for documentation on
 how to write your own templates.
 
+### Templates
+
+The following templates are available externally. If you have written a template and would like to add it to the list, please make a PR.
+
+- [deps-new-lib-adoc-template](https://github.com/KingMob/deps-new-lib-adoc-template) - The default `lib` template, but using AsciiDoc
+- [re-marfer](https://github.com/kees-/re-marfer) - A minimal re-frame SPA template
+- [avil-template](https://github.com/codesmith-gmbh/anvil-template) - A template for projects using anvil and blocks
+
 ## Emacs Integration
 
 An [emacs package](https://github.com/jpe90/emacs-clj-deps-new) is available which provides a Magit-style interface to `clj-new` and `deps-new`. It includes some community templates and welcomes for recommendations for more.
