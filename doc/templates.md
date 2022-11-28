@@ -45,7 +45,7 @@ should be good to go.
 
 E.g.:
 ```bash
-clojure -Sdeps '{:deps {io.github.myusername/my-template {:git/url "https://github.com/myusername/my-template" :git/sha "e55b1472680a62fe38ea28be8a9d81adf711a9eb"}}}' -Tnew create :template myusername/my-template :name myusername/mycoollib
+clojure -Sdeps '{:deps {io.github.myusername/my-template {:git/sha "e55b1472680a62fe38ea28be8a9d81adf711a9eb"}}}' -Tnew create :template myusername/my-template :name myusername/mycoollib
 ```
 
 ## Renaming Folders
