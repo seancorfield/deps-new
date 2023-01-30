@@ -12,7 +12,6 @@ clojure -Ttools install io.github.seancorfield/deps-new '{:git/tag "v0.4.13"}' :
 
 _Currently `deps-new` only support `:local/root` and `git`-based coordinates, but no Maven/Clojars coordinates. If you want an alternative that supports distributing your templates using Maven/Clojars check [clj-new](https://github.com/seancorfield/clj-new)._
 
-
 ## Motivation
 
 `clj-new` inherently carries along all of the baggage of `lein new` and `boot new`, including a modified chunk of Leiningen itself, as well as depending on Pomegranate for loading dependencies (so as to be compatible with Leiningen and Boot), and Stencil for the variable substitution in templates. The recently-released `tools.build` library, from the core Clojure team, provides all of the functionality needed to create new projects from templates, so `deps-new` aims to provide a wrapper around `tools.build`, some standard templates "out of the box", and machinery to allow you to easily write your own templates, mostly with no code needed at all.
