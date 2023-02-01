@@ -1,4 +1,4 @@
-;; copyright (c) 2021 sean corfield, all rights reserved
+;; copyright (c) 2021-2023 sean corfield, all rights reserved
 
 (ns org.corfield.new.impl-test
   (:require [clojure.string :as str]

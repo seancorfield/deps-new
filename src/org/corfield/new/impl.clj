@@ -1,4 +1,4 @@
-;; copyright (c) 2021 sean corfield, all rights reserved
+;; copyright (c) 2021-2023 sean corfield, all rights reserved
 
 (ns ^:no-doc org.corfield.new.impl
   "The implementation helpers for `org.corfield.new/create`."

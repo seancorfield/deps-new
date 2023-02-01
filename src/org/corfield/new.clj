@@ -1,4 +1,4 @@
-;; copyright (c) 2021 sean corfield, all rights reserved
+;; copyright (c) 2021-2023 sean corfield, all rights reserved
 
 (ns org.corfield.new
   "The next generation of clj-new. Uses tools.build and

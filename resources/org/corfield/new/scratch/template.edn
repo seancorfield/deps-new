@@ -1,4 +1,4 @@
 {:scratch "scratch"
  :transform
  [["src" "src"
-   {"scratch.clj" "{{scratch/file}}.clj"}]]}
+   {"scratch.tmpl" "{{scratch/file}}.clj"}]]}
