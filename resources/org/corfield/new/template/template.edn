@@ -1,7 +1,13 @@
 {:description "FIXME: my new template."
  :transform
  [["resources" "resources/{{top/file}}/{{main/file}}" {} ["<<" ">>"]]
+  ["build" ""
+   {"build.tmpl"    "build.clj"
+    "deps.tmpl"     "deps.edn"}]
+  ["build" ""
+   {"template.tmpl" "resources/{{top/file}}/{{main/file}}/template.edn"}
+   ["<<" ">>"]]
   ["src" "src/{{top/file}}"
-   {"main.clj" "{{main/file}}.clj"}]
+   {"main.tmpl" "{{main/file}}.clj"}]
   ["test" "test/{{top/file}}"
-   {"main_test.clj" "{{main/file}}_test.clj"}]]}
+   {"main_test.tmpl" "{{main/file}}_test.clj"}]]}

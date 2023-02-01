@@ -4,7 +4,10 @@
  ;; this does not transform the EDN but does print a message:
  :template-fn <<top/ns>>.<<main/ns>>/template-fn
  :transform
- [["src" "src/{{top/file}}"
-   {"main.clj" "{{main/file}}.clj"}]
+ [["build" ""
+   {"build.tmpl" "build.clj"
+    "deps.tmpl"  "deps.edn"}]
+  ["src" "src/{{top/file}}"
+   {"main.tmpl" "{{main/file}}.clj"}]
   ["test" "test/{{top/file}}"
-   {"main_test.clj" "{{main/file}}_test.clj"}]]}
+   {"main_test.tmpl" "{{main/file}}_test.clj"}]]}
