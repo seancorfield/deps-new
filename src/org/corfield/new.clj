@@ -2,7 +2,7 @@
 
 (ns org.corfield.new
   "The next generation of clj-new. Uses tools.build and
-  tools.deps.alpha heavily to provide a simpler 'shim'
+  tools.deps heavily to provide a simpler 'shim'
   around template processing."
   {:org.babashka/cli {:coerce {:overwrite :keyword}}}
   (:require [clojure.edn :as edn]

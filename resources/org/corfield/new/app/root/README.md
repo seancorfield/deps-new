@@ -48,9 +48,7 @@ from `build.clj`.
 
 Run that uberjar:
 
-    $ java -jar target/{{main/ns}}-{{version}}.jar
-
-If you remove `version` from `build.clj`, the uberjar will become `target/{{main/ns}}-standalone.jar`.
+    $ java -jar target/{{top/ns}}/{{main/ns}}-{{version}}.jar
 
 ## Options
 

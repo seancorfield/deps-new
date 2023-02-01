@@ -4,7 +4,7 @@
   "The implementation helpers for `org.corfield.new/create`."
   (:require [clojure.java.io :as io]
             [clojure.string :as str]
-            [clojure.tools.deps.alpha.extensions.git :as git]
+            [clojure.tools.deps.extensions.git :as git]
             [clojure.tools.build.api :as b])
   (:import (java.nio.file Files)
            (java.nio.file.attribute FileAttribute)
@@ -132,11 +132,6 @@
                              :src-dirs   [(str template-dir "/" src)]}
                       (not raw)
                       (assoc :replace file-data)))))))
-
-(def ^:private known-scms
-  "A string to be used as part of a regex, identifying
-  known SCM providers that we special case."
-  "^(io|com|org)\\.(github|gitlab|bitbucket)\\.")
 
 (defn- deconstruct-project-name
   "Given a symbol, make it canonical, and break down the

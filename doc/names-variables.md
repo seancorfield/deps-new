@@ -78,7 +78,7 @@ _For some unqualified variables this additional processing may make no sense, bu
 
 ## SCM Domains
 
-`deps-new` "knows about" the [same SCM services as `tools.deps.alpha`](https://clojure.org/reference/deps_and_cli#_git), including GitHub, GitLab, and others and treats project names that contain a
+`deps-new` "knows about" the [same SCM services as `tools.deps`](https://clojure.org/reference/deps_and_cli#_git), including GitHub, GitLab, and others and treats project names that contain a
 reverse domain name based on those sites in a special manner.
 
 If the project name begins with the reverse domain name of one of the supported SCM services,
