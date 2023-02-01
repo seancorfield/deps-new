@@ -48,7 +48,7 @@ from `build.clj`.
 
 Run that uberjar:
 
-    $ java -jar target/{{top/ns}}/{{main/ns}}-{{version}}.jar
+    $ java -jar target/{{group/id}}/{{artifact/id}}-{{version}}.jar
 
 ## Options
 
