@@ -10,7 +10,22 @@ clojure -Ttools install io.github.seancorfield/deps-new '{:git/tag "v0.5.0"}' :a
 
 > Note: if you are on Windows, read [**Quoting keys and values**](https://clojure.org/reference/deps_and_cli#quoting) in the official **Deps and CLI Reference** documentation to understand how the above command needs to look on Powershell. Or take a look at the [Babashka CLI](#babashka-cli) library support.
 
-_Currently `deps-new` only support `:local/root` and `git`-based coordinates, but no Maven/Clojars coordinates. If you want an alternative that supports distributing your templates using Maven/Clojars check [clj-new](https://github.com/seancorfield/clj-new)._
+_`deps-new` only supports `:local/root` and `git`-based coordinates, not Maven/Clojars coordinates. If you want an alternative that supports distributing your templates using Maven/Clojars look at [clj-new](https://github.com/seancorfield/clj-new) but bear in mind I am no longer actively maintaining that._
+
+The documentation here is structured as follows:
+
+* [Motivation](#motivation) -- why does `deps-new` exist?
+* Create an [Application](#create-an-application) -- how to create a basic application project, that can build an uberjar
+* Create a [Library](#create-a-library) -- how to create a basic library project, that can build a JAR and deploy to Clojars
+* Create a [Template](#create-a-template) -- how to create your own `deps-new` template project
+* Additional projects/files that `deps-new` can create ([scratch](#create-a-minimal-scratch-project), [`pom.xml`](#create-a-fully-fleshed-pomxml))
+* [More General Usage](#more-general-usage) -- this includes links to additional documentation:
+  * [Project Names and Variables](doc/names-variables.md) to see how the project name (`:name`) is used to derive the default values of all the built-in substitution variables
+  * [All the Options](doc/options.md) for the full list of command-line options available when invoking `deps-new`
+  * [Writing Templates](doc/templates.md) for documentation on how to write your own templates
+
+Followed by sections listing some community `deps-new` templates, integration with Emacs, some notes about the generated `LICENSE` file, and finally how to use
+`deps-new` with the Babashka CLI library.
 
 ## Motivation
 
@@ -182,9 +197,10 @@ how to write your own templates.
 
 The following templates are available externally. If you have written a template and would like to add it to the list, please make a PR.
 
+- [avil-template](https://github.com/codesmith-gmbh/anvil-template) - A template for projects using anvil and blocks
+- [clerk-utils](https://github.com/mentat-collective/clerk-utils/tree/main/resources/clerk_utils/custom) - Create a fully-configured Clerk notebook project
 - [deps-new-lib-adoc-template](https://github.com/KingMob/deps-new-lib-adoc-template) - The default `lib` template, but using AsciiDoc
 - [re-marfer](https://github.com/kees-/re-marfer) - A minimal re-frame SPA template
-- [avil-template](https://github.com/codesmith-gmbh/anvil-template) - A template for projects using anvil and blocks
 
 ## Emacs Integration
 
