@@ -1,6 +1,6 @@
 # Changes
 
-* v0.5.0.1 -- 2023-03-31
+* v0.5.0.1 c4bbcfc -- 2023-03-31
   * Fix [#47](https://github.com/seancorfield/deps-new/issues/47) by adding `:only` to template project specs.
 
 * v0.5.0 48bf01e -- 2023-01-31
