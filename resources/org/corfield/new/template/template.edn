@@ -3,10 +3,12 @@
  [["resources" "resources/{{top/file}}/{{main/file}}" {} ["<<" ">>"]]
   ["build" ""
    {"build.tmpl"    "build.clj"
-    "deps.tmpl"     "deps.edn"}]
+    "deps.tmpl"     "deps.edn"}
+   :only]
   ["build" ""
    {"template.tmpl" "resources/{{top/file}}/{{main/file}}/template.edn"}
-   ["<<" ">>"]]
+   ["<<" ">>"]
+   :only]
   ["src" "src/{{top/file}}"
    {"main.tmpl" "{{main/file}}.clj"}]
   ["test" "test/{{top/file}}"
