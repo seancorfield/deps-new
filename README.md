@@ -1,4 +1,4 @@
-# deps-new [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/seancorfield/deps-new) [![Slack](https://img.shields.io/badge/slack-deps--new-yellow.svg?logo=slack)](https://clojurians.slack.com/messages/C019ZQSPYG6)
+# deps-new [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/seancorfield/deps-new) [![Slack](https://img.shields.io/badge/slack-deps--new-yellow.svg?logo=slack)](https://clojurians.slack.com/app_redirect?channel=deps-new)
 
 A new, simpler alternative to `clj-new`.
 
