@@ -161,7 +161,7 @@ generate the documentation, e.g.,
   </scm>
 ```
 
-You should run `clojure -Spom` to synchronize the `<dependencies>` from your `deps.edn` file.
+You should run `clojure -X:deps mvn-pom` to synchronize the `<dependencies>` from your `deps.edn` file.
 
 ## More General Usage
 
@@ -193,6 +193,9 @@ See [**All the Options**](doc/options.md) for the full list of command-line opti
 when invoking `deps-new`. See [**Writing Templates**](doc/templates.md) for documentation on
 how to write your own templates.
 
+Practical.li also has an excellent
+[guide to writing `deps-new` templates](https://practical.li/blog/posts/create-deps-new-template-for-clojure-cli-projects/).
+
 ### Templates
 
 The following templates are available externally. If you have written a template and would like to add it to the list, please make a PR.
@@ -200,6 +203,7 @@ The following templates are available externally. If you have written a template
 - [avil-template](https://github.com/codesmith-gmbh/anvil-template) - A template for projects using anvil and blocks
 - [clerk-utils](https://github.com/mentat-collective/clerk-utils/tree/main/resources/clerk_utils/custom) - Create a fully-configured Clerk notebook project
 - [deps-new-lib-adoc-template](https://github.com/KingMob/deps-new-lib-adoc-template) - The default `lib` template, but using AsciiDoc
+- [practical.li templates](https://github.com/practicalli/project-templates) - Well-documented, well-maintained, fully-fleshed out templates for creating applications and services (with more to come)
 - [re-marfer](https://github.com/kees-/re-marfer) - A minimal re-frame SPA template
 
 ## Emacs Integration

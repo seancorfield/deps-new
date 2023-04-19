@@ -180,3 +180,11 @@ The data function could, for example, dynamically generate the content of one or
 new keys in the substitution map, and the template function could augment the EDN with additional
 folders to copy and transform. This would allow for a template to accept command-line arguments
 that controlled the inclusion of optional features in the generated project.
+
+## Additional Documentation
+
+Practical.li has an excellent
+[guide to writing `deps-new` templates](https://practical.li/blog/posts/create-deps-new-template-for-clojure-cli-projects/)
+as well as offering a number of well-documented, well-maintained, fully-fleshed
+out [templates for creating applications and services](https://github.com/practicalli/project-templates)
+(with more to come).
