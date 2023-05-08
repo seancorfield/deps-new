@@ -1,6 +1,9 @@
 # Changes
 
-* v0.5.2 -- 2023-05-07
+* v0.5.next in progress
+  * Update `tools.build` to v0.9.4.
+
+* v0.5.2 253f32a -- 2023-05-07
   * Fix [#49](https://github.com/seancorfield/deps-new/issues/49) by adding `.portal/vs-code.edn` to all `.gitignore` files.
 
 * v0.5.1 21cede2 -- 2023-03-31
