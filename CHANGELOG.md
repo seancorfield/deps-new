@@ -1,5 +1,8 @@
 # Changes
 
+* v0.5.2 -- 2023-05-07
+  * Fix [#49](https://github.com/seancorfield/deps-new/issues/49) by adding `.portal/vs-code.edn` to all `.gitignore` files.
+
 * v0.5.1 21cede2 -- 2023-03-31
   * Fix [#47](https://github.com/seancorfield/deps-new/issues/47) by adding `:only` to template project specs.
 
