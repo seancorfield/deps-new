@@ -1,7 +1,7 @@
 # Changes
 
 * v0.5.next in progress
-  * Update `tools.build` to v0.9.4.
+  * Update `tools.build` to v0.9.4 and `expectations` to 2.0.165
 
 * v0.5.2 253f32a -- 2023-05-07
   * Fix [#49](https://github.com/seancorfield/deps-new/issues/49) by adding `.portal/vs-code.edn` to all `.gitignore` files.
