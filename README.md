@@ -12,6 +12,8 @@ clojure -Ttools install io.github.seancorfield/deps-new '{:git/tag "v0.5.2"}' :a
 
 _`deps-new` only supports `:local/root` and `git`-based coordinates, not Maven/Clojars coordinates. If you want an alternative that supports distributing your templates using Maven/Clojars look at [clj-new](https://github.com/seancorfield/clj-new) but bear in mind I am no longer actively maintaining that._
 
+> Note: if you see instructions to use a template that look like `clojure -A:new some-template :name whatever` or `clojure -Tnew some-template :name whatever`, where `some-template` is not one of the built-in templates (`app`, `lib`, `pom`, `scratch`, `template`), those probably refer to [clj-new](https://github.com/seancorfield/clj-new) rather than `deps-new`. Any templates other than the built-in ones are created and maintained by the community in repositories elsewhere, so please open issues or ask questions of the appropriate maintainer (not me).
+
 The documentation here is structured as follows:
 
 * [Motivation](#motivation) -- why does `deps-new` exist?
