@@ -167,7 +167,7 @@ You should run `clojure -X:deps mvn-pom` to synchronize the `<dependencies>` fro
 
 ## More General Usage
 
-Currently those are the only four built-in templates (`app`, `lib`, `pom`, and `scratch`).
+Currently those are the only five built-in templates (`app`, `lib`, `pom`, `scratch`, and `template`).
 
 More general usage:
 
