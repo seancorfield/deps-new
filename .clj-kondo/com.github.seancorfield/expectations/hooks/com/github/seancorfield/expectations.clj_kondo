@@ -1,0 +1,12 @@
+(ns hooks.com.github.seancorfield.expectations
+  (:require [clj-kondo.hooks-api :as api]))
+
+(defn more-> [{:keys [node]}]
+  (let [tail (rest (:children node))
+        rewritten
+        (api/list-node
+         (list*
+          (api/token-node 'cond->)
+          (api/token-node 'nil)
+          tail))]
+    {:node rewritten}))

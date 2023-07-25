@@ -1,4 +1,9 @@
-{:lint-as
+{:hooks
+ {:analyze-call
+  {expectations.clojure.test/more->
+   hooks.com.github.seancorfield.expectations/more->}}
+ :lint-as
  {expectations.clojure.test/defexpect clojure.test/deftest
   expectations.clojure.test/from-each clojure.core/for
-  expectations.clojure.test/more-of clj-kondo.lint-as/def-catch-all}}
+  expectations.clojure.test/more-of clj-kondo.lint-as/def-catch-all
+  expectations.clojure.test/=? clojure.core/=}}
