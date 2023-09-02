@@ -204,6 +204,7 @@ The following templates are available externally. If you have written a template
 
 - [avil-template](https://github.com/codesmith-gmbh/anvil-template) - A template for projects using anvil and blocks
 - [clerk-utils](https://github.com/mentat-collective/clerk-utils/tree/main/resources/clerk_utils/custom) - Create a fully-configured Clerk notebook project
+- [Clojure Live Reload HTML Server Template](https://github.com/AdamFrey/clojure-html-server-live-reload-template)
 - [deps-new-lib-adoc-template](https://github.com/KingMob/deps-new-lib-adoc-template) - The default `lib` template, but using AsciiDoc
 - [practical.li templates](https://github.com/practicalli/project-templates) - Well-documented, well-maintained, fully-fleshed out templates for creating applications and services (with more to come)
 - [re-marfer](https://github.com/kees-/re-marfer) - A minimal re-frame SPA template
