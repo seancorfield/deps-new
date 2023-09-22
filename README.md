@@ -2,13 +2,11 @@
 
 A new, simpler alternative to `clj-new`.
 
-Intended to be installed as a "tool" (Clojure CLI 1.10.3.933 or later).
+Intended to be installed as a "tool" (Clojure CLI 1.11.1.1149 or later).
 
 ```bash
-clojure -Ttools install io.github.seancorfield/deps-new '{:git/tag "v0.5.2"}' :as new
+clojure -Ttools install-latest :lib io.github.seancorfield/deps-new :as new
 ```
-
-> Note: if you are on Windows, read [**Quoting keys and values**](https://clojure.org/reference/deps_and_cli#quoting) in the official **Deps and CLI Reference** documentation to understand how the above command needs to look on Powershell. Or take a look at the [Babashka CLI](#babashka-cli) library support.
 
 _`deps-new` only supports `:local/root` and `git`-based coordinates, not Maven/Clojars coordinates. If you want an alternative that supports distributing your templates using Maven/Clojars look at [clj-new](https://github.com/seancorfield/clj-new) but bear in mind I am no longer actively maintaining that._
 
@@ -186,6 +184,8 @@ clojure -Sdeps '{:deps {com.acme.project/cool-lib COORDINATES}}' -Tnew create :t
 The `COORDINATES` could be something like `{:local/root "/path/to/cool-lib"}`
 for a template that exists on the local filesystem, or it could be based on `:git/url`/`:git/sha` etc
 for a template that exists in a `git` repository.
+
+> Note: if you are on Windows, read [**Quoting keys and values**](https://clojure.org/reference/deps_and_cli#quoting) in the official **Deps and CLI Reference** documentation to understand how the above command needs to look on Powershell. Or take a look at the [Babashka CLI](#babashka-cli) library support.
 
 > Note: because `deps-new` is based on `tools.build` and uses its file copying functions, the template must ultimately live on the filesystem, so `:local/root` and `git`-based coordinates are supported, but Maven/Clojars coordinates are not.
 
