@@ -27,7 +27,8 @@
           :basis (b/create-basis {})
           :class-dir class-dir
           :target "target"
-          :src-dirs ["src"]))
+          :src-dirs ["src"]
+          :src-pom "template/pom.xml"))
 
 (defn ci "Run the CI pipeline of tests (and build the JAR)." [opts]
   (test opts)
