@@ -252,8 +252,8 @@ viable alternative:
 
 ```clojure
 :new {:deps {org.babashka/cli {:mvn/version "0.2.15"}
-             io.github.seancorfield/deps-new {:git/tag "v0.5.2"
-                                              :git/sha "253f32a"}}
+             io.github.seancorfield/deps-new {:git/tag "v0.5.2.1"
+                                              :git/sha "e955f4e"}}
       :ns-default org.corfield.new
       :exec-args {} ;; insert default arguments here
       :main-opts ["-m" "babashka.cli.exec"]}
