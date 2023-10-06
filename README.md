@@ -155,8 +155,8 @@ generate the documentation, e.g.,
 ...
   <scm>
     <url>https://github.com/acme/cool-lib</url>
-    <connection>scm:git:git://github.com/acme/cool-lib.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com/acme/cool-lib.git</developerConnection>
+    <connection>scm:git:https://github.com/acme/cool-lib.git</connection>
+    <developerConnection>scm:git:ssh:git@github.com:acme/cool-lib.git</developerConnection>
     <tag>v0.1.0-SNAPSHOT</tag>
   </scm>
 ```

@@ -1,8 +1,8 @@
 # Changes
 
 * v0.5.next in progress
-  * Address [#45](https://github.com/seancorfield/deps-new/issues/45) by putting the "template" `pom.xml` file in a `template` folder in generated projects.
-  * Update `tools.build` to 0.9.5 (as Maven dep) and `expectations` to 2.1.182.
+  * Address [#45](https://github.com/seancorfield/deps-new/issues/45) by updating `tools.build` to 0.9.6 and getting rid of the template `pom.xml` file altogether, in favor of the new `:pom-data` option to `b/write-pom`.
+  * Update `expectations` to 2.1.182.
 
 * v0.5.2 253f32a -- 2023-05-07
   * Fix [#49](https://github.com/seancorfield/deps-new/issues/49) by adding `.portal/vs-code.edn` to all `.gitignore` files.
