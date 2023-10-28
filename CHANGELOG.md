@@ -1,5 +1,8 @@
 # Changes
 
+* v0.5.next in progress
+  * Address [#52](https://github.com/seancorfield/deps-new/issues/52) by adding some notes about generated projects to the README.
+
 * v0.5.3 -- 2023-10-06
   * Address [#45](https://github.com/seancorfield/deps-new/issues/45) by updating `tools.build` to 0.9.6 and getting rid of the template `pom.xml` file altogether, in favor of the new `:pom-data` option to `b/write-pom`.
   * Update `expectations` to 2.1.182.

@@ -66,6 +66,15 @@ Creates a directory `mynewapp` containing a new application project, with `myuse
   (greet {:name (first args)}))
 ```
 
+In this new project, you can run `clojure -A:deps -T:build help/doc` to see what tasks are available
+in `build.clj`. You can run the following in the freshly-generated project:
+
+* `clojure -T:build test` -- run the tests (they'll fail until you fix them!)
+* `clojure -T:build ci` -- run the tests and build the (AOT-compiled) uberjar
+
+Consult the generated `README.md` file for additional details on how to run the
+source code, run the tests, and build and run the uberjar.
+
 ## Create a Library
 
 ```bash
@@ -84,6 +93,16 @@ clojure -Tnew lib :name myusername/mycoollib :target-dir projects/newlib
 
 Creates a directory `projects/newlib` containing a new library project, with `myusername` as
 the "top" namespace and `mycoollib` as the main project namespace under that.
+
+In this new project, you can run `clojure -A:deps -T:build help/doc` to see what tasks are available
+in `build.clj`. You can run the following in the freshly-generated project:
+
+* `clojure -T:build test` -- run the tests (they'll fail until you fix them!)
+* `clojure -T:build ci` -- run the tests and build the library jar
+
+Consult the generated `README.md` file for additional details on how to run
+functions from the source code, run the tests, build the jar, install it
+locally or deploy it to Clojars.
 
 ## Create a Template
 
@@ -105,6 +124,14 @@ clojure -Tnew template :name myusername/mytemplate :target-dir projects/newtempl
 
 Creates a directory `projects/newtemplate` containing a new library project, with `myusername` as
 the "top" namespace and `mytemplate` as the main project namespace under that.
+
+In this new project, you can run `clojure -A:deps -T:build help/doc` to see what tasks are available
+in `build.clj`. You can run the following in the freshly-generated project:
+
+* `clojure -T:build test` -- run the tests (they'll fail until you fix them!)
+
+Consult the generated `README.md` file for additional details on how to work
+with the newly-generated template project.
 
 ## Create a Minimal "scratch" Project
 
