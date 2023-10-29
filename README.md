@@ -238,6 +238,7 @@ The following templates are available externally. If you have written a template
 - [practical.li templates](https://github.com/practicalli/project-templates) - Well-documented, well-maintained, fully-fleshed out templates for creating applications and services (with more to come)
 - [re-marfer](https://github.com/kees-/re-marfer) - A minimal re-frame SPA template
 - [Hoplon project template](https://github.com/hoplon/project-template) - A template for Hoplon projects
+- [clj-polyglot-app](https://github.com/behrica/clj-polyglot-app) - A template to create a polyglot app in Clojure using `devcontainer`.
 
 ## Emacs Integration
 
