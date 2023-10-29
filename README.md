@@ -8,6 +8,8 @@ Intended to be installed as a "tool" (Clojure CLI 1.11.1.1149 or later).
 clojure -Ttools install-latest :lib io.github.seancorfield/deps-new :as new
 ```
 
+> Note: if you get an error about `No known ancestor relationship between git versions` then you probably installed [`clj-new`](https://github.com/seancorfield/clj-new) `:as new` previously, so you will need to remove that first: `clojure -Ttools remove :tool new`. `clj-new` should be installed `:as clj-new` if you want to use both tools.
+
 _`deps-new` only supports `:local/root` and `git`-based coordinates, not Maven/Clojars coordinates. If you want an alternative that supports distributing your templates using Maven/Clojars look at [clj-new](https://github.com/seancorfield/clj-new) but bear in mind I am no longer actively maintaining that._
 
 > Note: if you see instructions to use a template that look like `clojure -A:new some-template :name whatever` or `clojure -Tnew some-template :name whatever`, where `some-template` is not one of the built-in templates (`app`, `lib`, `pom`, `scratch`, `template`), those probably refer to [clj-new](https://github.com/seancorfield/clj-new) rather than `deps-new`. Any templates other than the built-in ones are created and maintained by the community in repositories elsewhere, so please open issues or ask questions of the appropriate maintainer (not me).
