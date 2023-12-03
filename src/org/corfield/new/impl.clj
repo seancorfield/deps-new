@@ -32,11 +32,12 @@
   return a pair of the directory path to the template's
   files and the path of the `template.edn` file that
   describes how to produce a project from it."
-  [template-sym]
+  [src-dirs template-sym]
   (let [poss-dir (->file template-sym)
         edn-file (str poss-dir "/template.edn")
-        paths    (str/split (System/getProperty "java.class.path")
-                            (re-pattern (System/getProperty "path.separator")))]
+        paths    (into (vec src-dirs)
+                       (str/split (System/getProperty "java.class.path")
+                                  (re-pattern (System/getProperty "path.separator"))))]
     (some #(let [file (io/file (str % "/" edn-file))]
              (when (.exists file)
                [(.getCanonicalPath (io/file (str % "/" poss-dir)))
@@ -217,8 +218,8 @@
                                " project.")} edn opts) edn]))
 
 (comment
-  (find-root 'org.corfield.new/app)
-  (find-root 'org.corfield.new/lib)
+  (find-root [] 'org.corfield.new/app)
+  (find-root [] 'org.corfield.new/lib)
   (substitute "{{foo/file}}.clj"
               (->subst-map {:top/ns "org.corfield"
                             :foo    "org.corfield-ns"

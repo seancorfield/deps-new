@@ -40,15 +40,17 @@
   "Exec function to create a new project from a template.
   `:template` -- a symbol (or string) identifying the template,
   `:name` -- a symbol (or string) identifying the project name,
+  `:src-dirs` -- optional sequence of directories to search for
+      the template in addition to the classpath (default empty),
   `:target-dir` -- optional string identifying the directory to
       create the new project in,
   `:overwrite` -- whether to overwrite an existing directory or,
       for `:delete`, to delete it first; if `:overwrite` is `nil`
       or `false`, an existing directory will not be overwritten."
   [opts]
-  (let [{:keys [template] :as basic-opts}
+  (let [{:keys [src-dirs template] :as basic-opts}
         (impl/preprocess-options opts)
-        [dir edn-file] (impl/find-root template)
+        [dir edn-file] (impl/find-root src-dirs template)
         _
         (when-not dir
           (throw (ex-info (str "Unable to find template.edn for " template) {})))
@@ -134,7 +136,7 @@
   (create (assoc opts :template 'scratch)))
 
 (comment
-  (let [[_dir edn] (impl/find-root 'org.corfield.new/app)]
+  (let [[_dir edn] (impl/find-root [] 'org.corfield.new/app)]
     (s/conform ::template (edn/read-string (slurp edn))))
   (create {:template   'org.corfield.new/app
            :name       'org.bitbucket.wsnetworks/example

@@ -218,6 +218,13 @@ for a template that exists in a `git` repository.
 
 > Note: because `deps-new` is based on `tools.build` and uses its file copying functions, the template must ultimately live on the filesystem, so `:local/root` and `git`-based coordinates are supported, but Maven/Clojars coordinates are not.
 
+As of v0.5.next, `:src-dirs` can be used to specify a list of
+directories to search for templates, in addition to the classpath.
+Those directories are searched in order, and take priority over the
+classpath. This allows you to have templates in a directory structure
+that is outside the classpath, and also makes it easier to use
+`deps-new` as a library.
+
 See [**Project Names and Variables**](doc/names-variables.md) to see how the project name (`:name`)
 is used to derive the default values of all the built-in substitution variables.
 See [**All the Options**](doc/options.md) for the full list of command-line options available

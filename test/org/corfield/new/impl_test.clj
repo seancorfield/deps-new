@@ -18,10 +18,13 @@
 
 (defexpect test-find-root
   (expecting "existing templates"
-             (expect some? (sut/find-root 'org.corfield.new/app))
-             (expect some? (sut/find-root 'org.corfield.new/lib)))
+             (expect some? (sut/find-root [] 'org.corfield.new/app))
+             (expect some? (sut/find-root [] 'org.corfield.new/lib)))
   (expecting "missing templates"
-             (expect nil?  (sut/find-root 'org.corfield.new/no-such-template))))
+             (expect nil?  (sut/find-root [] 'org.corfield.new/no-such-template)))
+  (expecting "local template"
+             (expect nil?  (sut/find-root [] 'data/impl))
+             (expect some? (sut/find-root ["."] 'data/impl))))
 
 (defexpect test->subst-map
   (expect (more (comp string? key)
