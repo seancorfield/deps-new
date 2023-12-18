@@ -3,6 +3,7 @@
 * v0.5.next in progress
   * Address [#54](https://github.com/seancorfield/deps-new/issues/54) by adding `:src-dirs` option to `create` so templates can be found in directories other than on the classpath.
   * Address [#52](https://github.com/seancorfield/deps-new/issues/52) by adding some notes about generated projects to the README.
+  * Add `:post-process-fn` support to `template.edn` so that generated projects can be programmatically modified after generation.
   * Add note to README about possible `new` tool install error due to prior `clj-new` install (and how to fix it).
 
 * v0.5.3 -- 2023-10-06

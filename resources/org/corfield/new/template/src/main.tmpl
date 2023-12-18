@@ -17,3 +17,10 @@
   ;; must return the whole EDN hash map
   (println "template-fn returning edn")
   edn)
+
+(defn post-process-fn
+  "Example post-process-fn handler.
+
+  Can programmatically modify files in the generated project."
+  [edn data]
+  (println "post-process-fn not modifying" (:target-dir data)))

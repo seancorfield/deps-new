@@ -16,6 +16,7 @@
 (s/def ::root string?)
 (s/def ::description string?)
 (s/def ::data-fn symbol?)
+(s/def ::post-process-fn symbol?)
 (s/def ::template-fn symbol?)
 (s/def ::files (s/map-of string? string?))
 (s/def ::open-close (s/tuple string? string?))
@@ -26,7 +27,8 @@
                          :delims (s/? ::open-close)
                          :opts (s/* ::opts)))
 (s/def ::transform (s/coll-of ::dir-spec :min-count 1))
-(s/def ::template (s/keys :opt-un [::data-fn ::description ::root ::template-fn ::transform]))
+(s/def ::template (s/keys :opt-un [::data-fn ::description ::post-process-fn
+                                   ::root ::template-fn ::transform]))
 
 (comment
   (s/conform ::transform [["root"]])
@@ -78,7 +80,10 @@
     (println "Creating project from" template "in" target-dir)
 
     (impl/copy-template-dir template-dir target-dir {:src (:root edn' "root")} data)
-    (run! #(impl/copy-template-dir template-dir target-dir % data) (:transform edn'))))
+    (run! #(impl/copy-template-dir template-dir target-dir % data) (:transform edn'))
+
+    (when-let [post-process-fn (:post-process-fn final-opts)]
+      ((requiring-resolve post-process-fn) edn' final-opts))))
 
 (defn app
   "Exec function to create an application project.
