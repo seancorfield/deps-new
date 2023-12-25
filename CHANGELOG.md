@@ -1,6 +1,6 @@
 # Changes
 
-* v0.6.0 -- 2023-12-25
+* v0.6.0 64e79d1 -- 2023-12-25
   * Address [#54](https://github.com/seancorfield/deps-new/issues/54) by adding `:src-dirs` option to `create` so templates can be found in directories other than on the classpath.
   * Address [#52](https://github.com/seancorfield/deps-new/issues/52) by adding some notes about generated projects to the README.
   * Add `:post-process-fn` support to `template.edn` so that generated projects can be programmatically modified after generation.
