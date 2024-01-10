@@ -1,5 +1,8 @@
 # Changes
 
+* v0.7.0 in progress
+  * Address [#55](https://github.com/seancorfield/deps-new/issues/55) by adding support for compound template names that can be resolved to git repositories and template paths within them.
+
 * v0.6.0 64e79d1 -- 2023-12-25
   * Address [#54](https://github.com/seancorfield/deps-new/issues/54) by adding `:src-dirs` option to `create` so templates can be found in directories other than on the classpath.
   * Address [#52](https://github.com/seancorfield/deps-new/issues/52) by adding some notes about generated projects to the README.

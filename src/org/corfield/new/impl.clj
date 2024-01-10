@@ -1,11 +1,13 @@
-;; copyright (c) 2021-2023 sean corfield, all rights reserved
+;; copyright (c) 2021-2024 sean corfield, all rights reserved
 
 (ns ^:no-doc org.corfield.new.impl
   "The implementation helpers for `org.corfield.new/create`."
   (:require [clojure.java.io :as io]
             [clojure.string :as str]
             [clojure.tools.deps.extensions.git :as git]
-            [clojure.tools.build.api :as b])
+            [clojure.tools.build.api :as b]
+            [clojure.tools.gitlibs :as gl]
+            [org.corfield.new.impl :as impl])
   (:import (java.nio.file Files)
            (java.nio.file.attribute FileAttribute)
            (java.text SimpleDateFormat)
@@ -43,6 +45,19 @@
                [(.getCanonicalPath (io/file (str % "/" poss-dir)))
                 (.getCanonicalPath file)]))
           paths)))
+
+(defn get-git-dir
+  "Given a template name (symbol), if it looks like a git repo, fetch it
+   and return the directory holding the most recent HEAD commit SHA."
+  [template-name tag]
+  (when-let [url (git/auto-git-url template-name)]
+    (let [sha (gl/resolve url tag)]
+      (gl/procure url template-name (or sha "HEAD")))))
+
+(comment
+  (get-git-dir 'io.github.seancorfield/deps-new nil)
+  (get-git-dir 'org.corfield.new/app nil)
+  )
 
 (defn ->subst-map
   "Given a hash map of substitution data, return a hash map of
@@ -165,17 +180,37 @@
      :scm/repo    base-name
      :top         top}))
 
+(comment
+  (for [t ['org.corfield.new/app
+           "io.github.seancorfield/deps-new%step%down/there"
+           "io.github.seancorfield/deps-new%org.corfield.new/app#v0.6.0"]]
+    (let [[_ repo _ root _ path _ tag]
+          (re-find #"^(.+?)(%(.+?))?(%(.+?))?(#(.+?))?$" (str t))]
+      [repo (and path root) (or path root repo) tag]))
+  )
+
 (defn preprocess-options
   "Given the raw options hash map, preprocess, parse, and
   validate certain values, and derive defaults for others."
   [{:keys [template target-dir], project-name :name, :as opts}]
   (when-not (and template project-name)
     (throw (ex-info "Both :template and :name are required." opts)))
-  (let [template   (symbol template) ; allow for string or symbol
+  ;; TODO: figure out suitable encoding for template names that supports a
+  ;; git org/repo plus a classpath-relative path to the template dir override
+  ;; plus, potentially later, specific tag overrides.
+  ;; org/repo%deps/root%template-sym#tag
+  (let [[_ repo _ root _ path _ tag]
+        (re-find #"^(.+?)(%(.+?))?(%(.+?))?(#(.+?))?$" (str template))
+        deps-root  (and path root)
+        template   (symbol (or path root repo))
         template   (if (namespace template)
                      template
                      ;; default ns for short template names:
                      (symbol "org.corfield.new" (name template)))
+        git-dir    (get-git-dir (symbol repo) tag)
+        _          (when git-dir
+                     (println "Resolving" repo "as a git dependency"
+                              (str (when tag (str "at " tag)))))
         {:keys [main] :as name-data}
         (deconstruct-project-name (symbol project-name)) ; allow for string or symbol
         target-dir (str (or target-dir main))
@@ -186,6 +221,10 @@
             :now/date   (.format (SimpleDateFormat. "yyyy-MM-dd") (Date.))
             :now/year   (str (+ 1900 (.getYear (Date.))))
             :raw-name   (str project-name)
+            :git-dir    (when git-dir
+                          (if deps-root
+                            (str git-dir "/" deps-root)
+                            git-dir))
             :template   (str template)
             :target-dir target-dir
             :user       username

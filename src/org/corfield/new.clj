@@ -1,4 +1,4 @@
-;; copyright (c) 2021-2023 sean corfield, all rights reserved
+;; copyright (c) 2021-2024 sean corfield, all rights reserved
 
 (ns org.corfield.new
   "The next generation of clj-new. Uses tools.build and
@@ -50,9 +50,12 @@
       for `:delete`, to delete it first; if `:overwrite` is `nil`
       or `false`, an existing directory will not be overwritten."
   [opts]
-  (let [{:keys [src-dirs template] :as basic-opts}
+  (let [{:keys [git-dir src-dirs template] :as basic-opts}
         (impl/preprocess-options opts)
-        [dir edn-file] (impl/find-root src-dirs template)
+        [dir edn-file] (impl/find-root (cond->> src-dirs
+                                         git-dir
+                                         (into [git-dir]))
+                                       template)
         _
         (when-not dir
           (throw (ex-info (str "Unable to find template.edn for " template) {})))
