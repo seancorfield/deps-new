@@ -50,6 +50,12 @@
       for `:delete`, to delete it first; if `:overwrite` is `nil`
       or `false`, an existing directory will not be overwritten."
   [opts]
+  (try
+    (let [cl (.getContextClassLoader (Thread/currentThread))]
+      (.setContextClassLoader (Thread/currentThread) (clojure.lang.DynamicClassLoader. cl)))
+    (catch Throwable t
+      (println "Unable to establish a DynamicClassLoader!")
+      (println (ex-message t))))
   (let [{:keys [git-dir src-dirs template] :as basic-opts}
         (impl/preprocess-options opts)
         [dir edn-file] (impl/find-root (cond->> src-dirs

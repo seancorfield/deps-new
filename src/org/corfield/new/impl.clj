@@ -3,6 +3,7 @@
 (ns ^:no-doc org.corfield.new.impl
   "The implementation helpers for `org.corfield.new/create`."
   (:require [clojure.java.io :as io]
+            [clojure.repl.deps :as deps]
             [clojure.string :as str]
             [clojure.tools.deps.extensions.git :as git]
             [clojure.tools.build.api :as b]
@@ -36,27 +37,32 @@
   describes how to produce a project from it."
   [src-dirs template-sym]
   (let [poss-dir (->file template-sym)
-        edn-file (str poss-dir "/template.edn")
-        paths    (into (vec src-dirs)
-                       (str/split (System/getProperty "java.class.path")
-                                  (re-pattern (System/getProperty "path.separator"))))]
-    (some #(let [file (io/file (str % "/" edn-file))]
-             (when (.exists file)
-               [(.getCanonicalPath (io/file (str % "/" poss-dir)))
-                (.getCanonicalPath file)]))
-          paths)))
+        edn-file (str poss-dir "/template.edn")]
+    ;; either it is on the classpath...
+    (if-let [^java.net.URL url (io/resource edn-file)]
+      (let [file (io/file (.getPath url))]
+        [(.getCanonicalPath (.getParentFile file))
+         (.getCanonicalPath file)])
+      ;; ...or it must be in the src-dirs:
+      (some #(let [file (io/file (str % "/" edn-file))]
+               (when (.exists file)
+                 [(.getCanonicalPath (io/file (str % "/" poss-dir)))
+                  (.getCanonicalPath file)]))
+            (vec src-dirs)))))
 
-(defn get-git-dir
-  "Given a template name (symbol), if it looks like a git repo, fetch it
-   and return the directory holding the most recent HEAD commit SHA."
+(defn get-git-sha
+  "Given a template name (symbol) and an optional tag, if it matches a git repo
+   pattern then resolve the tag (or HEAD) and return the full SHA and the git
+   directory."
   [template-name tag]
   (when-let [url (git/auto-git-url template-name)]
-    (let [sha (gl/resolve url tag)]
-      (gl/procure url template-name (or sha "HEAD")))))
+    (when-let [sha (or (gl/resolve url tag)
+                       (gl/resolve url "HEAD"))]
+      [sha (gl/procure url template-name sha)])))
 
 (comment
-  (get-git-dir 'io.github.seancorfield/deps-new nil)
-  (get-git-dir 'org.corfield.new/app nil)
+  (get-git-sha 'io.github.seancorfield/deps-new nil)
+  (get-git-sha 'org.corfield.new/app nil)
   )
 
 (defn ->subst-map
@@ -207,10 +213,16 @@
                      template
                      ;; default ns for short template names:
                      (symbol "org.corfield.new" (name template)))
-        git-dir    (get-git-dir (symbol repo) tag)
-        _          (when git-dir
+        [git-sha git-dir]
+        (get-git-sha (symbol repo) tag)
+        _          (when git-sha
                      (println "Resolving" repo "as a git dependency"
-                              (str (when tag (str "at " tag)))))
+                              (str (when tag (str "at " tag))))
+                     (binding [*repl* true]
+                       (deps/add-lib (symbol repo)
+                                     (cond-> {:git/sha git-sha}
+                                       deps-root
+                                       (assoc :deps/root deps-root)))))
         {:keys [main] :as name-data}
         (deconstruct-project-name (symbol project-name)) ; allow for string or symbol
         target-dir (str (or target-dir main))
@@ -218,13 +230,13 @@
                        (System/getProperty "user.name"))]
     (merge name-data
            {:developer  (str/capitalize username)
+            :git-dir    (when git-dir
+                          (cond-> git-dir
+                            deps-root
+                            (str "/" deps-root)))
             :now/date   (.format (SimpleDateFormat. "yyyy-MM-dd") (Date.))
             :now/year   (str (+ 1900 (.getYear (Date.))))
             :raw-name   (str project-name)
-            :git-dir    (when git-dir
-                          (if deps-root
-                            (str git-dir "/" deps-root)
-                            git-dir))
             :template   (str template)
             :target-dir target-dir
             :user       username
