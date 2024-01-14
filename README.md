@@ -181,6 +181,12 @@ generate the documentation, e.g.,
   <name>com.acme/cool-lib</name>
   <description>FIXME: my new org.corfield.new/pom project.</description>
   <url>https://github.com/com.acme/cool-lib</url>
+  <licenses>
+    <license>
+      <name>Eclipse Public License</name>
+      <url>http://www.eclipse.org/legal/epl-v10.html</url>
+    </license>
+  </licenses>
 ...
   <scm>
     <url>https://github.com/acme/cool-lib</url>
@@ -207,16 +213,48 @@ if present, uses that template to create a project, in `mynewproject`. Instead o
 could use `-Sdeps` to specify the dependencies needed to make the template available:
 
 ```bash
-clojure -Sdeps '{:deps {com.acme.project/cool-lib COORDINATES}}' -Tnew create :template com.acme.project/cool-lib :name myusername/mynewproject
+clojure -Sdeps '{:deps {io.github.acme/templates COORDINATES}}' -Tnew create :template com.acme.project/cool-lib :name myusername/mynewproject
 ```
 
 The `COORDINATES` could be something like `{:local/root "/path/to/cool-lib"}`
 for a template that exists on the local filesystem, or it could be based on `:git/url`/`:git/sha` etc
 for a template that exists in a `git` repository.
 
+As of v0.7.0, if you are using Clojure 1.12 -- either as the default `:deps` in
+your `deps.edn` file or via an alias, such as `-A:1.12` -- you can use a
+shorter syntax for the template dependency:
+
+```bash
+clojure -A:1.12 -Tnew create :template io.github.acme/templates%com.acme.project/cool-lib :name myusername/mynewproject
+```
+
+`deps-new` will infer a `git` dependency, as `https://github.com/acme/templates`,
+figure out the latest version on the default branch, check that out, and add it
+to the classpath, and then proceed to use `com.acme.project/cool-lib` as above.
+If you want to use a specific tag, you can use `#` to append that to the
+template specification, e.g., `io.github.acme/templates%com.acme.project/cool-lib#v1.2.3`.
+If the repo is structured such that the Clojure root is not the root of the
+repo itself, i.e., you would normally use `:deps/root` in the coordinates, you
+can specify that with an extra `%` in the template specification, after the
+repo and before the actual template name, e.g., `io.github.acme/templates%lib%com.acme.project/cool-lib#v1.2.3`.
+This would be equivalent to `{:deps {io.github.acme/templates {:git/tag "v1.2.3" :deps/root "lib"}}}`
+(which would not be legal without `:git/sha` as well for `-Sdeps` but
+`deps-new` will resolve the tag to a SHA for you).
+
+If your template name matches the `git` "lib" name, you can omit the template
+from the specification, e.g., `io.github.acme/cool-lib` would be treated as
+both the implied `git` repo and also the template name, as if you had specified:
+`io.github.acme/cool-lib%io.github.acme/cool-lib`.
+
+The examples above using `-A:1.12` assume an alias like this in your `deps.edn` file:
+
+```clojure
+  :1.12 {:override-deps {org.clojure/clojure {:mvn/version "1.12.0-alpha5"}}}
+```
+
 > Note: if you are on Windows, read [**Quoting keys and values**](https://clojure.org/reference/deps_and_cli#quoting) in the official **Deps and CLI Reference** documentation to understand how the above command needs to look on Powershell. Or take a look at the [Babashka CLI](#babashka-cli) library support.
 
-> Note: because `deps-new` is based on `tools.build` and uses its file copying functions, the template must ultimately live on the filesystem, so `:local/root` and `git`-based coordinates are supported, but Maven/Clojars coordinates are not.
+> Note: because `deps-new` is based on `tools.build` and uses its file copying functions, the template must ultimately live on the filesystem, so `:local/root` and `git`-based coordinates are supported, **but Maven/Clojars coordinates are not**.
 
 As of v0.6.0, `:src-dirs` can be used to specify a list of
 directories to search for templates, in addition to the classpath.
@@ -305,6 +343,6 @@ $ clj -M:new app --name foo/bar --overwrite delete
 
 # License
 
-Copyright © 2021-2023 Sean Corfield
+Copyright © 2021-2024 Sean Corfield
 
 Distributed under the Eclipse Public License version 1.0.

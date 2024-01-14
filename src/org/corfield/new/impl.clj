@@ -3,7 +3,6 @@
 (ns ^:no-doc org.corfield.new.impl
   "The implementation helpers for `org.corfield.new/create`."
   (:require [clojure.java.io :as io]
-            [clojure.repl.deps :as deps]
             [clojure.string :as str]
             [clojure.tools.deps.extensions.git :as git]
             [clojure.tools.build.api :as b]
@@ -15,6 +14,23 @@
            (java.util Date)))
 
 (set! *warn-on-reflection* true)
+
+;; Clojure 1.11 compatibility until TDEPS-258 is fixed:
+(declare add-lib say-resolving) ; to quiet the linter!
+(defmacro patch-add-lib []
+  (if (resolve 'clojure.core/*repl*)
+    `(do
+       (def ~'add-lib (requiring-resolve 'clojure.repl.deps/add-lib))
+       (defn ~'say-resolving [repo# tag#]
+         (println "Resolving" repo# "as a git dependency"
+                  (str (when tag# (str "at " tag#))))))
+    `(do ; define these locally as stubs on Clojure 1.11:
+       (def ~(with-meta '*repl* {:dynamic true}) false)
+       (defn ~'add-lib [lib# _coords#]
+         (println "Dynamically adding" lib# "to the classpath requires Clojure 1.12!"))
+       (defn ~'say-resolving [repo# tag#]
+         (println repo# "matches a git dependency but will not be used!")))))
+(patch-add-lib)
 
 (defn- ->ns
   "Given a string or symbol, presumably representing a
@@ -216,13 +232,12 @@
         [git-sha git-dir]
         (get-git-sha (symbol repo) tag)
         _          (when git-sha
-                     (println "Resolving" repo "as a git dependency"
-                              (str (when tag (str "at " tag))))
+                     (say-resolving repo tag)
                      (binding [*repl* true]
-                       (deps/add-lib (symbol repo)
-                                     (cond-> {:git/sha git-sha}
-                                       deps-root
-                                       (assoc :deps/root deps-root)))))
+                       (add-lib (symbol repo)
+                                (cond-> {:git/sha git-sha}
+                                  deps-root
+                                  (assoc :deps/root deps-root)))))
         {:keys [main] :as name-data}
         (deconstruct-project-name (symbol project-name)) ; allow for string or symbol
         target-dir (str (or target-dir main))

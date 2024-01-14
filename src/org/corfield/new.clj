@@ -50,6 +50,8 @@
       for `:delete`, to delete it first; if `:overwrite` is `nil`
       or `false`, an existing directory will not be overwritten."
   [opts]
+  ;; try to establish a DynamicClassLoader so that we can load
+  ;; templates onto the classpath (if we're running Clojure 1.12):
   (try
     (let [cl (.getContextClassLoader (Thread/currentThread))]
       (.setContextClassLoader (Thread/currentThread) (clojure.lang.DynamicClassLoader. cl)))
