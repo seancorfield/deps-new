@@ -205,7 +205,7 @@
 (comment
   (for [t ['org.corfield.new/app
            "io.github.seancorfield/deps-new%step%down/there"
-           "io.github.seancorfield/deps-new%org.corfield.new/app#v0.6.0"]]
+           "io.github.seancorfield/deps-new%org.corfield.new/app#v0.7.0"]]
     (let [[_ repo _ root _ path _ tag]
           (re-find #"^(.+?)(%(.+?))?(%(.+?))?(#(.+?))?$" (str t))]
       [repo (and path root) (or path root repo) tag]))

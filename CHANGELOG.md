@@ -1,6 +1,6 @@
 # Changes
 
-* v0.7.0 -- 2024-01-13
+* v0.7.0 58f2c19 -- 2024-01-13
   * Address [#55](https://github.com/seancorfield/deps-new/issues/55) by adding support for compound template names that can be resolved to git repositories and template paths within them.
 
 * v0.6.0 64e79d1 -- 2023-12-25
