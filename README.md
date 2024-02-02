@@ -284,6 +284,7 @@ The following templates are available externally. If you have written a template
 - [re-marfer](https://github.com/kees-/re-marfer) - A minimal re-frame SPA template
 - [Hoplon project template](https://github.com/hoplon/project-template) - A template for Hoplon projects
 - [clj-polyglot-app](https://github.com/behrica/clj-polyglot-app) - A template to create a polyglot app in Clojure using `devcontainer`.
+- [helix-scratch](https://github.com/rafaeldelboni/helix-scratch) - A minimal helix scratch SPA Template.
 
 ## Emacs Integration
 
