@@ -249,7 +249,7 @@ both the implied `git` repo and also the template name, as if you had specified:
 The examples above using `-A:1.12` assume an alias like this in your `deps.edn` file:
 
 ```clojure
-  :1.12 {:override-deps {org.clojure/clojure {:mvn/version "1.12.0-alpha5"}}}
+  :1.12 {:override-deps {org.clojure/clojure {:mvn/version "1.12.0-alpha7"}}}
 ```
 
 > Note: if you are on Windows, read [**Quoting keys and values**](https://clojure.org/reference/deps_and_cli#quoting) in the official **Deps and CLI Reference** documentation to understand how the above command needs to look on Powershell. Or take a look at the [Babashka CLI](#babashka-cli) library support.
