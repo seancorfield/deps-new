@@ -2,7 +2,7 @@
 
 Create new projects for use with the Clojure CLI and `deps.edn`.
 
-Intended to be installed as a "tool" (Clojure CLI 1.11.1.1149 or later).
+Intended to be installed as a [tool](https://clojure.org/reference/clojure_cli#tools) (Clojure CLI 1.11.1.1149 or later).
 
 ```bash
 clojure -Ttools install-latest :lib io.github.seancorfield/deps-new :as new
