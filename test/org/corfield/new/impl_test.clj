@@ -1,30 +1,40 @@
-;; copyright (c) 2021-2023 sean corfield, all rights reserved
+;; copyright (c) 2021-2025 sean corfield, all rights reserved
 
 (ns org.corfield.new.impl-test
-  (:require [clojure.string :as str]
-            [clojure.tools.build.api :as b]
-            [expectations.clojure.test
-             :refer [defexpect expect expecting from-each
-                     more more-> more-of side-effects]]
-            [org.corfield.new.impl :as sut]))
+  (:require
+   [clojure.string :as str]
+   [clojure.tools.build.api :as b]
+   [lazytest.core :refer [defdescribe describe it should]]
+   [lazytest.extensions.expectations
+             :refer [defexpect expect from-each more more-> more-of
+                     side-effects]]
+   [org.corfield.new.impl :as sut]))
 
-(defexpect test->ns
-  (expect "org.corfield.new.impl-test"
-          (#'sut/->ns "org/corfield/new/impl_test")))
+(defdescribe ns-file-conversions
+  (it "should produce a valid ns from a file"
+    (should (= "org.corfield.new.impl-test"
+               (#'sut/->ns "org/corfield/new/impl_test"))))
+  (it "should produce a valid file from a ns"
+    (should (= "org/corfield/new/impl_test"
+               (#'sut/->file "org.corfield.new.impl-test"))))
+  (it "should round-trip in both directions"
+    (should (= "org.corfield.new.impl-test"
+               (#'sut/->ns (#'sut/->file "org.corfield.new.impl-test"))))
+    (should (= "org/corfield/new/impl_test"
+               (#'sut/->file (#'sut/->ns "org/corfield/new/impl_test"))))))
 
-(defexpect test->file
-  (expect "org/corfield/new/impl_test"
-          (#'sut/->file "org.corfield.new.impl-test")))
-
-(defexpect test-find-root
-  (expecting "existing templates"
-             (expect some? (sut/find-root [] 'org.corfield.new/app))
-             (expect some? (sut/find-root [] 'org.corfield.new/lib)))
-  (expecting "missing templates"
-             (expect nil?  (sut/find-root [] 'org.corfield.new/no-such-template)))
-  (expecting "local template"
-             (expect nil?  (sut/find-root [] 'data/impl))
-             (expect some? (sut/find-root ["."] 'data/impl))))
+(defdescribe test-find-root
+  (it "should find built-in templates"
+    (should (some? (sut/find-root [] 'org.corfield.new/app)))
+    (should (some? (sut/find-root [] 'org.corfield.new/lib))))
+  (it "should not find a non-existent templates"
+    (should (nil? (sut/find-root [] 'org.corfield.new/no-such-template))))
+  (describe "without a root directory"
+    (it "should not find local templates"
+      (should (nil? (sut/find-root [] 'data/impl)))))
+  (describe "with a root directory"
+    (it "should find local templates"
+      (should (some? (sut/find-root ["."] 'data/impl))))))
 
 (defexpect test->subst-map
   (expect (more (comp string? key)

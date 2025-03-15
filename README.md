@@ -344,6 +344,6 @@ $ clj -M:new app --name foo/bar --overwrite delete
 
 # License
 
-Copyright © 2021-2024 Sean Corfield
+Copyright © 2021-2025 Sean Corfield
 
 Distributed under the Eclipse Public License version 1.0.

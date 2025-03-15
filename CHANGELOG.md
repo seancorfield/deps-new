@@ -1,5 +1,9 @@
 # Changes
 
+* v0.8.next in progress
+  * Switch from Expectations to LazyTest (just in this project, not in generated projects).
+  * Update deps.
+
 * v0.8.0 2f96530 -- 2024-09-05
   * Add example of `:post-process-fn` to documentation.
   * Update default Clojure version in generated projects to 1.12.0.
