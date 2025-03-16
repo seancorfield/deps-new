@@ -36,21 +36,24 @@
     (it "should find local templates"
       (should (some? (sut/find-root ["."] 'data/impl))))))
 
-(defexpect test->subst-map
-  (expecting "all keys and vals to be strings"
-    (expecting "and keys to be substitutions"
+(defdescribe test->subst-map
+  (describe "generic key and val string tests"
+    (it "produces strings for keys and vals"
       (expect (more (comp string? key)
-                    (comp string? val)
-                    #(re-find #"^\{\{.*\}\}" (key %)))
+                    (comp string? val))
+              (from-each [kv (sut/->subst-map {:a 42 :b "bee" :c true})]
+                         kv)))
+    (it "produces keys that are substitutions"
+      (expect #(re-find #"^\{\{.*\}\}" (key %))
               (from-each [kv (sut/->subst-map {:a 42 :b "bee" :c true})]
                          kv))))
-  (expecting "simple substitutions"
+  (it "produces a simple substitution map"
     (expect (more-of {a "{{a}}" b "{{b}}" c "{{c}}"}
                      "42"   a
                      "bee"  b
                      "true" c)
             (sut/->subst-map {:a 42 :b "bee" :c true})))
-  (expecting "ns and file substitutions"
+  (it "produces ns and file substitutions"
     (expect (more-of {a "{{a/ns}}"
                       b "{{b}}" bns "{{b/ns}}" bfile "{{b/file}}"
                       c "{{c/file}}"}
