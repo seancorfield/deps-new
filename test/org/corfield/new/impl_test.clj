@@ -6,7 +6,7 @@
    [clojure.tools.build.api :as b]
    [lazytest.core :refer [defdescribe describe it should]]
    [lazytest.extensions.expectations
-             :refer [defexpect expect expecting from-each more more-> more-of
+             :refer [defexpect expect from-each more more-> more-of
                      side-effects]]
    [org.corfield.new.impl :as sut]))
 
