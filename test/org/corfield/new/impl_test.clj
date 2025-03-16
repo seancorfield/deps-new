@@ -6,7 +6,7 @@
    [clojure.tools.build.api :as b]
    [lazytest.core :refer [defdescribe describe it should]]
    [lazytest.extensions.expectations
-             :refer [defexpect expect from-each more more-> more-of
+             :refer [defexpect expect expecting from-each more more-> more-of
                      side-effects]]
    [org.corfield.new.impl :as sut]))
 
@@ -37,27 +37,29 @@
       (should (some? (sut/find-root ["."] 'data/impl))))))
 
 (defexpect test->subst-map
-  (expect (more (comp string? key)
-                (comp string? val)
-                #(re-find #"^\{\{.*\}\}" (key %)))
-          (from-each [kv (sut/->subst-map {:a 42 :b "bee" :c true})]
-                     kv))
-
-  (expect (more-of {a "{{a}}" b "{{b}}" c "{{c}}"}
-                   "42"   a
-                   "bee"  b
-                   "true" c)
-          (sut/->subst-map {:a 42 :b "bee" :c true}))
-
-  (expect (more-of {a "{{a/ns}}"
-                    b "{{b}}" bns "{{b/ns}}" bfile "{{b/file}}"
-                    c "{{c/file}}"}
-                   nil?    a
-                   "b_e-e" b
-                   "b-e-e" bns
-                   "b_e_e" bfile
-                   nil?    c)
-          (sut/->subst-map {:a 42 :b "b_e-e" :c true})))
+  (expecting "all keys and vals to be strings"
+    (expecting "and keys to be substitutions"
+      (expect (more (comp string? key)
+                    (comp string? val)
+                    #(re-find #"^\{\{.*\}\}" (key %)))
+              (from-each [kv (sut/->subst-map {:a 42 :b "bee" :c true})]
+                         kv))))
+  (expecting "simple substitutions"
+    (expect (more-of {a "{{a}}" b "{{b}}" c "{{c}}"}
+                     "42"   a
+                     "bee"  b
+                     "true" c)
+            (sut/->subst-map {:a 42 :b "bee" :c true})))
+  (expecting "ns and file substitutions"
+    (expect (more-of {a "{{a/ns}}"
+                      b "{{b}}" bns "{{b/ns}}" bfile "{{b/file}}"
+                      c "{{c/file}}"}
+                     nil?    a
+                     "b_e-e" b
+                     "b-e-e" bns
+                     "b_e_e" bfile
+                     nil?    c)
+            (sut/->subst-map {:a 42 :b "b_e-e" :c true}))))
 
 ;; #'sut/substitute
 ;; sut/copy-template-dir
