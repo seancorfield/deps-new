@@ -10,7 +10,8 @@
  {:test
   {:extra-paths ["test"]
    :extra-deps {io.github.noahtheduke/lazytest
-                {:git/sha "32d399df029360affaf63eaa4a81ebbacf6388ca"}
+                {:git/sha #_"32d399df029360affaf63eaa4a81ebbacf6388ca"
+                 "30498b11decbaf39c6186226051f50b515efff2a"}
                 #_
                 {:local/root "/home/sean/oss/lazytest"}
                 #_

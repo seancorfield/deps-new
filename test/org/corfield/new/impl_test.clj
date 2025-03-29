@@ -5,9 +5,9 @@
    [clojure.string :as str]
    [clojure.tools.build.api :as b]
    [lazytest.core :refer [defdescribe describe it should]]
-   [lazytest.extensions.expectations
-             :refer [defexpect expect from-each more more-> more-of
-                     side-effects]]
+   [lazytest.experimental.interfaces.expectations :refer [defexpect expect]]
+   [lazytest.extensions.expectations :refer [from-each more more-> more-of
+                                             side-effects]]
    [org.corfield.new.impl :as sut]))
 
 (defdescribe ns-file-conversions
