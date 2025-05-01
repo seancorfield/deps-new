@@ -1,6 +1,7 @@
 # Changes
 
 * v0.8.next in progress
+  * Fix [#61](https://github.com/seancorfield/deps-new/issues/61) by removing the spurious self-`require` in `impl`.
   * Switch from Expectations to LazyTest (just in this project, not in generated projects).
   * Update deps.
 

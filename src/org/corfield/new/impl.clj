@@ -1,4 +1,4 @@
-;; copyright (c) 2021-2024 sean corfield, all rights reserved
+;; copyright (c) 2021-2025 sean corfield, all rights reserved
 
 (ns ^:no-doc org.corfield.new.impl
   "The implementation helpers for `org.corfield.new/create`."
@@ -6,8 +6,7 @@
             [clojure.string :as str]
             [clojure.tools.deps.extensions.git :as git]
             [clojure.tools.build.api :as b]
-            [clojure.tools.gitlibs :as gl]
-            [org.corfield.new.impl :as impl])
+            [clojure.tools.gitlibs :as gl])
   (:import (java.nio.file Files)
            (java.nio.file.attribute FileAttribute)
            (java.text SimpleDateFormat)
