@@ -270,7 +270,7 @@ when invoking `deps-new`. See [**Writing Templates**](doc/templates.md) for docu
 how to write your own templates.
 
 Practical.li also has an excellent
-[guide to writing `deps-new` templates](https://practical.li/blog/posts/create-deps-new-template-for-clojure-cli-projects/).
+[guide to writing `deps-new` templates](https://practical.li/blog/create-deps-new-templates-for-clojure-cli-projects/).
 
 ### Templates
 
