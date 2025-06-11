@@ -1,5 +1,9 @@
 # Changes
 
+* v0.8.2 in progress
+  * Update default Clojure version in generated projects to 1.12.1.
+  * Update `tools.build` to 0.10.9.
+
 * v0.8.1 2859baf -- 2025-05-01
   * Fix [#61](https://github.com/seancorfield/deps-new/issues/61) by removing the spurious self-`require` in `impl`.
   * Switch from Expectations to LazyTest (just in this project, not in generated projects).
