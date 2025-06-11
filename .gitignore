@@ -2,6 +2,7 @@
 *.jar
 *.swp
 *~
+.calva/mcp-server/port
 .calva/output-window/
 .calva/repl.calva-repl
 .classpath
