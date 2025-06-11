@@ -2,6 +2,8 @@
 
 Create new projects for use with the Clojure CLI and `deps.edn`.
 
+## Installation
+
 Intended to be installed as a [tool](https://clojure.org/reference/clojure_cli#tools) (Clojure CLI 1.11.1.1149 or later).
 
 ```bash
@@ -197,6 +199,20 @@ generate the documentation, e.g.,
 ```
 
 You should run `clojure -X:deps mvn-pom` to synchronize the `<dependencies>` from your `deps.edn` file.
+
+## Test Runners
+
+By default, generated projects use `clojure.test` for unit tests, and the
+[Cognitect Labs Test Runner](https://github.com/cognitect-labs/test-runner)
+for running tests.
+
+As of v0.9.0, you can use the `:test-runner` command-line option to choose
+[LazyTest](https://github.com/NoahTheDuke/lazytest) instead, by specifying
+`:test-runner :lazytest`:
+
+```bash
+clojure -Tnew app :name myusername/mynewapp :test-runner :lazytest
+```
 
 ## More General Usage
 
