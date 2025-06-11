@@ -2,12 +2,13 @@
   (:require [clojure.edn :as edn]
             [clojure.java.io :as io]
             [clojure.spec.alpha :as s]
-            [clojure.test :refer [deftest is testing]]
+            [{{test-runner/namespace}} :refer [{{test-runner/deftest}} {{test-runner/is}} {{test-runner/testing}}]]
             [org.corfield.new] ; for the Specs
-            [{{top/ns}}.{{main/ns}} :refer :all]))
+            [{{top/ns}}.{{main/ns}} :as sut])) ; system under test
 
-(deftest valid-template-test
-  (testing "template.edn is valid."
+({{test-runner/deftest}} valid-template-test
+  ({{test-runner/testing}} "template.edn is valid."
     (let [template (edn/read-string (slurp (io/resource "{{top/file}}/{{main/file}}/template.edn")))]
-      (is (s/valid? :org.corfield.new/template template)
-          (s/explain-str :org.corfield.new/template template)))))
+      ({{test-runner/is}}
+       (s/valid? :org.corfield.new/template template)
+       (s/explain-str :org.corfield.new/template template)))))

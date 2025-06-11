@@ -210,6 +210,22 @@
       [repo (and path root) (or path root repo) tag]))
   )
 
+(def ^:private clojure-test-runner
+  {:test-runner/coordinate "io.github.cognitect-labs/test-runner {:git/tag \"v0.5.1\" :git/sha \"dfb30dd\"}"
+   :test-runner/main       "cognitect.test-runner"
+   :test-runner/namespace  "clojure.test"
+   :test-runner/deftest    "deftest"
+   :test-runner/is         "is"
+   :test-runner/testing    "testing"})
+
+(def ^:private lazytest-runner
+  {:test-runner/coordinate "io.github.noahtheduke/lazytest {:mvn/version \"1.7.0\"}"
+   :test-runner/main       "lazytest.main"
+   :test-runner/namespace  "lazytest.core"
+   :test-runner/deftest    "defdescribe"
+   :test-runner/is         "expect"
+   :test-runner/testing    "it"})
+
 (defn preprocess-options
   "Given the raw options hash map, preprocess, parse, and
   validate certain values, and derive defaults for others."
@@ -255,6 +271,10 @@
             :target-dir target-dir
             :user       username
             :version    "0.1.0-SNAPSHOT"}
+           ;; make test runner swappable:
+           (if (= :lazytest (:test-runner opts))
+             lazytest-runner
+             clojure-test-runner)
            ;; remove options we cleaned up:
            (dissoc opts :template :target-dir :name))))
 

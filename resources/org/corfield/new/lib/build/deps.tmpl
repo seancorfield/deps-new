@@ -4,8 +4,7 @@
  {:test
   {:extra-paths ["test"]
    :extra-deps {org.clojure/test.check {:mvn/version "1.1.1"}
-                io.github.cognitect-labs/test-runner
-                {:git/tag "v0.5.1" :git/sha "dfb30dd"}}}
+                {{test-runner/coordinate}}}}
   :build {:deps {io.github.clojure/tools.build
                  {:mvn/version "0.10.9"}
                  slipset/deps-deploy {:mvn/version "0.2.2"}}

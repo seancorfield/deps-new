@@ -1,6 +1,7 @@
 # Changes
 
-* v0.8.2 in progress
+* v0.9.0 in progress
+  * Add `:test-runner` option to select between `:clojure-test` or `:lazytest` for the test runner in generated projects.
   * Update default Clojure version in generated projects to 1.12.1.
   * Update `tools.build` to 0.10.9.
 

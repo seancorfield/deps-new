@@ -1,7 +1,7 @@
 (ns {{top/ns}}.{{main/ns}}-test
-  (:require [clojure.test :refer [deftest is testing]]
-            [{{top/ns}}.{{main/ns}} :refer :all]))
+  (:require [{{test-runner/namespace}} :refer [{{test-runner/deftest}} {{test-runner/is}} {{test-runner/testing}}]]
+            [{{top/ns}}.{{main/ns}} :as sut])) ; system under test
 
-(deftest a-test
-  (testing "FIXME, I fail."
-    (is (= 0 1))))
+({{test-runner/deftest}} a-test
+  ({{test-runner/testing}} "FIXME, I fail."
+    ({{test-runner/is}} (= 0 1))))
