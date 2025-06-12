@@ -344,9 +344,9 @@ line. If you are dealing with quoting issues in your shell, this could be a
 viable alternative:
 
 ```clojure
-:new {:deps {org.babashka/cli {:mvn/version "0.8.60"}
-             io.github.seancorfield/deps-new {:git/tag "v0.8.1"
-                                              :git/sha "2859baf"}}
+:new {:deps {org.babashka/cli {:mvn/version "0.8.65"}
+             io.github.seancorfield/deps-new {:git/tag "v0.9.0-rc"
+                                              :git/sha "b32e0f2"}}
       :ns-default org.corfield.new
       :exec-args {} ;; insert default arguments here
       :main-opts ["-m" "babashka.cli.exec"]}
