@@ -213,7 +213,6 @@
 (def ^:private clojure-test-runner
   {:test-runner/coordinate "io.github.cognitect-labs/test-runner {:git/tag \"v0.5.1\" :git/sha \"dfb30dd\"}"
    :test-runner/main       "cognitect.test-runner"
-   :test-runner/main-fn    "cognitect.test-runner.api/test"
    :test-runner/namespace  "clojure.test"
    :test-runner/deftest    "deftest"
    :test-runner/is         "is"
@@ -222,7 +221,6 @@
 (def ^:private lazytest-runner
   {:test-runner/coordinate "io.github.noahtheduke/lazytest {:mvn/version \"1.8.0\"}"
    :test-runner/main       "lazytest.main"
-   :test-runner/main-fn    "lazytest.main/run-impl"
    :test-runner/namespace  "lazytest.core"
    :test-runner/deftest    "defdescribe"
    :test-runner/is         "expect"
