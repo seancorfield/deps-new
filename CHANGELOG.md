@@ -1,6 +1,6 @@
 # Changes
 
-* v0.10.0 in progress
+* v0.10.0 20e82f8 -- 2025-07-27
   * Add `:build` option to select between `:build` or `:bb` for the main driver of tasks in generated projects.
 
 * v0.9.0 da2f764 -- 2025-06-11
