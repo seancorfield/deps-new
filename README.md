@@ -214,6 +214,25 @@ As of v0.9.0, you can use the `:test-runner` command-line option to choose
 clojure -Tnew app :name myusername/mynewapp :test-runner :lazytest
 ```
 
+## `build.clj` or `bb.edn`?
+
+By default, generated projects use `build.clj` for all build-related tasks,
+including running tests.
+
+As of v0.10.0, you can use the `:build` command-line option to choose
+[Babashka](https://github.com/babashka/babashka)
+(`bb` tasks) instead, by specifying `:build :bb`:
+
+```bash
+clojure -Tnew app :name myusername/mynewapp :build :bb
+```
+
+This will generate a `bb.edn` file as well as a (minimal) `build.clj` file,
+so you can run `bb tasks` to list available tasks, and `bb test` to run the
+tests. This also offers `bb test:bb` to run the tests using Babashka itself,
+to check compatibility with Babashka. Other tasks include `test:all`, `ci`,
+and `ci:deploy` (for `lib` projects, which also have a local `install` task).
+
 ## More General Usage
 
 Currently those are the only five built-in templates (`app`, `lib`, `pom`, `scratch`, and `template`).

@@ -213,14 +213,16 @@
 (def ^:private clojure-test-runner
   {:test-runner/coordinate "io.github.cognitect-labs/test-runner {:git/tag \"v0.5.1\" :git/sha \"dfb30dd\"}"
    :test-runner/main       "cognitect.test-runner"
+   :test-runner/exec-fn    "cognitect.test-runner.api/test"
    :test-runner/namespace  "clojure.test"
    :test-runner/deftest    "deftest"
    :test-runner/is         "is"
    :test-runner/testing    "testing"})
 
 (def ^:private lazytest-runner
-  {:test-runner/coordinate "io.github.noahtheduke/lazytest {:mvn/version \"1.7.0\"}"
+  {:test-runner/coordinate "io.github.noahtheduke/lazytest {:mvn/version \"1.8.0\"}"
    :test-runner/main       "lazytest.main"
+   :test-runner/exec-fn    "lazytest.main/run-impl"
    :test-runner/namespace  "lazytest.core"
    :test-runner/deftest    "defdescribe"
    :test-runner/is         "expect"
@@ -271,12 +273,24 @@
             :target-dir target-dir
             :user       username
             :version    "0.1.0-SNAPSHOT"}
+           (when (= :bb (:build opts))
+             {::babashka true})
            ;; make test runner swappable:
            (if (= :lazytest (:test-runner opts))
              lazytest-runner
              clojure-test-runner)
            ;; remove options we cleaned up:
            (dissoc opts :template :target-dir :name))))
+
+(defn maybe-add-bb
+  "If the user has asked for a Babashka template, update the template.edn
+  to include `bb.edn` and use the simpler `build.clj` file."
+  [edn data]
+  (if (::babashka data)
+    (-> edn
+        (assoc-in  [:transform 0 0] "build-bb")
+        (update-in [:transform 0 2] assoc "bb.tmpl" "bb.edn"))
+    edn))
 
 (defn apply-template-fns
   "Given the template directory, the options hash map, and

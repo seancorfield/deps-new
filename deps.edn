@@ -10,7 +10,7 @@
  {:test
   {:extra-paths ["test"]
    :extra-deps {io.github.noahtheduke/lazytest
-                {:mvn/version "1.7.0"}}}
+                {:mvn/version "1.8.0"}}}
   :runner
   {:main-opts ["-m" "lazytest.main"]}
   :new ; for local testing as a tool

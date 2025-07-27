@@ -1,0 +1,19 @@
+{:paths ["src"]
+ :deps {org.clojure/clojure {:mvn/version "1.12.1"}}
+ :tasks
+ {:require [[clojure.string :as str]]
+
+  test {:doc "Run the test suite."
+        :task (clojure "-M:test" "-m" "{{test-runner/main}}")}
+
+  test:bb {:doc "Run the test suite using Babashka to check compatibility."
+           :extra-paths ["test"]
+           :extra-deps  {{{test-runner/coordinate}}}
+           :task (exec '{{test-runner/exec-fn}})}
+
+  test:all {:doc "Run the test suite with both Clojure and Babashka."
+            :depends [test test:bb]}
+
+  ci {:doc "Run the CI pipeline of tests and build the JAR."
+      :depends [test:all] ; or just test
+      :task (clojure "-T:build" "uber")}}}
