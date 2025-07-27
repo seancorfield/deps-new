@@ -1,5 +1,8 @@
 # Changes
 
+* v0.10.0 in progress
+  * Add `:build` option to select between `:build` or `:bb` for the main driver of tasks in generated projects.
+
 * v0.9.0 da2f764 -- 2025-06-11
   * Add `:test-runner` option to select between `:clojure-test` or `:lazytest` for the test runner in generated projects.
   * Update default Clojure version in generated projects to 1.12.1.
