@@ -9,11 +9,18 @@
   test:bb {:doc "Run the test suite using Babashka to check compatibility."
            :extra-paths ["test"]
            :extra-deps  {{{test-runner/coordinate}}}
-           :task {{test-runner/main}}/-main}
+           :task (exec '{{test-runner/exec-fn}})}
 
   test:all {:doc "Run the test suite with both Clojure and Babashka."
             :depends [test test:bb]}
 
   ci {:doc "Run the CI pipeline of tests and build the JAR."
       :depends [test:all] ; or just test
-      :task (clojure "-T:build" "uber")}}}
+      :task (clojure "-T:build" "jar")}
+
+  ci:deploy {:doc "Run the CI pipeline and deploy the JAR."
+             :depends [ci]
+             :task (clojure "-T:build" "deploy")}
+
+  install {:doc "Install the JAR locally (build via ci)."
+           :task (clojure "-T:build" "install")}}}

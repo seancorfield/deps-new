@@ -213,6 +213,7 @@
 (def ^:private clojure-test-runner
   {:test-runner/coordinate "io.github.cognitect-labs/test-runner {:git/tag \"v0.5.1\" :git/sha \"dfb30dd\"}"
    :test-runner/main       "cognitect.test-runner"
+   :test-runner/exec-fn    "cognitect.test-runner.api/test"
    :test-runner/namespace  "clojure.test"
    :test-runner/deftest    "deftest"
    :test-runner/is         "is"
@@ -221,6 +222,7 @@
 (def ^:private lazytest-runner
   {:test-runner/coordinate "io.github.noahtheduke/lazytest {:mvn/version \"1.8.0\"}"
    :test-runner/main       "lazytest.main"
+   :test-runner/exec-fn    "lazytest.main/run-impl"
    :test-runner/namespace  "lazytest.core"
    :test-runner/deftest    "defdescribe"
    :test-runner/is         "expect"
@@ -287,11 +289,7 @@
   (if (::babashka data)
     (-> edn
         (assoc-in  [:transform 0 0] "build-bb")
-        (update-in [:transform 0 2]
-                   #(-> %
-                        (dissoc "build.tmpl")
-                        (assoc  "bb-build.tmpl" "build.clj"
-                                "bb.tmpl"       "bb.edn"))))
+        (update-in [:transform 0 2] assoc "bb.tmpl" "bb.edn"))
     edn))
 
 (defn apply-template-fns

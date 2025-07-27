@@ -9,7 +9,7 @@
   test:bb {:doc "Run the test suite using Babashka to check compatibility."
            :extra-paths ["test"]
            :extra-deps  {{{test-runner/coordinate}}}
-           :task {{test-runner/main}}/-main}
+           :task (exec '{{test-runner/exec-fn}})}
 
   test:all {:doc "Run the test suite with both Clojure and Babashka."
             :depends [test test:bb]}
