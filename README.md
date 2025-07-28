@@ -76,8 +76,17 @@ in `build.clj`. You can run the following in the freshly-generated project:
 * `clojure -T:build test` -- run the tests (they'll fail until you fix them!)
 * `clojure -T:build ci` -- run the tests and build the (AOT-compiled) uberjar
 
+Or, if you used the `:build :bb` option, you can run:
+
+* `bb tasks` -- list the available tasks
+* `bb test` -- run the tests (they'll fail until you fix them!)
+* `bb ci` -- run the tests and build the (AOT-compiled) uberjar
+
 Consult the generated `README.md` file for additional details on how to run the
 source code, run the tests, and build and run the uberjar.
+
+See also [**Test Runners**](#test-runners) and
+[**`build.clj` or `bb.edn`?**](#buildclj-or-bbedn) for more options.
 
 ## Create a Library
 
@@ -104,9 +113,18 @@ in `build.clj`. You can run the following in the freshly-generated project:
 * `clojure -T:build test` -- run the tests (they'll fail until you fix them!)
 * `clojure -T:build ci` -- run the tests and build the library jar
 
+Or, if you used the `:build :bb` option, you can run:
+
+* `bb tasks` -- list the available tasks
+* `bb test` -- run the tests (they'll fail until you fix them!)
+* `bb ci` -- run the tests and build the library jar
+
 Consult the generated `README.md` file for additional details on how to run
 functions from the source code, run the tests, build the jar, install it
 locally or deploy it to Clojars.
+
+See also [**Test Runners**](#test-runners) and
+[**`build.clj` or `bb.edn`?**](#buildclj-or-bbedn) for more options.
 
 ## Create a Template
 
@@ -136,6 +154,10 @@ in `build.clj`. You can run the following in the freshly-generated project:
 
 Consult the generated `README.md` file for additional details on how to work
 with the newly-generated template project.
+
+See also [**Test Runners**](#test-runners) for more options.
+
+> Note: `:build :bb` is not yet supported for template projects.
 
 ## Create a Minimal "scratch" Project
 
