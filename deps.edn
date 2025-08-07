@@ -1,7 +1,7 @@
 {:paths ["src" "resources"]
  :deps ; 1.12 required for add-lib
  {org.clojure/clojure {:mvn/version "1.12.1"}
-  io.github.clojure/tools.build {:mvn/version "0.10.9"}}
+  io.github.clojure/tools.build {:mvn/version "0.10.10"}}
 
  :tools/usage
  {:ns-default org.corfield.new}
