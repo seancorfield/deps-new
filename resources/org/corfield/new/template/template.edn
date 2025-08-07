@@ -1,4 +1,5 @@
 {:description "FIXME: my new template."
+ :data-fn     [org.corfield.new.transformers/choose-test-runner]
  :transform
  [["resources" "resources/{{top/file}}/{{main/file}}" {} ["<<" ">>"]]
   ["build" ""

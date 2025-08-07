@@ -1,4 +1,4 @@
-;; copyright (c) 2021-2024 sean corfield, all rights reserved
+;; copyright (c) 2021-2025 sean corfield, all rights reserved
 
 (ns org.corfield.new
   "The next generation of clj-new. Uses tools.build and
@@ -15,9 +15,9 @@
 
 (s/def ::root string?)
 (s/def ::description string?)
-(s/def ::data-fn symbol?)
-(s/def ::post-process-fn symbol?)
-(s/def ::template-fn symbol?)
+(s/def ::data-fn (s/or :sym symbol? :coll (s/coll-of symbol?)))
+(s/def ::post-process-fn (s/or :sym symbol? :coll (s/coll-of symbol?)))
+(s/def ::template-fn (s/or :sym symbol? :coll (s/coll-of symbol?)))
 (s/def ::files (s/map-of string? string?))
 (s/def ::open-close (s/tuple string? string?))
 (s/def ::opts #{:only :raw})
@@ -93,7 +93,7 @@
     (impl/copy-template-dir template-dir target-dir {:src (:root edn' "root")} data)
     (run! #(impl/copy-template-dir template-dir target-dir % data) (:transform edn'))
 
-    (doseq [post-process-fn (impl/get-multi-option final-opts :post-process-fn)]
+    (doseq [post-process-fn (impl/get-multi-option edn :post-process-fn)]
       ((requiring-resolve post-process-fn) edn' final-opts))))
 
 (defn app

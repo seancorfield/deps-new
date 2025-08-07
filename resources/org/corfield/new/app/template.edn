@@ -1,5 +1,6 @@
 {:description "FIXME: my new application."
- :template-fn org.corfield.new.impl/maybe-add-bb
+ :data-fn     [org.corfield.new.transformers/choose-test-runner]
+ :template-fn [org.corfield.new.transformers/maybe-add-bb]
  :transform
  [["build" ""
    {"build.tmpl" "build.clj"

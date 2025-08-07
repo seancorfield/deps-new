@@ -194,7 +194,7 @@ Here's an example of `:post-process-fn` that runs the tests in a freshly-generat
   (let [basis (b/create-basis {:dir (:target-dir data) :aliases [:test]})
         cmds  (b/java-command {:basis     basis
                                :main      'clojure.main
-                               :main-args ["-m" "cognitect.test-runner"]})
+                               :main-args ["-m" (:test-runner/main data)]})
         {:keys [exit]}
         (b/process (assoc cmds :dir (:target-dir data)))]
     (println "Post-processing" edn "with" data "produced" exit)))
@@ -206,6 +206,10 @@ in that directory. The `:aliases` option is used to add the `:test` alias from
 the new project's `deps.edn` file to the basis. `:main` specifies `clojure.main`
 since we want to mimic running `clojure -M`. `:main-args` specifies the command-line
 arguments to provide to `clojure -M` (in this case).
+
+`(:test-runner/main data)` will be `"cognitect.test-runner"` by default, but
+will be `"lazytest.main"` if the `:test-runner :lazytest` option was provided.
+This data field was added in v0.9.0, when the `:test-runner` option was introduced.
 
 ## Additional Documentation
 
