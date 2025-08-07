@@ -93,7 +93,7 @@
     (impl/copy-template-dir template-dir target-dir {:src (:root edn' "root")} data)
     (run! #(impl/copy-template-dir template-dir target-dir % data) (:transform edn'))
 
-    (when-let [post-process-fn (:post-process-fn final-opts)]
+    (doseq [post-process-fn (impl/get-multi-option final-opts :post-process-fn)]
       ((requiring-resolve post-process-fn) edn' final-opts))))
 
 (defn app

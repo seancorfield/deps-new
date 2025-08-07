@@ -292,6 +292,22 @@
         (update-in [:transform 0 2] assoc "bb.tmpl" "bb.edn"))
     edn))
 
+(defn get-multi-option
+  "Given a hash map of options, return the value for the
+  given key, or an empty sequence if the key is not present."
+  [opts k]
+  (let [v (get opts k [])]
+    (if (sequential? v)
+      v
+      [v])))
+
+(comment
+  (get-multi-option {} :foo)
+  (get-multi-option {:foo 'bar/baz} :foo)
+  (get-multi-option {:foo ['bar/baz]} :foo)
+  (get-multi-option {:foo ['bar/baz 'quux/wibble]} :foo)
+  )
+
 (defn apply-template-fns
   "Given the template directory, the options hash map, and
   the template hash map (EDN), apply any data manipulation
@@ -301,14 +317,16 @@
   `:template` is already available."
   [template-dir basic-opts basic-edn]
   (let [basic-opts (assoc basic-opts :template-dir template-dir)
-        opts (if-let [data-fn (:data-fn basic-edn)]
-               ;; :data-fn result is additive:
-               (merge basic-opts ((requiring-resolve data-fn) basic-opts))
-               basic-opts)
-        edn  (if-let [template-fn (:template-fn basic-edn)]
-               ;; :template-fn result is replacement:
-               ((requiring-resolve template-fn) basic-edn opts)
-               basic-edn)]
+        opts (reduce (fn [opts data-fn]
+                       ;; :data-fn result is additive:
+                       (merge opts ((requiring-resolve data-fn) opts)))
+                     basic-opts
+                     (get-multi-option basic-opts :data-fn))
+        edn  (reduce (fn [edn template-fn]
+                       ;; :template-fn result is replacement:
+                       ((requiring-resolve template-fn) edn opts))
+                     basic-edn
+                     (get-multi-option opts :template-fn))]
     ;; this allows any defaults from the template to
     ;; be part of the data used for substitution:
     [(merge {:description (str "FIXME: my new"
