@@ -6,6 +6,8 @@ The following options can be provided to `deps-new`:
 * `:name` (required) -- symbol (or string) identifying the project name to create,
 * `:target-dir` -- string (or symbol) identifying the directory in which to create the project; defaults to the trailing portion of the qualified project name.
 * `:overwrite` -- indicate whether an existing directory should be overwritten (added to), deleted, or prevent creation of the project; defaults to `nil` (prevents creation of the project); `:delete` means delete the existing directory and then create the project; any other truthy value means overlay the project on the existing directory.
+* `:test-runner` -- as of v0.9.0, you can override the default (Cognitect) test runner in generated projects by specifying `:test-runner :lazytest`; as of v0.10.next, this is implemented via `org.corfield.new.transformers/choose-test-runner` as a `:template-fn` in the `app`, `lib`, and `template` templates.
+* `:build` -- as of v0.10.0, you can override the default `build.clj` generation to add Babashka tasks for your project by specifying `:build :bb`; as of v0.10.next, this is implemented via `org.corfield.new.transformers/maybe-add-bb` as a `:data-fn` in `app` and `lib` templates.
 
 The following optional keys can be provided to override defaults in the template:
 * `:artifact/id` -- the `artifact-id` to use in the `pom.xml` file; defaults to the trailing portion of the qualified project name,
