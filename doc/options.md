@@ -9,7 +9,13 @@ The following options can be provided to `deps-new`:
 * `:test-runner` -- as of v0.9.0, you can override the default (Cognitect) test runner in generated projects by specifying `:test-runner :lazytest`; as of v0.10.next, this is implemented via `org.corfield.new.transformers/choose-test-runner` as a `:template-fn` in the `app`, `lib`, and `template` templates.
 * `:build` -- as of v0.10.0, you can override the default `build.clj` generation to add Babashka tasks for your project by specifying `:build :bb`; as of v0.10.next, this is implemented via `org.corfield.new.transformers/maybe-add-bb` as a `:data-fn` in `app` and `lib` templates.
 
+All of these options, except `:name`, end up in the `data` hash map, available
+to the template and any `:data-fn`, `:template-fn`, or `:post-process-fn`
+transformers. The `:raw-name` key is added with the original value of the
+`:name` option.
+
 The following optional keys can be provided to override defaults in the template:
+
 * `:artifact/id` -- the `artifact-id` to use in the `pom.xml` file; defaults to the trailing portion of the qualified project name,
 * `:description` -- a string used in the generated README and `pom.xml` files to describe the project; the default value is typically provided by `template.edn`,
 * `:developer` -- the capitalized version of your current username,
@@ -25,3 +31,10 @@ The following optional keys can be provided to override defaults in the template
 * `:top` -- the leading portion of the qualified project name, with known SCM hosts removed.
 * `:user` -- your current username,
 * `:version` -- the version string; defaults to `"0.1.0-SNAPSHOT"`.
+
+All of these options also end up in the `data` hash map, either as their
+default value or the overridden value passed on the command line.
+
+Any additional options you provide to the `deps-new` command will be also passed
+through to the template as part of the `data` map, as well as any `:data-fn`,
+`:template-fn`, or `:post-process-fn` transformers.
