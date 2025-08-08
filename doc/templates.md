@@ -178,7 +178,7 @@ symbols that will resolve to functions that can be invoked as follows:
 * `:template-fn` -- a function, or sequence of functions, that is invoked with the EDN (hash map) as the first argument and the substitution data (augmented by the result of `:data-fn` if present), and which should return the updated template EDN,
 * `:post-process-fn` -- a function, or sequence of functions, that is invoked, after copying all the template files to the target, with the substitution data (augmented by the result of `:data-fn` if present) and the template EDN (updated by `:template-fn` if present).
 
-> Note: support for a sequence of functions was added in v0.10.next.
+> Note: support for a sequence of functions was added in v0.10.1.
 
 The data function could, for example, dynamically generate the content of one or more files as
 new keys in the substitution map, and the template function could augment the EDN with additional

@@ -1,6 +1,6 @@
 # Changes
 
-* v0.10.next in progress
+* v0.10.1 -- 2025-08-08
   * Address [#66](https://github.com/seancorfield/deps-new/issues/66) by reimplementing `:test-runner` and `:build` options purely in terms of `:data-fn` and `:template-fn` options in `template.edn` files.
   * Address [#65](https://github.com/seancorfield/deps-new/issues/65) by allowing `:data-fn`, `:template-fn`, and `:post-process-fn` to accept either a single symbol or a sequence of symbols, to support multiple transformations in order.
   * Address [#59](https://github.com/seancorfield/deps-new/issues/59) by clarifying how options end up in the `data` hash map.
