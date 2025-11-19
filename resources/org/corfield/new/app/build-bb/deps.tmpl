@@ -1,12 +1,12 @@
 {:paths ["src" "resources"]
- :deps {org.clojure/clojure {:mvn/version "1.12.2"}}
+ :deps {org.clojure/clojure {:mvn/version "1.12.3"}}
  :aliases
  {:run-m {:main-opts ["-m" "{{top/ns}}.{{main/ns}}"]}
   :run-x {:ns-default {{top/ns}}.{{main/ns}}
           :exec-fn greet
           :exec-args {:name "Clojure"}}
   :build {:deps {io.github.clojure/tools.build
-                 {:mvn/version "0.10.10"}}
+                 {:mvn/version "0.10.11"}}
           :ns-default build}
   :test {:extra-paths ["test"]
          :extra-deps {org.clojure/test.check {:mvn/version "1.1.1"}

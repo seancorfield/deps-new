@@ -1,7 +1,8 @@
 # Changes
 
 * v0.10.next in progress
-  * Update default version of Clojure to 1.12.2.
+  * Update tools.build to 0.10.11.
+  * Update default version of Clojure to 1.12.3.
 
 * v0.10.1 a90029c -- 2025-08-08
   * Address [#66](https://github.com/seancorfield/deps-new/issues/66) by reimplementing `:test-runner` and `:build` options purely in terms of `:data-fn` and `:template-fn` options in `template.edn` files.

@@ -24,7 +24,7 @@
    :test-runner/testing    "testing"})
 
 (def ^:private lazytest-runner
-  {:test-runner/coordinate "io.github.noahtheduke/lazytest {:mvn/version \"1.8.0\"}"
+  {:test-runner/coordinate "io.github.noahtheduke/lazytest {:mvn/version \"1.9.1\"}"
    :test-runner/main       "lazytest.main"
    :test-runner/exec-fn    "lazytest.main/run-impl"
    :test-runner/namespace  "lazytest.core"
