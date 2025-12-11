@@ -18,7 +18,8 @@
           io.github.seancorfield/deps-new {:local/root "."}}
    :ns-default org.corfield.new}
   :outdated ; all the deps we use in project templates so antq can find them
-  {:extra-deps {org.clojure/test.check {:mvn/version "1.1.2"}
+  {:extra-deps {org.babashka/cli {:mvn/version "0.8.67"}
+                org.clojure/test.check {:mvn/version "1.1.2"}
                 io.github.cognitect-labs/test-runner
                 {:git/tag "v0.5.1" :git/sha "dfb30dd"}
                 slipset/deps-deploy {:mvn/version "0.2.2"}}}}}
