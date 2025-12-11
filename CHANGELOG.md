@@ -1,5 +1,8 @@
 # Changes
 
+* v0.10.3 -- 2025-12-11
+  * Update default version of Clojure to 1.12.4.
+
 * v0.10.2 3153351 -- 2025-11-25
   * Update `test.check` to 1.1.2.
   * Update `tools.build` to 0.10.11.
