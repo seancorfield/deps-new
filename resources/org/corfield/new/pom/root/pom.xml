@@ -10,8 +10,8 @@
   <url>https://{{scm/domain}}/{{scm/user}}/{{scm/repo}}</url>
   <licenses>
     <license>
-      <name>Eclipse Public License</name>
-      <url>http://www.eclipse.org/legal/epl-v10.html</url>
+      <name>{{license/name}}</name>
+      <url>{{license/url}}</url>
     </license>
   </licenses>
   <developers>
