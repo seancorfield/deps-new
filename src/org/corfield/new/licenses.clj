@@ -7,7 +7,6 @@
             [spdx.licenses :as sl]))
 
 
-(def ^:private init-called? (atom false))
 (def default-license-id "EPL-1.0")
 (defn id->license
   "Retrieve from [SPDX](https://spdx.dev/) library the full info and text of
@@ -48,19 +47,16 @@
         {:keys [id name text see-also]}
         (sl/id->info string-id {:include-large-text-values? true})
         missing (fn [fieldname]
-                  (format " * (No %s for %s in SPDX) * " fieldname id))]
+                  (format "* (No %s for %s in SPDX) *" fieldname id))]
     (case licenses
       :jar (when (str/blank?
-                  (System/getProperty " org.spdx.useJARLicenseInfoOnly "))
-             (System/setProperty " org.spdx.useJARLicenseInfoOnly " (str true)))
-      :full-cache (when-not @init-called?
-                    (sl/init!)
-                    (reset! init-called? true))
+                  (System/getProperty "org.spdx.useJARLicenseInfoOnly"))
+             (System/setProperty "org.spdx.useJARLicenseInfoOnly" (str true)))
+      :full-cache (sl/init!)
       :cache nil ;; incremental cache
-      (throw (ex-info " :licenses must be :jar (default), :cache, or :full-cache. "
-                      opts)))
+      (throw (ex-info ":licenses must be :jar, :cache, or :full-cache." opts)))
     (when id
       {:license/id   id
-       :license/name (or name             (missing " name "))
-       :license/url  (or (first see-also) (missing " URL "))
-       :license/text (or text             (missing " text "))})))
+       :license/name (or name             (missing "name"))
+       :license/url  (or (first see-also) (missing "URL"))
+       :license/text (or text             (missing "text"))})))
