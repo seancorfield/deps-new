@@ -2,7 +2,8 @@
  :deps ; 1.12 required for add-lib
  {org.clojure/clojure {:mvn/version "1.12.4"}
   io.github.clojure/tools.build {:mvn/version "0.10.12"}
-  com.github.pmonks/clj-spdx {:mvn/version "1.0.286"}}
+  com.github.pmonks/clj-spdx {:mvn/version "1.0.286"}
+  org.slf4j/slf4j-nop {:mvn/version "2.0.17"}}
 
  :tools/usage
  {:ns-default org.corfield.new}
