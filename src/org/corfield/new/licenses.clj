@@ -16,29 +16,28 @@
   Other popular licenses are `\"MIT\"`, `\"Apache-2.0\"`, `\"EPL-2.0\"`, or any
   identifier found in the [SPDX license list](https://spdx.org/licenses/).
   Returns a map with the following entries:
-    - `:license/id`, the SPDX identifier of the license,
+    - `:licenses`, specifies where to get license info (see below)
+    - `:license/id`, the SPDX identifier of the license
     - `:license/name`, the name of the license,
     - `:license/url`, the URL associated with the license,
     - `:license/text`, the full text of the license.
+  The returned map will always contain the above keys, though their values
+  may indicate a license attribute was not found. An exception is thrown
+  when a license is not found or the `:licenses` value is invalid.
 
-  The SPDX official library provides a local cache that should be built
-  incrementally in the user cache directory (i.e. `${XDG_CACHE_HOME}` or
-  `${HOME}/.cache`). By default the etag of a license is checked after a
-  certain interval, and retrieved if it's stale. See the official
-  [SPDX library documentation](https://github.com/spdx/Spdx-Java-Library) about
-  the cache behavior and configuration.
-  However the incremental behavior of the cache needs to be verified as there
-  has been reports of performance issues due to the unexpected download of the
-  full set of licenses from SPDX, which appears to take a lot more than just
-  downloading the 22Mb it represents.
-  Until this is validated the licenses info included in the SPDX JAR is used by
-  default. Even though it may be out of date with SPDX listing, this should be
-  fit for purpose because licenses don't change very often.
-  To change that default behavior use the `:licenses` option which may be:
+  By default license info is retrieved from the SPDX jar so as to not require
+  internet access. Alternatively use the `:licenses` option which may be:
     - :jar, to get license info from the SPDX jar (default behavior),
     - :cache, to get license info from SPDX API and build an incremental cache,
     - :full-cache, to get license info from a full local cache of all SPDX
-                   licenses, which adds a noticeable delay upon first run. "
+                   licenses, which adds a noticeable delay upon first run.
+  The last two values above use the local cache provided by the SPDX official
+  library and respectively build it incrementally or download a full copy of all
+  licenses upon first run. The cache resides in the user cache directory (i.e.
+  `${XDG_CACHE_HOME}` or `${HOME}/.cache`). The etag of a license is checked
+  after a certain interval from last run (24 hours by default), and retrieved
+  if it's stale. For more details on the cache behavior and configuration see the
+  [SPDX library documentation](https://github.com/spdx/Spdx-Java-Library)."
   [{:keys [licenses], opts-id :license/id
     :or {licenses :jar opts-id default-license-id} :as opts}]
   (let [string-id (if (str/blank? (str opts-id))
@@ -47,16 +46,17 @@
         {:keys [id name text see-also]}
         (sl/id->info string-id {:include-large-text-values? true})
         missing (fn [fieldname]
-                  (format "* (No %s for %s in SPDX) *" fieldname id))]
+                  (format "*No %s for \"%s\" in SPDX *" fieldname id))]
     (case licenses
-      :jar (when (str/blank?
-                  (System/getProperty "org.spdx.useJARLicenseInfoOnly"))
+      :jar (when (str/blank? (System/getProperty "org.spdx.useJARLicenseInfoOnly"))
              (System/setProperty "org.spdx.useJARLicenseInfoOnly" (str true)))
-      :full-cache (sl/init!)
       :cache nil ;; incremental cache
+      :full-cache (sl/init!)
       (throw (ex-info ":licenses must be :jar, :cache, or :full-cache." opts)))
-    (when id
-      {:license/id   id
+    (if id
+      {:licenses     licenses
+       :license/id   id
        :license/name (or name             (missing "name"))
        :license/url  (or (first see-also) (missing "URL"))
-       :license/text (or text             (missing "text"))})))
+       :license/text (or text             (missing "text"))}
+      (throw (ex-info (format "License with id \"%s\" not found" string-id) opts)))))
