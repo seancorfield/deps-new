@@ -55,16 +55,22 @@
   (let [string-id (if (str/blank? (str opts-id))
                     default-license-id
                     (str opts-id))
+        ;; This config needs to happen before the call to SPDX
+        _ (case licenses
+            :jar (when (str/blank? (System/getProperty
+                                     "org.spdx.useJARLicenseInfoOnly"))
+                   (System/setProperty
+                     "org.spdx.useJARLicenseInfoOnly" (str true)))
+            :cache nil ;; incremental cache
+            :full-cache (sl/init!)
+            (throw (ex-info ":licenses must be :jar, :cache, or :full-cache."
+                            opts)))
+        ;; The actual call to SPDX
         {:keys [id name text see-also]}
         (sl/id->info string-id {:include-large-text-values? true})
+        ;; helper fn to flag missing license attributes
         missing (fn [fieldname]
                   (format "*No %s for \"%s\" in SPDX *" fieldname id))]
-    (case licenses
-      :jar (when (str/blank? (System/getProperty "org.spdx.useJARLicenseInfoOnly"))
-             (System/setProperty "org.spdx.useJARLicenseInfoOnly" (str true)))
-      :cache nil ;; incremental cache
-      :full-cache (sl/init!)
-      (throw (ex-info ":licenses must be :jar, :cache, or :full-cache." opts)))
     (if id
       {:licenses     licenses
        :license/id   id

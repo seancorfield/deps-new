@@ -70,4 +70,5 @@ FIXME: listing of options this app accepts.
 
 Copyright © {{now/year}} {{developer}}
 
+Distributed under the
 [{{license/name}}]({{license/url}})

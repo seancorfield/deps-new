@@ -365,7 +365,7 @@ The OSI also displays the SPDX id in their [listing of OSI-approved licenses](ht
 
 **You are not required to open source your generated project!** Just because the projects
 are generated with an open source `LICENSE` file and have a **License** section in their
-`README.md** files does not mean you need to keep that license in place, if you do not
+`README.md` files does not mean you need to keep that license in place, if you do not
 want your project to be open source.
 
 **Choosing a license**: the use of the Eclipse Public License v1.0 is a tradition that
