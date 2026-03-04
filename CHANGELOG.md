@@ -1,9 +1,9 @@
 # Changes
 
 * v0.11.0 -- 2026-03-04
+  * License is now retrieved from SPDX library, default EPL-1.0 can easily be changed with the `:license/id` option, see PR [#68](https://github.com/seancorfield/deps-new/pull/68) from [@fmjrey](https://github.com/fmjrey).
   * Update `test.check` to 1.1.3.
   * Update `tools.build` to 0.10.12.
-  * License is now retrieved from SPDX library, default EPL-1.0 can easily be changed with the `:license/id` option, see PR [#68](https://github.com/seancorfield/deps-new/pull/68) from [@fmjrey](https://github.com/fmjrey).
 
 * v0.10.3 2c012c4 -- 2025-12-11
   * Update default version of Clojure to 1.12.4.
