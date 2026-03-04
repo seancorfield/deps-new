@@ -7,26 +7,22 @@
    [org.corfield.new.licenses :as licenses]))
 
 (defdescribe provide-licenses
-  (it "should provide a default value for licenses"
-      (should (-> nil
-                  licenses/id->license
-                  :licenses))
-      (should (-> {}
-                  licenses/id->license
-                  :licenses))
-      (should (-> {:no-licenses :value}
-                  licenses/id->license
-                  :licenses)))
   (it "should use :jar as default license source"
       (should (= :jar
+                 (-> nil
+                     licenses/id->license
+                     :licenses)
+                 (-> {}
+                     licenses/id->license
+                     :licenses)
                  (-> {:no-licenses :value}
                      licenses/id->license
                      :licenses))))
   (it "should throw with an invalid license source"
       (should (throws? Exception
-                (fn [] (-> {:licenses :invalid-value}
-                           licenses/id->license
-                           :licenses))))))
+                       (fn [] (-> {:licenses :invalid-value}
+                                  licenses/id->license
+                                  :licenses))))))
 
 (defdescribe accept-symbol-or-string
   (it "should accept symbol or string as license id"
@@ -40,17 +36,15 @@
 
 (defdescribe provide-default-license
   (it "should provide a default license"
-      (should (-> nil
-                  licenses/id->license
-                  :license/id))
-      (should (-> {}
-                  licenses/id->license
-                  :license/id))
-      (should (-> {:no-license :id}
-                  licenses/id->license
-                  :license/id)))
-  (it "should use EPL-1.0 as default license"
-      (should (= "EPL-1.0"
+      (should (and (string? licenses/default-license-id)
+                   (not (str/blank? licenses/default-license-id))))
+      (should (= licenses/default-license-id
+                 (-> nil
+                     licenses/id->license
+                     :license/id)
+                 (-> {}
+                     licenses/id->license
+                     :license/id)
                  (-> {:no-license :id}
                      licenses/id->license
                      :license/id))))

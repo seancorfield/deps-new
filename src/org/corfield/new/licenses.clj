@@ -7,32 +7,44 @@
             [spdx.licenses :as sl]))
 
 
-(def default-license-id "EPL-1.0")
+(def default-license-id
+  "The default license id as a string."
+  "EPL-1.0")
 (defn id->license
-  "Retrieve from [SPDX](https://spdx.dev/) library the full info and text of
-  a license identified from option `:license/id`, or `nil` if not found.
+  "Retrieve from the [SPDX](https://spdx.dev/) library the full info and text of
+  a license identified from option `:license/id`.
   If `:license/id` is not provided it defaults to `\"EPL-1.0\"`, a license
   traditionally used in clojure projects.
   Other popular licenses are `\"MIT\"`, `\"Apache-2.0\"`, `\"EPL-2.0\"`, or any
   identifier found in the [SPDX license list](https://spdx.org/licenses/).
+
   Returns a map with the following entries:
+
     - `:licenses`, specifies where to get license info (see below)
     - `:license/id`, the SPDX identifier of the license
     - `:license/name`, the name of the license,
     - `:license/url`, the URL associated with the license,
     - `:license/text`, the full text of the license.
   The returned map will always contain the above keys, though their values
-  may indicate a license attribute was not found. An exception is thrown
-  when a license is not found or the `:licenses` value is invalid.
+  may indicate a missing license attribute.
 
-  By default license info is retrieved from the SPDX jar so as to not require
-  internet access. Alternatively use the `:licenses` option which may be:
-    - :jar, to get license info from the SPDX jar (default behavior),
-    - :cache, to get license info from SPDX API and build an incremental cache,
-    - :full-cache, to get license info from a full local cache of all SPDX
-                   licenses, which adds a noticeable delay upon first run.
+  An exception is thrown when a license
+  is not found or the `:licenses` value is invalid.
+
+  By default license info is retrieved from the jar of the official SPDX java
+  library so as to not require internet access. Alternatively use the `:licenses`
+  option which may be:
+
+    - `:jar`, to get license info from the SPDX jar (default behavior), this is
+      done by setting `org.spdx.useJARLicenseInfoOnly` JVM property if not set,
+    - `:cache`, to get license info from SPDX API and build an incremental cache,
+      which is the normal behavior when using the `clj-spdx` library,
+    - `:full-cache`, to get license info from a full local cache of all SPDX
+      licenses, which adds a noticeable delay upon first run, and is done by
+      calling `spdx.license/init!`.
+
   The last two values above use the local cache provided by the SPDX official
-  library and respectively build it incrementally or download a full copy of all
+  library, and respectively build it incrementally or download a full copy of all
   licenses upon first run. The cache resides in the user cache directory (i.e.
   `${XDG_CACHE_HOME}` or `${HOME}/.cache`). The etag of a license is checked
   after a certain interval from last run (24 hours by default), and retrieved
