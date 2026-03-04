@@ -6,7 +6,8 @@
             [clojure.string :as str]
             [clojure.tools.deps.extensions.git :as git]
             [clojure.tools.build.api :as b]
-            [clojure.tools.gitlibs :as gl])
+            [clojure.tools.gitlibs :as gl]
+            [org.corfield.new.licenses :as licenses])
   (:import (java.nio.file Files)
            (java.nio.file.attribute FileAttribute)
            (java.text SimpleDateFormat)
@@ -243,6 +244,7 @@
         username   (or (System/getenv "USER")
                        (System/getProperty "user.name"))]
     (merge name-data
+           (licenses/id->license opts)
            {:developer  (str/capitalize username)
             :git-dir    (when git-dir
                           (cond-> git-dir
