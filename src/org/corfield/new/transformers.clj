@@ -4,12 +4,12 @@
   "Built-in transformers to support conditional template generation,
    based on CLI options:
 
-   :data-fn transformers:
+   `:data-fn` transformers:
 
    * choose-test-runner -- if `:test-runner :lazytest` is specified, add the
      coordinates etc for LazyTest, else add Cognitect's `test-runner`
 
-   :template-fn transformers:
+   `:template-fn` transformers:
 
    * maybe-add-bb -- if `:build :bb` is specified, use the `build-bb`
      templates folder (instead of the default `build` folder)")
