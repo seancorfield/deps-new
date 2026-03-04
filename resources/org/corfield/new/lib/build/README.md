@@ -38,5 +38,4 @@ Your library will be deployed to {{group/id}}/{{artifact/id}} on clojars.org by 
 
 Copyright © {{now/year}} {{developer}}
 
-Distributed under the
-[{{license/name}}]({{license/url}})
+Distributed under the [{{license/name}}]({{license/url}})

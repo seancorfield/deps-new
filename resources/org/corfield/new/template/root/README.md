@@ -28,5 +28,4 @@ file -- that it is valid EDN and it satisfies the `deps-new` Spec for template f
 
 Copyright © {{now/year}} {{developer}}
 
-Distributed under the
-[{{license/name}}]({{license/url}})
+Distributed under the [{{license/name}}]({{license/url}})
