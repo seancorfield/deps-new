@@ -1,6 +1,6 @@
 # Changes
 
-* v0.11.0 -- 2026-03-04
+* v0.11.0 8629dcc -- 2026-03-04
   * Add `clojure -X:codox` to `deps.edn` so folks can generate API documentation (since cljdoc does not work with source releases on GitHub yet), see PR [#69](https://github.com/seancorfield/deps-new/pull/69) from [@fmjrey](https://github.com/fmjrey).
   * License is now retrieved from SPDX library, default EPL-1.0 can easily be changed with the `:license/id` option, see PR [#68](https://github.com/seancorfield/deps-new/pull/68) from [@fmjrey](https://github.com/fmjrey).
   * Update `test.check` to 1.1.3.
