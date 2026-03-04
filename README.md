@@ -384,9 +384,12 @@ used for that code (which _may_ require you to release your enhancements under t
 license and will, most likely, require you to include their copyright notices, etc).
 _Do not copy other people's code without attribution!_
 
-**IMPORTANT NOTES**
-- A license text may contain placeholders for various information such as year and copyright owner.
-  When overriding the default EPL-1.0 license, review the `LICENSE` file generated and amend accordingly.
+**IMPORTANT NOTES AND DISCLAIMER**
+- The generation of license text is a convenience automation. In no event shall the authors or
+  contributors be liable for damages arising from use of the software and generated licenses.
+- The user is strongly recommended to review the generated output and amend accordingly.
+  In particular some license text from SPDX may contain placeholders for various information
+  such as year and copyright owner.
 - For performance reasons the list of licenses is currently a local static resource.
   While it contains most licenses likely to be used, it may not reflect all licenses present
   in the [SPDX license list](https://spdx.org/licenses/). See the docstring of
