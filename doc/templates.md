@@ -21,7 +21,7 @@ derived from the project name or the environment should not be used -- the deriv
 variables will override them.
 
 In particular, you can provide defaults for any `deps-new` options by specifying
-them in your `template.edn` file, e.g., `:license-id Apache-2.0`.
+them in your `template.edn` file, e.g., `:license/id Apache-2.0`.
 
 For any unqualified key computed from the project name or supplied on the command-line
 that has a string as its value, an `{{opt/ns}}` version is also available that should
