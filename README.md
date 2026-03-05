@@ -1,6 +1,8 @@
-# deps-new [![Slack](https://img.shields.io/badge/slack-deps--new-yellow.svg?logo=slack)](https://clojurians.slack.com/app_redirect?channel=deps-new)
+# deps-new
 
 Create new projects for use with the Clojure CLI and `deps.edn`.
+
+Discuss on [![Slack](https://img.shields.io/badge/slack-deps--new-yellow.svg?logo=slack)](https://clojurians.slack.com/app_redirect?channel=deps-new).
 
 ## Installation
 
