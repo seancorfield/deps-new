@@ -244,7 +244,6 @@
         username   (or (System/getenv "USER")
                        (System/getProperty "user.name"))]
     (merge name-data
-           (licenses/id->license opts)
            {:developer  (str/capitalize username)
             :git-dir    (when git-dir
                           (cond-> git-dir
@@ -294,13 +293,15 @@
                        ;; :template-fn result is replacement:
                        ((requiring-resolve template-fn) edn opts))
                      basic-edn
-                     (get-multi-option basic-edn :template-fn))]
+                     (get-multi-option basic-edn :template-fn))
+        desc {:description (str "FIXME: my new"
+                                (when-let [template-name (:template opts)]
+                                  (str " " template-name))
+                                " project.")}
+        merged-opts (merge desc edn opts)]
     ;; this allows any defaults from the template to
     ;; be part of the data used for substitution:
-    [(merge {:description (str "FIXME: my new"
-                               (when-let [template-name (:template opts)]
-                                 (str " " template-name))
-                               " project.")} edn opts) edn]))
+    [(merge merged-opts (licenses/id->license merged-opts)) edn]))
 
 (comment
   (find-root [] 'org.corfield.new/app)
