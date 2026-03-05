@@ -25,9 +25,15 @@
                 io.github.cognitect-labs/test-runner
                 {:git/tag "v0.5.1" :git/sha "dfb30dd"}
                 slipset/deps-deploy {:mvn/version "0.2.2"}}}
+  ;; To run codox:
+  ;; rm -rf target/ && clojure -X:codox
   :codox
   {:extra-deps {codox/codox {:mvn/version "0.10.8"}}
    :exec-fn codox.main/generate-docs
    :exec-args {:source-paths ["src"]
+               :doc-files ["README.md"
+                           "doc/templates.md"
+                           "doc/options.md"
+                           "doc/names-variables.md"]
                :metadata {:doc/format :markdown}
                :codox {:writer codox.writer.html/write-docs}}}}}
