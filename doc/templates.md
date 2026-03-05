@@ -20,6 +20,9 @@ for substitutions that can be overridden via the command-line. Keys that match t
 derived from the project name or the environment should not be used -- the derived
 variables will override them.
 
+In particular, you can provide defaults for any `deps-new` options by specifying
+them in your `template.edn` file, e.g., `:license-id Apache-2.0`.
+
 For any unqualified key computed from the project name or supplied on the command-line
 that has a string as its value, an `{{opt/ns}}` version is also available that should
 be suitable for use as a namespace in the generated code, and an `{{opt/file}}` version
@@ -28,7 +31,7 @@ that should be suitable for use as a filename or directory path.
 ## Making your template work remotely
 
 If you wish to deploy and use your template from a remote git repository, a `template.edn` and
-`root` directory alone aren't sufficient. You will also need to package it in a deps.edn project,
+`root` directory alone aren't sufficient. You will also need to package it in a `deps.edn` project,
 so `deps-new` can consume it.
 
 It will look for `root` and `template.edn` under something like `resources/myusername/mytemplate/`

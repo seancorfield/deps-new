@@ -370,6 +370,10 @@ are generated with an open source `LICENSE` file and have a **License** section 
 `README.md` files does not mean you need to keep that license in place, if you do not
 want your project to be open source.
 
+**Template authors can specify a default license** in their `template.edn` files using
+the `:license/id` key. This allows the generated projects to automatically use
+the specified license unless overridden by the user.
+
 **Choosing a license**: the use of the Eclipse Public License v1.0 is a tradition that
 started with Leiningen's `lein new` and carried over into `boot new` and now `clj-new`.
 The idea is that it's better to ensure any open source projects created have a valid
