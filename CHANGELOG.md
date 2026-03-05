@@ -1,5 +1,8 @@
 # Changes
 
+* v0.11.1 in progress
+  * Address [#70](https://github.com/seancorfield/deps-new/issues/70) by supporting `:license/id` in `template.edn` files.
+
 * v0.11.0 8629dcc -- 2026-03-04
   * Add `clojure -X:codox` to `deps.edn` so folks can generate API documentation (since cljdoc does not work with source releases on GitHub yet), see PR [#69](https://github.com/seancorfield/deps-new/pull/69) from [@fmjrey](https://github.com/fmjrey).
   * License is now retrieved from SPDX library, default EPL-1.0 can easily be changed with the `:license/id` option, see PR [#68](https://github.com/seancorfield/deps-new/pull/68) from [@fmjrey](https://github.com/fmjrey).
