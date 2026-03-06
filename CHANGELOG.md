@@ -1,6 +1,7 @@
 # Changes
 
-* v0.11.1 in progress
+* v0.11.1 -- 2026-03-06
+  * Address [#72](https://github.com/seancorfield/deps-new/issues/72) by explicitly listing the files to include in the generated documentation, see PR [#73](https://github.com/seancorfield/deps-new/pull/73) from [@fmjrey](https://github.com/fmjrey).
   * Address [#70](https://github.com/seancorfield/deps-new/issues/70) by supporting `:license/id` in `template.edn` files.
 
 * v0.11.0 8629dcc -- 2026-03-04
