@@ -31,7 +31,7 @@ The following optional keys can be provided to override defaults in the template
 * `:top` -- the leading portion of the qualified project name, with known SCM hosts removed.
 * `:user` -- your current username,
 * `:version` -- the version string; defaults to `"0.1.0-SNAPSHOT"`.
-* `:license/id` -- the license for the project if different than the default ``EPL-1.0``, see the [SPDX license list](https://spdx.org/licenses/) for a list of available license identifiers. The OSI also displays the SPDX id in their [listing of OSI-approved licenses](https://opensource.org/licenses). If the license required does not exist in SPDX, you can request its inclusion (if open source) and/or create your own template. From the license id the following additional keys are derived:
+* `:license/id` -- the license for the project if different than the default ``EPL-2.0``, see the [SPDX license list](https://spdx.org/licenses/) for a list of available license identifiers. The OSI also displays the SPDX id in their [listing of OSI-approved licenses](https://opensource.org/licenses). If the license required does not exist in SPDX, you can request its inclusion (if open source) and/or create your own template. From the license id the following additional keys are derived:
     * `:license/name`, the name of the license,
     * `:license/url`, the URL associated with the license,
     * `:license/text`, the full text of the license.

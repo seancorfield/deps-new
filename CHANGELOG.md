@@ -1,5 +1,8 @@
 # Changes
 
+* v0.12.0 in progress
+  * Upgrade from EPL-1.0 to EPL-2.0 for broader compatibility. Explicitly allow for relicensing of `deps-new` code under Apache-2.0. Generated projects now default to EPL-2.0, rather than EPL-1.0 as was previously the case.
+
 * v0.11.1 dd459f0 -- 2026-03-06
   * Address [#72](https://github.com/seancorfield/deps-new/issues/72) by explicitly listing the files to include in the generated documentation, see PR [#73](https://github.com/seancorfield/deps-new/pull/73) from [@fmjrey](https://github.com/fmjrey).
   * Address [#70](https://github.com/seancorfield/deps-new/issues/70) by supporting `:license/id` in `template.edn` files.

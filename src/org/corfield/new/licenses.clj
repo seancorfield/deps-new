@@ -9,13 +9,14 @@
 
 (def default-license-id
   "The default license id as a string."
-  "EPL-1.0")
+  "EPL-2.0")
+
 (defn id->license
   "Retrieve from the [SPDX](https://spdx.dev/) library the full info and text of
   a license identified from option `:license/id`.
-  If `:license/id` is not provided it defaults to `\"EPL-1.0\"`, a license
+  If `:license/id` is not provided it defaults to `\"EPL-2.0\"`, a license
   traditionally used in clojure projects.
-  Other popular licenses are `\"MIT\"`, `\"Apache-2.0\"`, `\"EPL-2.0\"`, or any
+  Other popular licenses are `\"MIT\"`, `\"Apache-2.0\"`, or any
   identifier found in the [SPDX license list](https://spdx.org/licenses/).
 
   Returns a map with the following entries:
