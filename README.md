@@ -209,7 +209,7 @@ generate the documentation, e.g.,
   <url>https://github.com/com.acme/cool-lib</url>
   <licenses>
     <license>
-      <name>Eclipse Public License</name>
+      <name>Eclipse Public License 2.0</name>
       <url>https://www.eclipse.org/legal/epl-2.0</url>
     </license>
   </licenses>
