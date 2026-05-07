@@ -1,8 +1,8 @@
 {:paths ["src" "resources"]
  :deps ; 1.12 required for add-lib
  {org.clojure/clojure {:mvn/version "1.12.4"}
-  io.github.clojure/tools.build {:mvn/version "0.10.12"}
-  com.github.pmonks/clj-spdx {:mvn/version "1.0.286"}
+  io.github.clojure/tools.build {:mvn/version "0.10.13"}
+  com.github.pmonks/clj-spdx {:mvn/version "1.0.342"}
   org.slf4j/slf4j-nop {:mvn/version "2.0.17"}}
 
  :tools/usage
@@ -12,7 +12,7 @@
  {:test
   {:extra-paths ["test"]
    :extra-deps {io.github.noahtheduke/lazytest
-                {:mvn/version "1.9.1"}}}
+                {:mvn/version "2.0.0"}}}
   :runner
   {:main-opts ["-m" "lazytest.main"]}
   :new ; for local testing as a tool
@@ -24,7 +24,7 @@
                 org.clojure/test.check {:mvn/version "1.1.3"}
                 io.github.cognitect-labs/test-runner
                 {:git/tag "v0.5.1" :git/sha "dfb30dd"}
-                slipset/deps-deploy {:mvn/version "0.2.2"}}}
+                slipset/deps-deploy {:mvn/version "0.2.3"}}}
   ;; To run codox:
   ;; rm -rf target/ && clojure -X:codox
   :codox
