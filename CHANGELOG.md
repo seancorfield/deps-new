@@ -1,5 +1,8 @@
 # Changes
 
+* v0.12.1 in progress
+  * Update Clojure to 1.12.5 in generated projects.
+
 * v0.12.0 cbabae0 -- 2026-05-07
   * Upgrade from EPL-1.0 to EPL-2.0 for broader compatibility. Explicitly allow for relicensing of `deps-new` code under Apache-2.0. Generated projects now default to EPL-2.0, rather than EPL-1.0 as was previously the case.
   * Update dev/test deps, including in generated projects.

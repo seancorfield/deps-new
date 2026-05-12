@@ -1,6 +1,6 @@
 {:paths ["src" "resources"]
  :deps ; 1.12 required for add-lib
- {org.clojure/clojure {:mvn/version "1.12.4"}
+ {org.clojure/clojure {:mvn/version "1.12.5"}
   io.github.clojure/tools.build {:mvn/version "0.10.13"}
   com.github.pmonks/clj-spdx {:mvn/version "1.0.342"}
   org.slf4j/slf4j-nop {:mvn/version "2.0.17"}}
@@ -16,7 +16,7 @@
   :runner
   {:main-opts ["-m" "lazytest.main"]}
   :new ; for local testing as a tool
-  {:deps {org.clojure/clojure {:mvn/version "1.12.4"}
+  {:deps {org.clojure/clojure {:mvn/version "1.12.5"}
           io.github.seancorfield/deps-new {:local/root "."}}
    :ns-default org.corfield.new}
   :outdated ; all the deps we use in project templates so antq can find them
