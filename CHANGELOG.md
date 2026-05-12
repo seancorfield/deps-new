@@ -1,6 +1,6 @@
 # Changes
 
-* v0.12.1 in progress
+* v0.12.1 -- 2026-05-12
   * Update Clojure to 1.12.5 in generated projects.
 
 * v0.12.0 cbabae0 -- 2026-05-07
