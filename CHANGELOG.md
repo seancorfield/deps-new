@@ -1,6 +1,7 @@
 # Changes
 
 * v0.12.next in progress
+  * Fix links to git deps via PR [#74](https://github.com/seancorfield/deps-new/pull/74) from [@fmjrey](https://github.com/fmjrey).
   * Update `deps-deploy` to 0.2.4 in generated projects.
 
 * v0.12.1 883e82c -- 2026-05-12
