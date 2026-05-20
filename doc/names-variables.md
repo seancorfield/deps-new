@@ -78,7 +78,7 @@ _For some unqualified variables this additional processing may make no sense, bu
 
 ## SCM Domains
 
-`deps-new` "knows about" the [same SCM services as `tools.deps`](https://clojure.org/reference/deps_and_cli#_git), including GitHub, GitLab, and others and treats project names that contain a
+`deps-new` "knows about" the [same SCM services as `tools.deps`](https://clojure.org/reference/deps_edn#deps_git), including GitHub, GitLab, and others and treats project names that contain a
 reverse domain name based on those sites in a special manner.
 
 If the project name begins with the reverse domain name of one of the supported SCM services,
@@ -87,7 +87,7 @@ that prefix is removed from the values of
 
 In other words, a project name of `io.gitlab.myname/myproject`
 will cause `"gitlab.com"` to be selected for `{{scm/domain}}` and both `{{scm/user}}` and `{{top}}`
-will be `"myname"`. Similarly, for the other services listed in the [Deps and CLI Reference](https://clojure.org/reference/deps_and_cli#_git).
+will be `"myname"`. Similarly, for the other services listed in the [Deps and CLI Reference](https://clojure.org/reference/deps_edn#deps_git).
 
 A project name of `com.acme/myproject` will cause `"github.com"` to be selected for
 `{{scm/domain}}`, `{{scm/user}}` will be `"acme"`, and `{{top}}` will be `"com.acme"`.
