@@ -1,8 +1,9 @@
 # Changes
 
-* v0.12.next in progress
+* v0.12.2 -- 2026-05-30
   * Fix links to git deps via PR [#74](https://github.com/seancorfield/deps-new/pull/74) from [@fmjrey](https://github.com/fmjrey).
-  * Update `deps-deploy` to 0.2.4 in generated projects.
+  * Update `tools.build` to 0.10.14 in generated projects.
+  * Update `deps-deploy` to 0.2.5 in generated projects.
 
 * v0.12.1 883e82c -- 2026-05-12
   * Update Clojure to 1.12.5 in generated projects.
