@@ -1,9 +1,7 @@
 {:paths ["src"]
  :deps {org.clojure/clojure {:mvn/version "1.12.5"}}
  :tasks
- {:require [[clojure.string :as str]]
-
-  test {:doc "Run the test suite."
+ {test {:doc "Run the test suite."
         :task (clojure "-M:test" "-m" "{{test-runner/main}}")}
 
   test:bb {:doc "Run the test suite using Babashka to check compatibility."
