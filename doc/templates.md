@@ -195,7 +195,7 @@ the "root" folder is always processed with the default `{{opt}}` substitutions.
 
 > Note: you can specify both `:raw` and `:only` as the last elements of the transformation tuple, if needed, and they can be in either order, but they must be after the delimiter string pair if that is also specified.
 
-As of v0.12.next, you can also specify a `:raw-exts` option in your `template.edn` 
+As of v0.13.0, you can also specify a `:raw-exts` option in your `template.edn` 
 file to augment the list of file extensions that are not processed for substitutions 
 (and are copied as-is). This is useful if you have additional binary file types 
 that you want to copy without substitution. This list of extensions is added to
