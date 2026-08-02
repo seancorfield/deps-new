@@ -1,5 +1,8 @@
 # Changes
 
+* v0.13.next in progress
+  * Update dev/test deps.
+
 * v0.13.0 3406dff -- 2026-08-02
   * Address [#78](https://github.com/seancorfield/deps-new/issues/78) by adding `:raw-exts` option to `template.edn` to augment the list of file extensions that are not processed for substitutions (and are copied as-is). **This currently patches `tools.build` to workaround a [bug in `:non-replaced-exts`](https://ask.clojure.org/index.php/15208/tools-build-copy-task-does-not-respect-non-replaced-exts)**
   * Address [#77](https://github.com/seancorfield/deps-new/issues/77) by expanding the **Writing Templates** documentation to clarify the behavior around the `root` folder, and how to deal with subfolders or files that need different options etc.
