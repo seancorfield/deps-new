@@ -1,4 +1,4 @@
-;; copyright (c) 2021-2025 sean corfield, all rights reserved
+;; copyright (c) 2021-2026 sean corfield, all rights reserved
 
 (ns org.corfield.new
   "The next generation of clj-new. Uses tools.build and
@@ -9,6 +9,7 @@
             [clojure.java.io :as io]
             [clojure.spec.alpha :as s]
             [clojure.tools.build.api :as b]
+            [clojure.tools.build.tasks.copy :as copy]
             [org.corfield.new.impl :as impl]))
 
 (set! *warn-on-reflection* true)
@@ -27,8 +28,9 @@
                          :delims (s/? ::open-close)
                          :opts (s/* ::opts)))
 (s/def ::transform (s/coll-of ::dir-spec :min-count 1))
+(s/def ::raw-exts (s/coll-of string?))
 (s/def ::template (s/keys :opt-un [::data-fn ::description ::post-process-fn
-                                   ::root ::template-fn ::transform]))
+                                   ::root ::template-fn ::transform ::raw-exts]))
 
 (comment
   (s/conform ::transform [["root"]])
@@ -68,7 +70,7 @@
         (when-not dir
           (throw (ex-info (str "Unable to find template.edn for " template) {})))
 
-        [{:keys [target-dir template-dir overwrite] :as final-opts} edn]
+        [{:keys [target-dir template-dir overwrite raw-exts] :as final-opts} edn]
         (impl/apply-template-fns dir
                                  basic-opts
                                  ;; this may throw for invalid EDN:
@@ -90,8 +92,11 @@
 
     (println "Creating project from" template "in" target-dir)
 
-    (impl/copy-template-dir template-dir target-dir {:src (:root edn' "root")} data)
-    (run! #(impl/copy-template-dir template-dir target-dir % data) (:transform edn'))
+    ;; raw-exts is additive to tools.build's existing defaults:
+    (let [raw-exts (into copy/default-non-replaced-exts raw-exts)]
+      (run! #(impl/copy-template-dir template-dir target-dir
+                                     (assoc % :raw-exts raw-exts) data)
+            (cons {:src (:root edn' "root")} (:transform edn'))))
 
     (doseq [post-process-fn (impl/get-multi-option edn :post-process-fn)]
       ((requiring-resolve post-process-fn) edn' final-opts))))

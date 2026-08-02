@@ -109,6 +109,7 @@
     (expect (more-> clojure.lang.ExceptionInfo type
                     "Both :template and :name are required." ex-message
                     {:foo 42} ex-data)
+            #_{:clj-kondo/ignore [:type-mismatch]} ; since this is what we're testing!
             (sut/preprocess-options {:foo 42})))
 
   (it "assumes github from a simple qualified name"

@@ -1,1 +1,3 @@
-{:config-paths ["com.github.seancorfield/expectations"]}
+{:config-paths ["com.github.seancorfield/expectations"]
+ :config-in-call
+ {lazytest.extensions.expectations/more-> {:ignore [:constant-condition]}}}

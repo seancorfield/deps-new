@@ -68,7 +68,7 @@
                             opts)))
         ;; The actual call to SPDX
         {:keys [id name text see-also]}
-        (sl/id->info string-id {:include-large-text-values? true})
+        (sl/info string-id {:include-large-text-values? true})
         ;; helper fn to flag missing license attributes
         missing (fn [fieldname]
                   (format "*No %s for \"%s\" in SPDX *" fieldname id))]

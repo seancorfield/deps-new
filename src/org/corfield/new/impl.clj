@@ -1,4 +1,4 @@
-;; copyright (c) 2021-2025 sean corfield, all rights reserved
+;; copyright (c) 2021-2026 sean corfield, all rights reserved
 
 (ns ^:no-doc org.corfield.new.impl
   "The implementation helpers for `org.corfield.new/create`."
@@ -132,7 +132,7 @@
 
   If files is provided, any files found in the source directory
   that are not explicitly mentioned are copied directly."
-  [template-dir target-dir {:keys [src target files delims opts]} data]
+  [template-dir target-dir {:keys [src target files delims opts raw-exts]} data]
   (let [target    (when target (str "/" (substitute target data)))
         opts      (set opts)
         raw       (:raw opts)
@@ -151,7 +151,8 @@
         ;; first we just copy the raw files with no substitutions:
         (when (not only)
           (b/copy-dir {:target-dir inter-target
-                       :src-dirs   [(str template-dir "/" src)]}))
+                       :src-dirs   [(str template-dir "/" src)]
+                       :non-replaced-exts raw-exts}))
         ;; now we process the named files, substituting paths:
         (run! (fn [[from to]]
                 (b/delete {:path (str inter-target "/" from)})
@@ -161,13 +162,15 @@
               files)
         ;; finally we copy the prepared folder (with substitutions):
         (b/copy-dir (cond-> {:target-dir target-dir
-                             :src-dirs   [intermediate]}
+                             :src-dirs   [intermediate]
+                             :non-replaced-exts raw-exts}
                       (not raw)
                       (assoc :replace file-data))))
       (if only
         nil ; what should happen for :only with no files?
         (b/copy-dir (cond-> {:target-dir (str target-dir target)
-                             :src-dirs   [(str template-dir "/" src)]}
+                             :src-dirs   [(str template-dir "/" src)]
+                             :non-replaced-exts raw-exts}
                       (not raw)
                       (assoc :replace file-data)))))))
 

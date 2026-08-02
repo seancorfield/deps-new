@@ -164,7 +164,7 @@ the "root" folder is always processed with the default `{{opt}}` delimiters.
 
 By default, `deps-new` passes a `:replace` option to the `copy-dir` of `tools.build`
 in order to perform the substitutions of `{{opt}}`. That function skips some common
-image types (`jpg`, `jpeg`, `png`, `gif`, and `bmp` as of `tools.build` v0.6.1)
+image types (`jpg`, `jpeg`, `png`, `gif`, and `bmp` as of `tools.build` v0.10.14)
 but treats all other
 as text and attempts to perform textual replacements -- so some binary files will not
 be copied correctly. In addition, you may want to copy some files as if they were
@@ -190,6 +190,24 @@ if appropriate).
 the "root" folder is always processed with the default `{{opt}}` substitutions.
 
 > Note: you can specify both `:raw` and `:only` as the last elements of the transformation tuple, if needed, and they can be in either order, but they must be after the delimiter string pair if that is also specified.
+
+As of v0.12.next, you can also specify a `:raw-exts` option in your `template.edn` 
+file to augment the list of file extensions that are not processed for substitutions 
+(and are copied as-is). This is useful if you have additional binary file types 
+that you want to copy without substitution. This list of extensions is added to
+the default list that `tools.build` treats as binary files:
+(`jpg`, `jpeg`, `png`, `gif`, and `bmp` as of `tools.build` v0.10.14)
+
+For example:
+
+```clojure
+;; template.edn
+{:raw-exts ["pdf" "docx" "xlsx"]
+ :transform [..]}
+```
+
+In addition to the image types listed above, this will copy PDFs, Word documents,
+and Excel spreadsheets without attempting to perform substitutions on them.
 
 ## Programmatic Transformation
 
