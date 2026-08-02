@@ -105,6 +105,8 @@ be copied as-is.
 As noted above, this is in addition to files from the "root" folder, which are 
 always copied to the `<target>` folder, with their original file names.
 
+> Note: when specifying individual files to copy/rename, the global `:raw-exts` option (see below) will not be applied. If you want to copy a file without substitutions, you can use the `:raw` option described below.
+
 ## Copying Files (Only)
 
 As seen above, by default the entire folder is copied, with specified files renamed.
@@ -130,6 +132,8 @@ copied -- just the specified ones (`main_test.clj` in this case).
 
 Again, this is in addition to files from the "root" folder, which are 
 always copied to the `<target>` folder.
+
+> Note: when specifying individual files to copy/rename, the global `:raw-exts` option (see below) will not be applied. If you want to copy a file without substitutions, you can use the `:raw` option described below.
 
 ## Alternative Delimiters
 
@@ -186,7 +190,7 @@ will be performed on them but files in `templates` will be copied to the specifi
 target as raw files -- with no substitutions (and therefore safely treated as binary files,
 if appropriate).
 
-`:raw` can only be applied to additional files and folders --
+`:raw` can only be applied to additional folders --
 the "root" folder is always processed with the default `{{opt}}` substitutions.
 
 > Note: you can specify both `:raw` and `:only` as the last elements of the transformation tuple, if needed, and they can be in either order, but they must be after the delimiter string pair if that is also specified.
@@ -208,6 +212,8 @@ For example:
 
 In addition to the image types listed above, this will copy PDFs, Word documents,
 and Excel spreadsheets without attempting to perform substitutions on them.
+
+> Note: `:raw-exts` only applies to folders that are copied, not to individual files that are copied/renamed. When copying/renaming individual files, the `:raw` option must be used to suppress substitutions.
 
 ## Programmatic Transformation
 
