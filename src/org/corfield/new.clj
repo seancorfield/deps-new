@@ -94,6 +94,9 @@
 
     ;; raw-exts is additive to tools.build's existing defaults:
     (let [raw-exts (into copy/default-non-replaced-exts raw-exts)]
+      ;; https://ask.clojure.org/index.php/15208/tools-build-copy-task-does-not-respect-non-replaced-exts
+      ;; tools.build's copy task does not respect non-replaced extensions, so we have to do it ourselves:
+      (alter-var-root #'copy/default-non-replaced-exts (constantly raw-exts))
       (run! #(impl/copy-template-dir template-dir target-dir
                                      (assoc % :raw-exts raw-exts) data)
             (cons {:src (:root edn' "root")} (:transform edn'))))
