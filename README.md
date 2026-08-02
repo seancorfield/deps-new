@@ -411,7 +411,7 @@ line. If you are dealing with quoting issues in your shell, this could be a
 viable alternative:
 
 ```clojure
-:new {:deps {org.babashka/cli {:mvn/version "0.12.75"}
+:new {:deps {org.babashka/cli {:mvn/version "0.12.85"}
              io.github.seancorfield/deps-new {:git/tag "v0.13.0"
                                               :git/sha "3406dff"}}
       :ns-default org.corfield.new
