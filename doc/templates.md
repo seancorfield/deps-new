@@ -28,6 +28,16 @@ that has a string as its value, an `{{opt/ns}}` version is also available that s
 be suitable for use as a namespace in the generated code, and an `{{opt/file}}` version
 that should be suitable for use as a filename or directory path.
 
+The "root" folder is always copied completely, and substitutions are always
+applied. See below for information on how to copy additional sets of files,
+folders, how to rename files and folders, and how to suppress substitutions.
+
+It is not recommended to try to specify additional behaviors on subfolders
+of the "root" folder, even though that is technically possible by specifying
+folder paths that start with `"root/..."`. This is likely to lead to confusion 
+and can produce unexpected results. Instead, place those folders and/or files
+under a separate top-level folder in the template, alongside the "root" folder.
+
 ## Making your template work remotely
 
 If you wish to deploy and use your template from a remote git repository, a `template.edn` and
@@ -56,7 +66,7 @@ clojure -Sdeps '{:deps {io.github.myusername/my-template {:git/sha "e55b1472680a
 All of the files inside the "root" folder are copied to matching files in the
 "target" folder. That includes file paths so `<root>/doc/intro.md` will be copied to
 `<target>/doc/intro.md`. If you want some files copied to different locations you
-can provide multiple folders in the template and specify how those folders should
+can provide additional folders in the template and specify how those folders should
 be mapped in the `template.edn` file, under a `:transform` key:
 
 ```clojure
@@ -68,6 +78,9 @@ This says that the contents of the template's `resources` folder should be copie
 to a subfolder within the `<target>/resources` folder. For our example `com.acme/cool-lib`
 project, that would be `<target>/resources/com/acme` (since `{{top}}` would `"com.acme"`
 so there will be `{{top/ns}}` and `{{top/file}}` substitutions as well).
+
+This is in addition to files from the "root" folder, which are always copied 
+directly to the `<target>` folder, with their original folder names.
 
 ## Renaming Files
 
@@ -88,6 +101,9 @@ In this example, `src/main.clj` will be copied to `<target>/src/com/acme/cool_li
 and `test/main_test.clj` will be copied to `<target>/test/com/acme/cool_lib_test.clj`.
 Any files in `src` (or `test`) that are not specifically listed in the hash map will
 be copied as-is.
+
+As noted above, this is in addition to files from the "root" folder, which are 
+always copied to the `<target>` folder, with their original file names.
 
 ## Copying Files (Only)
 
@@ -111,6 +127,9 @@ and `test/main_test.clj` will be copied to `<target>/test/com/acme/cool_lib_test
 Any files in `src` that are not specifically listed in the hash map will
 be copied as-is. Because of the `:only` option, no other files in `test` will be
 copied -- just the specified ones (`main_test.clj` in this case).
+
+Again, this is in addition to files from the "root" folder, which are 
+always copied to the `<target>` folder.
 
 ## Alternative Delimiters
 
@@ -138,6 +157,9 @@ files in `test` will use `<<opt>>` as the substitution pattern. This is how `dep
 itself handles generation of the `template` project, since some files that are copied
 are templates themselves that will later have substitutions applied to them.
 
+The alternative delimiters can only be applied to additional files and folders --
+the "root" folder is always processed with the default `{{opt}}` delimiters.
+
 ## Suppressing Substitution & Binary Files
 
 By default, `deps-new` passes a `:replace` option to the `copy-dir` of `tools.build`
@@ -163,6 +185,9 @@ image files noted above) and substitution
 will be performed on them but files in `templates` will be copied to the specified
 target as raw files -- with no substitutions (and therefore safely treated as binary files,
 if appropriate).
+
+`:raw` can only be applied to additional files and folders --
+the "root" folder is always processed with the default `{{opt}}` substitutions.
 
 > Note: you can specify both `:raw` and `:only` as the last elements of the transformation tuple, if needed, and they can be in either order, but they must be after the delimiter string pair if that is also specified.
 

@@ -1,6 +1,7 @@
 # Changes
 
 * v0.12.next in progress
+  * Address [#77](https://github.com/seancorfield/deps-new/issues/77) by expanding the **Writing Templates** documentation to clarify the behavior around the `root` folder, and how to deal with subfolders or files that need different options etc.
   * Fix [#75](https://github.com/seancorfield/deps-new/issues/75) by removing the unnecessary and incorrect `:require` directives from `bb.tmpl` files.
 
 * v0.12.2 465b303 -- 2026-05-30
