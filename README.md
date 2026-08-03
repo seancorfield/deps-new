@@ -4,6 +4,8 @@ Create new projects for use with the Clojure CLI and `deps.edn`.
 
 Discuss on [![Slack](https://img.shields.io/badge/slack-deps--new-yellow.svg?logo=slack)](https://clojurians.slack.com/app_redirect?channel=deps-new).
 
+> [My AI Usage Statement](https://corfield.org/blog/2026/08/02/ai/)
+
 ## Installation
 
 Intended to be installed as a [tool](https://clojure.org/reference/clojure_cli#tools) (Clojure CLI 1.11.1.1149 or later).
