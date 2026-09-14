@@ -1,7 +1,10 @@
-{:paths ["src"]
- :deps {org.clojure/clojure {:mvn/version "1.12.6"}}
+{:paths ["src" "."]
+ :deps {org.clojure/clojure {:mvn/version "1.12.6"}
+        io.github.babashka/deps-deploy {:mvn/version "0.0.1"}}
  :tasks
- {test {:doc "Run the test suite."
+ {:requires [build]
+
+  test {:doc "Run the test suite."
         :task (clojure "-M:test" "-m" "{{test-runner/main}}")}
 
   test:bb {:doc "Run the test suite using Babashka to check compatibility."
@@ -14,11 +17,11 @@
 
   ci {:doc "Run the CI pipeline of tests and build the JAR."
       :depends [test:all] ; or just test
-      :task (clojure "-T:build" "jar")}
+      :exec-fn build/jar}
 
   ci:deploy {:doc "Run the CI pipeline and deploy the JAR."
              :depends [ci]
-             :task (clojure "-T:build" "deploy")}
+             :exec-fn build/deploy}
 
   install {:doc "Install the JAR locally (build via ci)."
-           :task (clojure "-T:build" "install")}}}
+           :exec-fn build/install}}}

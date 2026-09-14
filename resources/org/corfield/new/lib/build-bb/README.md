@@ -21,6 +21,8 @@ Run the project's CI pipeline and build a JAR (this will fail until you edit the
 
     $ bb ci
 
+> Note: requires `bb` 1.13.222 or later!
+
 This will produce an updated `pom.xml` file with synchronized dependencies inside the `META-INF`
 directory inside `target/classes` and the JAR in `target`. You can update the version (and SCM tag)
 information in generated `pom.xml` by updating `build.clj`.

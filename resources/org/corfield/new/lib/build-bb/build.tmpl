@@ -1,7 +1,6 @@
 (ns build
-  (:refer-clojure :exclude [test])
   (:require [clojure.tools.build.api :as b]
-            [deps-deploy.deps-deploy :as dd]))
+            [babashka.deps-deploy :as dd]))
 
 (def lib '{{group/id}}/{{artifact/id}})
 (def version "{{version}}")

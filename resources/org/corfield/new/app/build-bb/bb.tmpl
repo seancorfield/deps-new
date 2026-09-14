@@ -1,7 +1,9 @@
-{:paths ["src"]
+{:paths ["src" "."]
  :deps {org.clojure/clojure {:mvn/version "1.12.6"}}
  :tasks
- {test {:doc "Run the test suite."
+ {:requires [build]
+
+  test {:doc "Run the test suite."
         :task (clojure "-M:test" "-m" "{{test-runner/main}}")}
 
   test:bb {:doc "Run the test suite using Babashka to check compatibility."
@@ -14,4 +16,4 @@
 
   ci {:doc "Run the CI pipeline of tests and build the JAR."
       :depends [test:all] ; or just test
-      :task (clojure "-T:build" "uber")}}}
+      :exec-fn build/uber}}}
