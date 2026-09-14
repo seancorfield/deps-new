@@ -1,6 +1,7 @@
 # Changes
 
 * v0.13.next in progress
+  * Update LazyTest in generated projects to 2.1.0.
   * Update dev/test deps.
 
 * v0.13.0 3406dff -- 2026-08-02
