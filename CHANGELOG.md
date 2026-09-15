@@ -1,6 +1,6 @@
 # Changes
 
-* v0.14.1 -- 2026-09-15
+* v0.14.1 39d257c -- 2026-09-15
   * Address [#80](https://github.com/seancorfield/deps-new/issues/80) by adding `:min-bb-version` ("1.13.222") to generated `bb.edn` files.
 
 * v0.14.0 415b3a8 -- 2026-09-15
