@@ -1,6 +1,6 @@
 # Changes
 
-* v0.13.next in progress
+* v0.14.0-rc1 -- 2026-09-15
   * Address [#79](https://github.com/seancorfield/deps-new/issues/79) by switching `build-bb` folders to use `bb`-driven `build.clj` files.
   * Update LazyTest in generated projects to 2.1.0.
   * Update Clojure to 1.12.6 in generated projects.
