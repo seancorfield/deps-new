@@ -1,5 +1,7 @@
 {:paths ["src" "."]
- :deps {org.clojure/clojure {:mvn/version "1.12.6"}}
+ ;; this makes sure the test runner is available if you jack-in with Babashka
+ ;; so you can eval code in the test namespaces:
+ :deps {{{test-runner/coordinate}}}
  :tasks
  {:requires [build]
 
@@ -8,7 +10,6 @@
 
   test:bb {:doc "Run the test suite using Babashka to check compatibility."
            :extra-paths ["test"]
-           :extra-deps  {{{test-runner/coordinate}}}
            :task (exec '{{test-runner/exec-fn}})}
 
   test:all {:doc "Run the test suite with both Clojure and Babashka."
