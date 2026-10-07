@@ -1,6 +1,6 @@
 # Changes
 
-* v0.15.0 -- 2026-10-07
+* v0.15.0 96d3ca0 -- 2026-10-07
   * Address [#81](https://github.com/seancorfield/deps-new/issues/81) by using `tools.deps.config` for global (user-level) defaults for options.
 
 * v0.14.1 39d257c -- 2026-09-15
