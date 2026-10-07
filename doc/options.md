@@ -46,3 +46,44 @@ default value or the overridden value passed on the command line.
 Any additional options you provide to the `deps-new` command will be also passed
 through to the template as part of the `data` map, as well as any `:data-fn`,
 `:template-fn`, or `:post-process-fn` transformers.
+
+# Global Defaults
+
+As of v0.15.0, you can configure "global" (user-level) defaults for any options
+in `deps-new`. This is done via the recently released
+[tools.deps.config](https://github.com/clojure/tools.deps.config) library,
+which means that the you should create `.cljconf/org.corfield/deps-new.edn`
+under your Clojure configuration directory (either `$HOME/.config/clojure`
+if you follow XDG conventions, or `$HOME/.clojure` otherwise).
+
+For example, you might decide to change the defaults for `:build` and `:test-runner`,
+amongst others:
+
+```
+# XDG style:
+> cat ~/.config/clojure/.cljconf/org.corfield/deps-new.edn 
+{:build :bb
+ :developer "Jane Engineer"
+ :test-runner :lazytest
+ :user "janee"}
+
+# default:
+> cat ~/.clojure/.cljconf/org.corfield/deps-new.edn 
+{:build :bb
+ :developer "Jane Engineer"
+ :test-runner :lazytest
+ :user "janee"}
+```
+
+These can still be overridden on the command line but can make those invocations
+a lot simpler, since you no longer have to override `deps-new`'s defaults.
+
+# "Project" Defaults
+
+Although you wouldn't normally be creating new projects with `deps-new` inside
+an actual project, you _can_ have per-directory defaults as well, by creating 
+`.cljconf/org.corfield/deps-new.edn` in the directory where you will be
+creating new projects. This might be useful if you have separate directories
+for your open source projects, your school projects, or any other category.
+`tools.deps.config` will automatically merge directory-specific defaults
+over any global defaults, followed by any command-line options.

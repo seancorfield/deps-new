@@ -4,6 +4,7 @@
   "The implementation helpers for `org.corfield.new/create`."
   (:require [clojure.java.io :as io]
             [clojure.string :as str]
+            [clojure.tools.deps.config :as cfg]
             [clojure.tools.deps.extensions.git :as git]
             [clojure.tools.build.api :as b]
             [clojure.tools.gitlibs :as gl]
@@ -246,21 +247,23 @@
         target-dir (str (or target-dir main))
         username   (or (System/getenv "USER")
                        (System/getProperty "user.name"))]
-    (merge name-data
-           {:developer  (str/capitalize username)
-            :git-dir    (when git-dir
-                          (cond-> git-dir
-                            deps-root
-                            (str "/" deps-root)))
-            :now/date   (.format (SimpleDateFormat. "yyyy-MM-dd") (Date.))
-            :now/year   (str (+ 1900 (.getYear (Date.))))
-            :raw-name   (str project-name)
-            :template   (str template)
-            :target-dir target-dir
-            :user       username
-            :version    "0.1.0-SNAPSHOT"}
-           ;; remove options we cleaned up:
-           (dissoc opts :template :target-dir :name))))
+    (cfg/config 'org.corfield/deps-new
+                :defaults
+                (merge name-data
+                       {:developer  (str/capitalize username)
+                        :git-dir    (when git-dir
+                                      (cond-> git-dir
+                                        deps-root
+                                        (str "/" deps-root)))
+                        :now/date   (.format (SimpleDateFormat. "yyyy-MM-dd") (Date.))
+                        :now/year   (str (+ 1900 (.getYear (Date.))))
+                        :raw-name   (str project-name)
+                        :template   (str template)
+                        :target-dir target-dir
+                        :user       username
+                        :version    "0.1.0-SNAPSHOT"})
+                :overrides ; remove options we cleaned up:
+                (dissoc opts :template :target-dir :name))))
 
 (defn get-multi-option
   "Given a hash map of options, return the value for the

@@ -1,5 +1,8 @@
 # Changes
 
+* v0.15.0 -- 2026-10-07
+  * Address [#81](https://github.com/seancorfield/deps-new/issues/81) by using `tools.deps.config` for global (user-level) defaults for options.
+
 * v0.14.1 39d257c -- 2026-09-15
   * Address [#80](https://github.com/seancorfield/deps-new/issues/80) by adding `:min-bb-version` ("1.13.222") to generated `bb.edn` files.
 
