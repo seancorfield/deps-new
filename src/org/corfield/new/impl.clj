@@ -9,7 +9,8 @@
             [clojure.tools.build.api :as b]
             [clojure.tools.gitlibs :as gl]
             [org.corfield.new.licenses :as licenses])
-  (:import (java.nio.file Files)
+  (:import (java.io File)
+           (java.nio.file Files)
            (java.nio.file.attribute FileAttribute)
            (java.text SimpleDateFormat)
            (java.util Date)))
@@ -246,8 +247,23 @@
         (deconstruct-project-name (symbol project-name)) ; allow for string or symbol
         target-dir (str (or target-dir main))
         username   (or (System/getenv "USER")
-                       (System/getProperty "user.name"))]
-    (cfg/config 'org.corfield/deps-new
+                       (System/getProperty "user.name"))
+        our-lib-name 'org.corfield/deps-new]
+
+    ;; if there is a deps.edn file in either the user or project data directory
+    ;; load those dependencies to the classpath:
+    (binding [*repl* true]
+      (doseq [loc [:user :project]]
+        (let [^File f (cfg/data-file loc our-lib-name "deps.edn")]
+          (when (.exists f)
+            (println "Loading deps.edn at" (.getAbsolutePath f))
+            (add-lib (symbol (namespace our-lib-name)
+                             (str (name our-lib-name) "." (name loc)))
+                     {:local/root (.getAbsolutePath (cfg/data-dir loc our-lib-name))})))))
+
+    ;; build the overall config to include any user or project level, as well
+    ;; as deps-new's own defaults and any command-line arguments:
+    (cfg/config our-lib-name
                 :defaults
                 (merge name-data
                        {:developer  (str/capitalize username)
