@@ -281,6 +281,18 @@ The `COORDINATES` could be something like `{:local/root "/path/to/cool-lib"}`
 for a template that exists on the local filesystem, or it could be based on `:git/url`/`:git/sha` etc
 for a template that exists in a `git` repository.
 
+As of v0.16.0, you can list commonly-used template dependencies in the user-level
+and/or directory-level `deps.edn` files instead of via the command-line
+(via `-Sdeps` or an alias), in your tools configuration data
+directory, i.e., `.cljconf/org.corfield/deps-new/deps.edn`,
+under your Clojure configuration directory (either `$HOME/.config/clojure`
+if you follow XDG conventions, or `$HOME/.clojure` otherwise), or in the
+directory where you are creating your the new projects.
+This is handled via the
+[tools.deps.config](https://github.com/clojure/tools.deps.config) library.
+See also [Global Defaults](https://github.com/seancorfield/deps-new/blob/develop/doc/options.md#global-defaults), 
+introduced in v0.15.0.
+
 As of v0.7.0, if you are using Clojure 1.12 -- either as the default `:deps` in
 your `deps.edn` file or via an alias, such as `-A:1.12` -- you can use a
 shorter syntax for the template dependency:
