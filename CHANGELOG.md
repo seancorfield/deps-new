@@ -1,7 +1,7 @@
 # Changes
 
 * v0.16.0 in progress
-  * Add support for `deps.edn` in the configuration data directory (user-level and directory-level). DOCUMENTATION YET TO COME!
+  * Add support for `deps.edn` in the configuration data directory (user-level and directory-level).
 
 * v0.15.0 96d3ca0 -- 2026-10-07
   * Address [#81](https://github.com/seancorfield/deps-new/issues/81) by using `tools.deps.config` for global (user-level) defaults for options.
