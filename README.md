@@ -293,9 +293,43 @@ This is handled via the
 See also [Global Defaults](https://github.com/seancorfield/deps-new/blob/develop/doc/options.md#global-defaults), 
 introduced in v0.15.0.
 
+In addition, you can write local user-level and/or directory-level templates in
+the tools configuration data directory. For example:
+
+```
+> tree .cljconf/
+.cljconf/
+└── org.corfield
+    ├── deps-new
+    │   ├── deps.edn
+    │   └── resources
+    │       └── example
+    │           └── mini
+    │               ├── root
+    │               │   └── script.clj
+    │               └── template.edn
+    └── deps-new.edn
+```
+
+Where that `deps.edn` file contains `{:paths ["resources"]}` and that
+`script.clj` file contains `(println "Hello, {{name}}!")` (and that
+`template.edn` file contains `{}`), now you have access to a template
+called `example/mini` that will produce a new project containing just
+`script.clj`, which will have the project name substituted in:
+
+```
+> clojure -T:new create :template example/mini :name myusername/mynewproject
+Loading deps.edn at <HOME>/.config/clojure/.cljconf/org.corfield/deps-new/deps.edn
+Creating project from example/mini in mynewproject
+> cat mynewproject/script.clj 
+(println "Hello, myusername/mynewproject!")
+> (cd mynewproject && clojure -M script.clj)
+Hello, myusername/mynewproject!
+```
+
 As of v0.7.0, if you are using Clojure 1.12 -- either as the default `:deps` in
 your `deps.edn` file or via an alias, such as `-A:1.12` -- you can use a
-shorter syntax for the template dependency:
+shorter syntax for the template dependency on the command-line:
 
 ```bash
 clojure -A:1.12 -Tnew create :template io.github.acme/templates%com.acme.project/cool-lib :name myusername/mynewproject
