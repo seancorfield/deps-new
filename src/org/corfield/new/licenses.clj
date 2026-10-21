@@ -7,12 +7,26 @@
 
 (defn- bb-license-info
   "Returns license info for string-id from the SPDX license list over HTTP,
-  or an empty map if SPDX does not list string-id."
+  or an empty map if SPDX does not list string-id.
+  string-id matches a license id in any case."
   [string-id]
   (let [parse (requiring-resolve 'clojure.data.json/read-str)
+        http-get (requiring-resolve 'babashka.http-client/get)
+        fetch (fn [path]
+                (let [{:keys [status body]}
+                      (http-get (str "https://spdx.org/licenses/" path) {:throw false})]
+                  (when (= 200 status)
+                    (parse body))))
+        canonical-id (fn []
+                       (some (fn [{:strs [licenseId]}]
+                               (when (= (str/lower-case string-id)
+                                        (str/lower-case licenseId))
+                                 licenseId))
+                             (get (fetch "licenses.json") "licenses")))
         {:strs [licenseId name licenseText seeAlso]}
-        (try (parse (slurp (str "https://spdx.org/licenses/" string-id ".json")))
-             (catch java.io.FileNotFoundException _ {}))]
+        (or (fetch (str string-id ".json"))
+            (some-> (canonical-id) (str ".json") fetch)
+            {})]
     {:id licenseId :name name :text licenseText :see-also seeAlso}))
 
 
