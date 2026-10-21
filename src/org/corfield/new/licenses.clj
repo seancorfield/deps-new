@@ -6,11 +6,13 @@
   (:require [clojure.string :as str]))
 
 (defn- bb-license-info
-  "Returns license info for string-id from the SPDX license list over HTTP."
+  "Returns license info for string-id from the SPDX license list over HTTP,
+  or an empty map if SPDX does not list string-id."
   [string-id]
   (let [parse (requiring-resolve 'cheshire.core/parse-string)
         {:strs [licenseId name licenseText seeAlso]}
-        (parse (slurp (str "https://spdx.org/licenses/" string-id ".json")))]
+        (try (parse (slurp (str "https://spdx.org/licenses/" string-id ".json")))
+             (catch java.io.FileNotFoundException _ {}))]
     {:id licenseId :name name :text licenseText :see-also seeAlso}))
 
 
