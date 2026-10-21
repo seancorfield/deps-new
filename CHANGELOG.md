@@ -1,5 +1,8 @@
 # Changes
 
+* v0.17.0 in progress
+  * Restore Babashka compatibility via PR [#82](https://github.com/seancorfield/deps-new/pull/82) from [@borkdude](https://github.com/borkdude). This broke in v0.11.0 when the SPDX library was introduced.
+
 * v0.16.0 bac3a23 -- 2026-10-15
   * Add support for `deps.edn` and local templates in the configuration data directory (user-level and directory-level).
 
