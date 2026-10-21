@@ -460,8 +460,8 @@ viable alternative:
 
 ```clojure
 :new {:deps {org.babashka/cli {:mvn/version "0.12.91"}
-             io.github.seancorfield/deps-new {:git/tag "v0.17.0-rc1"
-                                              :git/sha "3f502e7"}}
+             io.github.seancorfield/deps-new {:git/tag "v0.17.0"
+                                              :git/sha "657fca6"}}
       :ns-default org.corfield.new
       :exec-args {} ;; insert default arguments here
       :main-opts ["-m" "babashka.cli.exec"]}
