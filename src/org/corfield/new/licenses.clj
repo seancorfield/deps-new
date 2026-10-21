@@ -3,8 +3,15 @@
 (ns org.corfield.new.licenses
   "Light wrapper around the [clj-spdx](https://github.com/pmonks/clj-spdx)
   library to access the license repository managed by [SPDX](https://spdx.dev/)."
-  (:require [clojure.string :as str]
-            [spdx.licenses :as sl]))
+  (:require [clojure.string :as str]))
+
+(defn- bb-license-info
+  "Returns license info for string-id from the SPDX license list over HTTP."
+  [string-id]
+  (let [parse (requiring-resolve 'cheshire.core/parse-string)
+        {:strs [licenseId name licenseText seeAlso]}
+        (parse (slurp (str "https://spdx.org/licenses/" string-id ".json")))]
+    {:id licenseId :name name :text licenseText :see-also seeAlso}))
 
 
 (def default-license-id
@@ -57,18 +64,21 @@
                     default-license-id
                     (str opts-id))
         ;; This config needs to happen before the call to SPDX
+        bb? (System/getProperty "babashka.version")
         _ (case licenses
             :jar (when (str/blank? (System/getProperty
                                      "org.spdx.useJARLicenseInfoOnly"))
                    (System/setProperty
                      "org.spdx.useJARLicenseInfoOnly" (str true)))
             :cache nil ;; incremental cache
-            :full-cache (sl/init!)
+            :full-cache (when-not bb? ((requiring-resolve 'spdx.licenses/init!)))
             (throw (ex-info ":licenses must be :jar, :cache, or :full-cache."
                             opts)))
         ;; The actual call to SPDX
         {:keys [id name text see-also]}
-        (sl/info string-id {:include-large-text-values? true})
+        (if bb?
+          (bb-license-info string-id)
+          ((requiring-resolve 'spdx.licenses/info) string-id {:include-large-text-values? true}))
         ;; helper fn to flag missing license attributes
         missing (fn [fieldname]
                   (format "*No %s for \"%s\" in SPDX *" fieldname id))]
