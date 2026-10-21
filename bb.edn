@@ -1,0 +1,11 @@
+{:paths ["test"]
+ :deps {io.github.seancorfield/deps-new {:local/root "."}
+        io.github.noahtheduke/lazytest {:mvn/version "2.1.0"}}
+ :tasks
+ {test:jvm {:doc "Run the tests on the JVM"
+            :task (clojure "-M:test:runner")}
+  test:bb {:doc "Run the tests in babashka"
+           :requires ([lazytest.main])
+           :task (lazytest.main/-main "--dir" "test")}
+  test {:doc "Run the tests on the JVM and in babashka"
+        :depends [test:jvm test:bb]}}}
