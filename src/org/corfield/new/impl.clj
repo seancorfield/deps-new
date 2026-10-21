@@ -7,8 +7,7 @@
             [clojure.tools.deps.config :as cfg]
             [clojure.tools.deps.extensions.git :as git]
             [clojure.tools.build.api :as b]
-            [clojure.tools.gitlibs :as gl]
-            [org.corfield.new.licenses :as licenses])
+            [clojure.tools.gitlibs :as gl])
   (:import (java.io File)
            (java.nio.file Files)
            (java.nio.file.attribute FileAttribute)
@@ -323,7 +322,7 @@
         merged-opts (merge desc edn opts)]
     ;; this allows any defaults from the template to
     ;; be part of the data used for substitution:
-    [(merge merged-opts (licenses/id->license merged-opts)) edn]))
+    [(merge merged-opts ((requiring-resolve (quote org.corfield.new.licenses/id->license)) merged-opts)) edn]))
 
 (comment
   (find-root [] 'org.corfield.new/app)
