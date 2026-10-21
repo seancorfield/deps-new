@@ -9,7 +9,7 @@
   "Returns license info for string-id from the SPDX license list over HTTP,
   or an empty map if SPDX does not list string-id."
   [string-id]
-  (let [parse (requiring-resolve 'cheshire.core/parse-string)
+  (let [parse (requiring-resolve 'clojure.data.json/read-str)
         {:strs [licenseId name licenseText seeAlso]}
         (try (parse (slurp (str "https://spdx.org/licenses/" string-id ".json")))
              (catch java.io.FileNotFoundException _ {}))]
