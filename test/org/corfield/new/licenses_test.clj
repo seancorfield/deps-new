@@ -34,6 +34,17 @@
                      licenses/id->license
                      :license/id)))))
 
+(defdescribe accept-any-case
+  (it "should accept a license id in any case"
+      (should (= "MIT"
+                 (-> {:license/id "mit"}
+                     licenses/id->license
+                     :license/id)))
+      (should (= "Apache-2.0"
+                 (-> {:license/id "apache-2.0"}
+                     licenses/id->license
+                     :license/id)))))
+
 (defdescribe provide-default-license
   (it "should provide a default license"
       (should (and (string? licenses/default-license-id)
