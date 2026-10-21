@@ -37,4 +37,6 @@
                            "doc/options.md"
                            "doc/names-variables.md"]
                :metadata {:doc/format :markdown}
-               :codox {:writer codox.writer.html/write-docs}}}}}
+               :codox {:writer codox.writer.html/write-docs}}}
+
+  :neil {:project {:version "0.17.0"}}}}
