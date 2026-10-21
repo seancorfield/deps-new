@@ -1,6 +1,7 @@
 # Changes
 
 * v0.17.0 d002448 -- 2026-10-21
+  * Add canonicalization for license IDs for Babashka via PR [#83](https://github.com/seancorfield/deps-new/pull/83) from [@borkdude](https://github.com/borkdude).
   * Restore Babashka compatibility via PR [#82](https://github.com/seancorfield/deps-new/pull/82) from [@borkdude](https://github.com/borkdude). This broke in v0.11.0 when the SPDX library was introduced.
 
 * v0.16.0 bac3a23 -- 2026-10-15
