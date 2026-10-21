@@ -322,7 +322,7 @@
         merged-opts (merge desc edn opts)]
     ;; this allows any defaults from the template to
     ;; be part of the data used for substitution:
-    [(merge merged-opts ((requiring-resolve (quote org.corfield.new.licenses/id->license)) merged-opts)) edn]))
+    [(merge merged-opts ((requiring-resolve 'org.corfield.new.licenses/id->license) merged-opts)) edn]))
 
 (comment
   (find-root [] 'org.corfield.new/app)
