@@ -39,4 +39,4 @@
                :metadata {:doc/format :markdown}
                :codox {:writer codox.writer.html/write-docs}}}
 
-  :neil {:project {:version "0.17.0-rc1"}}}}
+  :neil {:project {:version "0.17.0"}}}}
