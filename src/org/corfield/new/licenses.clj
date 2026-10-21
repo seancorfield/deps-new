@@ -11,9 +11,12 @@
   string-id matches a license id in any case."
   [string-id]
   (let [parse (requiring-resolve 'clojure.data.json/read-str)
+        http-get (requiring-resolve 'babashka.http-client/get)
         fetch (fn [path]
-                (try (parse (slurp (str "https://spdx.org/licenses/" path)))
-                     (catch java.io.FileNotFoundException _ nil)))
+                (let [{:keys [status body]}
+                      (http-get (str "https://spdx.org/licenses/" path) {:throw false})]
+                  (when (= 200 status)
+                    (parse body))))
         canonical-id (fn []
                        (some (fn [{:strs [licenseId]}]
                                (when (= (str/lower-case string-id)
