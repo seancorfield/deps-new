@@ -1,6 +1,7 @@
 # Changes
 
 * 0.17.1 in progress
+  * Update Clojure to 1.12.7 in generated projects.
   * Update dev/test deps.
 
 * v0.17.0 657fca6 -- 2026-10-21
